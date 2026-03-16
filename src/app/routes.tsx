@@ -13,6 +13,7 @@ import { ContactPage } from "./pages/public/ContactPage";
 import { LoginPage } from "./pages/auth/LoginPage";
 import { SignupPage } from "./pages/auth/SignupPage";
 import { ForgotPasswordPage } from "./pages/auth/ForgotPasswordPage";
+import { ResetPasswordPage } from "./pages/auth/ResetPasswordPage";
 
 // Booking Flow
 import { BookingSelectServicePage } from "./pages/booking/BookingSelectServicePage";
@@ -30,6 +31,16 @@ import { UserProfilePage } from "./pages/dashboard/user/UserProfilePage";
 import { UserPaymentsPage } from "./pages/dashboard/user/UserPaymentsPage";
 import { UserReviewsPage } from "./pages/dashboard/user/UserReviewsPage";
 
+// Provider Dashboard
+import { ProviderDashboardLayout } from "./pages/dashboard/provider/ProviderDashboardLayout";
+import { ProviderOverviewPage } from "./pages/dashboard/provider/ProviderOverviewPage";
+import { ProviderServicesPage } from "./pages/dashboard/provider/ProviderServicesPage";
+import { ProviderBookingsPage } from "./pages/dashboard/provider/ProviderBookingsPage";
+import { ProviderEarningsPage } from "./pages/dashboard/provider/ProviderEarningsPage";
+import { ProviderReviewsPage } from "./pages/dashboard/provider/ProviderReviewsPage";
+import { ProviderMessagesPage } from "./pages/dashboard/provider/ProviderMessagesPage";
+import { ProviderSettingsPage } from "./pages/dashboard/provider/ProviderSettingsPage";
+
 // Admin Dashboard
 import { AdminDashboardLayout } from "./pages/dashboard/admin/AdminDashboardLayout";
 import { AdminOverviewPage } from "./pages/dashboard/admin/AdminOverviewPage";
@@ -38,6 +49,10 @@ import { AdminBookingsPage } from "./pages/dashboard/admin/AdminBookingsPage";
 import { AdminUsersPage } from "./pages/dashboard/admin/AdminUsersPage";
 import { AdminReviewsPage } from "./pages/dashboard/admin/AdminReviewsPage";
 import { AdminPaymentsPage } from "./pages/dashboard/admin/AdminPaymentsPage";
+
+// Error Pages
+import { NotFoundPage } from "./pages/errors/NotFoundPage";
+import { ServerErrorPage } from "./pages/errors/ServerErrorPage";
 
 // Layouts
 import { PublicLayout } from "./layouts/PublicLayout";
@@ -62,6 +77,7 @@ export const router = createBrowserRouter([
       { path: "login", Component: LoginPage },
       { path: "signup", Component: SignupPage },
       { path: "forgot-password", Component: ForgotPasswordPage },
+      { path: "reset-password", Component: ResetPasswordPage },
     ],
   },
   {
@@ -87,6 +103,19 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    path: "/provider",
+    Component: ProviderDashboardLayout,
+    children: [
+      { index: true, Component: ProviderOverviewPage },
+      { path: "services", Component: ProviderServicesPage },
+      { path: "bookings", Component: ProviderBookingsPage },
+      { path: "earnings", Component: ProviderEarningsPage },
+      { path: "reviews", Component: ProviderReviewsPage },
+      { path: "messages", Component: ProviderMessagesPage },
+      { path: "settings", Component: ProviderSettingsPage },
+    ],
+  },
+  {
     path: "/admin",
     Component: AdminDashboardLayout,
     children: [
@@ -97,5 +126,13 @@ export const router = createBrowserRouter([
       { path: "reviews", Component: AdminReviewsPage },
       { path: "payments", Component: AdminPaymentsPage },
     ],
+  },
+  {
+    path: "/500",
+    Component: ServerErrorPage,
+  },
+  {
+    path: "*",
+    Component: NotFoundPage,
   },
 ]);

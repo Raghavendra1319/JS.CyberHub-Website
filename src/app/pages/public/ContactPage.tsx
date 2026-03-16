@@ -1,3 +1,9 @@
+import { Contact } from "../../components/Contact";
+
 export function ContactPage() {
-  return <div>Contact Page - In Development</div>;
+  return (
+    <div className="min-h-screen">
+      <Contact />
+    </div>
+  );
 }
