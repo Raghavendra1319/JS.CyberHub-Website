@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { ArrowRight, Shield, Zap, Users, CheckCircle, Star } from "lucide-react";
+import { ArrowRight, Shield, Zap, Users, CheckCircle, Star, Lock, ShieldCheck, Cpu, Database, Radar, Activity } from "lucide-react";
 import { motion } from "motion/react";
 import { services } from "../../data/services";
 
@@ -7,115 +7,180 @@ export function HomePage() {
   const popularServices = services.filter(s => s.popular).slice(0, 3);
 
   return (
-    <div>
+    <div className="bg-cyber-dark">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-white py-20 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+      <section className="relative min-h-[90vh] flex items-center py-20 overflow-hidden">
+        {/* Cyber Grid Background */}
+        <div className="absolute inset-0 cyber-grid opacity-40" />
+
+        {/* Animated Glows */}
         <motion.div
-          className="absolute top-20 right-10 w-72 h-72 bg-blue-400 rounded-full blur-3xl opacity-20"
+          className="absolute top-20 right-10 w-[600px] h-[600px] bg-neon-indigo rounded-full blur-[120px] opacity-20"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.3, 0.2],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-20 left-10 w-[500px] h-[500px] bg-neon-purple rounded-full blur-[120px] opacity-15"
           animate={{
             scale: [1, 1.2, 1],
-            x: [0, 30, 0],
-            y: [0, -30, 0],
+            opacity: [0.15, 0.25, 0.15],
           }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                <Zap className="h-4 w-4" />
-                <span>Trusted by 500+ businesses</span>
-              </div>
+        {/* Scan Line Effect */}
+        <motion.div
+          className="absolute inset-0 w-full h-0.5 bg-gradient-to-r from-transparent via-neon-blue to-transparent opacity-30"
+          animate={{
+            y: [0, "100vh", 0],
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+        />
 
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-                Secure & Grow Your{" "}
-                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  Business
-                </span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-8 cyber-surface neon-border"
+              >
+                <div className="w-2 h-2 bg-neon-blue rounded-full animate-pulse" />
+                <span className="text-blue-300">CYBER DEFENSE SYSTEM ACTIVE</span>
+              </motion.div>
+
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
+                <span className="text-white">JS</span>
+                <span className="gradient-text">.CyberHub</span>
               </h1>
 
-              <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
-                Expert cybersecurity, custom development, and strategic consulting services
-                for startups and SMBs. Book services online in minutes.
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                Next-Gen Cybersecurity Command Center
+              </h2>
+
+              <p className="text-lg md:text-xl text-blue-200 mb-10 leading-relaxed max-w-xl">
+                Advanced threat protection, penetration testing, and security consulting powered by AI-driven defense systems. Secure your digital infrastructure.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 mb-12">
                 <Link
                   to="/services"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:shadow-xl transition-shadow"
+                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-neon-indigo to-neon-purple font-semibold rounded-xl neon-glow hover:scale-105 transition-transform text-white"
                 >
-                  Browse Services
-                  <ArrowRight className="h-5 w-5" />
+                  Deploy Protection
+                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-900 font-medium rounded-lg border-2 border-gray-200 hover:border-blue-600 hover:text-blue-600 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-neon-blue text-blue-300 font-semibold rounded-xl hover:bg-neon-blue/10 transition-colors"
                 >
-                  Contact Us
+                  <Radar className="h-5 w-5" />
+                  System Scan
                 </Link>
               </div>
 
-              {/* Trust Indicators */}
-              <div className="mt-12 flex items-center gap-8">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map((i) => (
-                    <img
-                      key={i}
-                      src={`https://i.pravatar.cc/40?img=${i}`}
-                      alt="Customer"
-                      className="w-10 h-10 rounded-full border-2 border-white"
-                    />
-                  ))}
-                </div>
-                <div>
-                  <div className="flex items-center gap-1 mb-1">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-sm text-gray-600">
-                    <span className="font-semibold text-gray-900">4.9/5</span> from 200+ reviews
-                  </p>
-                </div>
+              {/* Cyber Stats */}
+              <div className="grid grid-cols-3 gap-6">
+                {[
+                  { value: "500+", label: "Systems Protected", icon: Shield },
+                  { value: "99.9%", label: "Uptime SLA", icon: Activity },
+                  { value: "24/7", label: "Threat Monitoring", icon: Radar },
+                ].map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
+                    className="cyber-surface rounded-lg p-4"
+                  >
+                    <stat.icon className="h-5 w-5 text-neon-blue mb-2" />
+                    <p className="text-2xl font-bold text-white mb-1">{stat.value}</p>
+                    <p className="text-xs text-blue-300 uppercase tracking-wider">{stat.label}</p>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
               className="relative"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              {/* Main Visual */}
+              <div className="relative rounded-2xl overflow-hidden cyber-card neon-border">
                 <img
-                  src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
-                  alt="Team working"
-                  className="w-full h-auto"
+                  src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop"
+                  alt="Cybersecurity Operations"
+                  className="w-full h-auto opacity-80"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-cyber-dark via-transparent to-transparent" />
+
+                {/* Threat Detection Overlay */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.6 }}
+                  className="absolute inset-0 border-2 border-neon-blue/30 rounded-2xl"
+                >
+                  {/* Corner Brackets */}
+                  {["top-left", "top-right", "bottom-left", "bottom-right"].map((corner) => (
+                    <div
+                      key={corner}
+                      className={`absolute w-8 h-8 ${
+                        corner.includes("top") ? "top-4" : "bottom-4"
+                      } ${
+                        corner.includes("left") ? "left-4" : "right-4"
+                      } border-neon-blue border-2 ${
+                        corner === "top-left" ? "border-b-0 border-r-0" :
+                        corner === "top-right" ? "border-b-0 border-l-0" :
+                        corner === "bottom-left" ? "border-t-0 border-r-0" :
+                        "border-t-0 border-l-0"
+                      }`}
+                    />
+                  ))}
+                </motion.div>
               </div>
 
-              {/* Floating Stats */}
+              {/* Floating Security Badge */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-6"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                className="absolute -bottom-6 -left-6 cyber-surface rounded-xl p-6 neon-border"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                    <CheckCircle className="h-6 w-6 text-green-600" />
+                  <div className="w-14 h-14 bg-gradient-to-br from-neon-blue to-neon-purple rounded-xl flex items-center justify-center neon-glow">
+                    <ShieldCheck className="h-8 w-8 text-white" />
                   </div>
                   <div>
-                    <p className="text-2xl font-bold text-gray-900">500+</p>
-                    <p className="text-sm text-gray-600">Projects Completed</p>
+                    <p className="text-3xl font-bold gradient-text">A+</p>
+                    <p className="text-sm text-blue-300">Security Rating</p>
                   </div>
+                </div>
+              </motion.div>
+
+              {/* Live Activity Indicator */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 1 }}
+                className="absolute -top-4 -right-4 cyber-surface rounded-lg p-4 neon-border"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="relative">
+                    <div className="w-3 h-3 bg-green-400 rounded-full" />
+                    <div className="absolute inset-0 w-3 h-3 bg-green-400 rounded-full animate-ping" />
+                  </div>
+                  <span className="text-sm font-semibold text-green-400">LIVE</span>
                 </div>
               </motion.div>
             </motion.div>
@@ -123,54 +188,88 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose Us?
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We combine technical expertise with business acumen to deliver exceptional results
-            </p>
+      {/* Defense Capabilities */}
+      <section className="py-24 bg-cyber-darker relative overflow-hidden">
+        <div className="absolute inset-0 cyber-grid opacity-20" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-block mb-4"
+            >
+              <span className="text-sm font-bold text-neon-blue uppercase tracking-wider">DEFENSE CAPABILITIES</span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-5xl font-bold text-white mb-6"
+            >
+              Military-Grade Protection
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-lg text-blue-300 max-w-2xl mx-auto"
+            >
+              Advanced security infrastructure powered by AI threat detection
+            </motion.p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                icon: Shield,
-                title: "Enterprise-Grade Security",
-                description: "Advanced security measures protecting your data and infrastructure 24/7",
-                color: "blue"
+                icon: ShieldCheck,
+                title: "Penetration Testing",
+                description: "Advanced vulnerability assessment and ethical hacking to expose security weaknesses",
               },
               {
-                icon: Zap,
-                title: "Fast Turnaround",
-                description: "Quick project delivery without compromising on quality or security",
-                color: "yellow"
+                icon: Lock,
+                title: "Zero-Trust Architecture",
+                description: "Implement enterprise-grade zero-trust security frameworks and access controls",
               },
               {
-                icon: Users,
-                title: "Expert Team",
-                description: "Certified professionals with years of experience in their domains",
-                color: "green"
+                icon: Cpu,
+                title: "AI Threat Detection",
+                description: "Machine learning-powered real-time threat identification and automated response",
+              },
+              {
+                icon: Database,
+                title: "Data Encryption",
+                description: "End-to-end encryption for data at rest and in transit using military-grade algorithms",
+              },
+              {
+                icon: Radar,
+                title: "24/7 SOC Monitoring",
+                description: "Security Operations Center with continuous network surveillance and incident response",
+              },
+              {
+                icon: Activity,
+                title: "Compliance & Audit",
+                description: "GDPR, ISO 27001, SOC 2 compliance auditing and security framework implementation",
               }
             ].map((feature, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-shadow"
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group cyber-card rounded-xl p-8 hover:neon-glow transition-all duration-300"
               >
-                <div className={`w-14 h-14 bg-${feature.color}-100 rounded-xl flex items-center justify-center mb-6`}>
-                  <feature.icon className={`h-7 w-7 text-${feature.color}-600`} />
+                <div className="w-16 h-16 bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-neon-blue/30">
+                  <feature.icon className="h-8 w-8 text-neon-blue" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-bold text-white mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-blue-300 leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
@@ -179,57 +278,85 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Popular Services */}
-      <section className="py-20 bg-gray-50">
+      {/* Elite Services */}
+      <section className="py-24 bg-cyber-dark relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Popular Services
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Most requested services by our clients
-            </p>
+          <div className="text-center mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-block mb-4"
+            >
+              <span className="text-sm font-bold text-neon-purple uppercase tracking-wider">MISSION CRITICAL</span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-5xl font-bold text-white mb-6"
+            >
+              Deploy Elite Security
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-lg text-blue-300 max-w-2xl mx-auto"
+            >
+              Most deployed security solutions by enterprise clients
+            </motion.p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {popularServices.map((service, index) => (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
               >
                 <Link
                   to={`/services/${service.id}`}
-                  className="block bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-shadow group"
+                  className="block group"
                 >
-                  <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={service.image}
-                      alt={service.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-semibold text-blue-600">
-                      ${service.price}
+                  <div className="cyber-card rounded-2xl overflow-hidden hover:neon-glow transition-all duration-300 h-full">
+                    <div className="relative h-56 overflow-hidden">
+                      <img
+                        src={service.image}
+                        alt={service.name}
+                        className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-cyber-surface via-cyber-surface/50 to-transparent" />
+
+                      <div className="absolute top-4 right-4 px-4 py-2 rounded-lg text-sm font-bold gradient-text cyber-surface neon-border">
+                        ${service.price}
+                      </div>
+
+                      {/* Scan Lines */}
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neon-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
-                  </div>
-                  <div className="p-6">
-                    <div className="text-xs font-medium text-blue-600 uppercase mb-2">
-                      {service.category}
-                    </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                      {service.name}
-                    </h3>
-                    <p className="text-gray-600 mb-4">
-                      {service.shortDescription}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-500">{service.duration}</span>
-                      <span className="text-blue-600 font-medium group-hover:gap-2 flex items-center gap-1 transition-all">
-                        Learn More
-                        <ArrowRight className="h-4 w-4" />
-                      </span>
+
+                    <div className="p-6">
+                      <div className="text-xs font-bold text-neon-blue uppercase tracking-wider mb-3">
+                        {service.category}
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-3 group-hover:gradient-text transition-all">
+                        {service.name}
+                      </h3>
+                      <p className="text-blue-300 mb-6 leading-relaxed">
+                        {service.shortDescription}
+                      </p>
+                      <div className="flex items-center justify-between pt-4 border-t border-neon-blue/20">
+                        <span className="text-sm text-blue-400 font-medium">{service.duration}</span>
+                        <span className="text-neon-blue font-semibold group-hover:gap-2 flex items-center gap-1 transition-all">
+                          Deploy
+                          <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </Link>
@@ -237,49 +364,107 @@ export function HomePage() {
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Link
-              to="/services"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors"
-            >
-              View All Services
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-600 to-indigo-600 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            className="text-center mt-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Ready to Get Started?
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-neon-indigo to-neon-purple font-bold rounded-xl neon-glow hover:scale-105 transition-transform text-white text-lg"
+            >
+              View All Solutions
+              <ArrowRight className="h-6 w-6" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-32 bg-cyber-darker relative overflow-hidden">
+        <div className="absolute inset-0 cyber-grid opacity-30" />
+
+        {/* Animated Background Elements */}
+        <motion.div
+          className="absolute top-0 left-1/4 w-96 h-96 bg-neon-indigo rounded-full blur-[100px] opacity-20"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.3, 0.2],
+          }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute bottom-0 right-1/4 w-96 h-96 bg-neon-purple rounded-full blur-[100px] opacity-20"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.25, 0.2],
+          }}
+          transition={{ duration: 10, repeat: Infinity, delay: 1 }}
+        />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="inline-block mb-8"
+            >
+              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full cyber-surface neon-border">
+                <ShieldCheck className="h-5 w-5 text-neon-blue" />
+                <span className="text-sm font-bold text-blue-300 uppercase tracking-wider">
+                  ACTIVATE DEFENSE PROTOCOL
+                </span>
+              </div>
+            </motion.div>
+
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+              Ready to <span className="gradient-text">Secure</span> Your Infrastructure?
             </h2>
-            <p className="text-lg text-blue-100 mb-8 leading-relaxed">
-              Book a service or consultation today and take your business to the next level
+
+            <p className="text-xl text-blue-300 mb-12 leading-relaxed max-w-3xl mx-auto">
+              Deploy enterprise-grade cybersecurity solutions and protect your digital assets from advanced threats
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
                 to="/services"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-blue-600 font-medium rounded-lg hover:shadow-xl transition-shadow"
+                className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-neon-indigo to-neon-purple font-bold rounded-xl neon-glow hover:scale-105 transition-all text-white text-lg"
               >
-                Book a Service
-                <ArrowRight className="h-5 w-5" />
+                <Shield className="h-6 w-6" />
+                Deploy Security
+                <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-700 text-white font-medium rounded-lg hover:bg-blue-800 transition-colors"
+                className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-transparent border-2 border-neon-blue text-blue-300 font-bold rounded-xl hover:bg-neon-blue/10 transition-all text-lg"
               >
-                Schedule Consultation
+                <Radar className="h-6 w-6" />
+                Request Audit
               </Link>
             </div>
+
+            {/* Security Badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-16 flex flex-wrap items-center justify-center gap-8"
+            >
+              {["ISO 27001", "SOC 2", "GDPR", "PCI DSS"].map((cert) => (
+                <div key={cert} className="cyber-surface px-6 py-3 rounded-lg neon-border">
+                  <span className="text-sm font-bold text-blue-300">{cert}</span>
+                </div>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
       </section>

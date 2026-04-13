@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { Shield, Mail, Lock, Loader2, AlertCircle } from "lucide-react";
+import { Shield, Mail, Lock, Loader2, AlertCircle, ShieldCheck, Fingerprint } from "lucide-react";
 import { motion } from "motion/react";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from "sonner";
@@ -20,8 +20,8 @@ export function LoginPage() {
 
     try {
       await login(email, password);
-      toast.success("Welcome back!");
-      
+      toast.success("Access Granted - Welcome back!");
+
       // Redirect based on email
       if (email === "admin@jscyberhub.com") {
         navigate("/admin");
@@ -31,89 +31,131 @@ export function LoginPage() {
         navigate("/dashboard");
       }
     } catch (err) {
-      setError("Invalid email or password");
+      setError("Access Denied - Invalid credentials");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-cyber-dark relative overflow-hidden flex items-center justify-center p-4">
+      {/* Background Effects */}
+      <div className="absolute inset-0 cyber-grid opacity-20" />
+      <motion.div
+        className="absolute top-20 right-20 w-96 h-96 bg-neon-indigo rounded-full blur-[120px] opacity-20"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.3, 0.2],
+        }}
+        transition={{ duration: 8, repeat: Infinity }}
+      />
+      <motion.div
+        className="absolute bottom-20 left-20 w-96 h-96 bg-neon-purple rounded-full blur-[120px] opacity-15"
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.15, 0.25, 0.15],
+        }}
+        transition={{ duration: 10, repeat: Infinity, delay: 1 }}
+      />
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md"
+        transition={{ duration: 0.8 }}
+        className="w-full max-w-md relative z-10"
       >
         {/* Logo */}
-        <Link to="/" className="flex items-center justify-center gap-2 mb-8">
-          <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-            <Shield className="h-7 w-7 text-white" />
+        <Link to="/" className="flex items-center justify-center gap-3 mb-10">
+          <div className="w-14 h-14 bg-gradient-to-br from-neon-indigo to-neon-purple rounded-xl flex items-center justify-center neon-glow">
+            <Shield className="h-8 w-8 text-white" />
           </div>
-          <span className="text-2xl font-bold text-gray-900">JS.CyberHub</span>
+          <div className="flex items-baseline gap-0.5">
+            <span className="text-3xl font-bold text-white">JS</span>
+            <span className="text-3xl font-bold gradient-text">.CyberHub</span>
+          </div>
         </Link>
 
         {/* Login Form */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="cyber-card rounded-2xl p-8 neon-border">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">
-              Welcome Back
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg cyber-surface neon-border mb-4"
+            >
+              <ShieldCheck className="h-4 w-4 text-neon-blue" />
+              <span className="text-xs font-bold text-blue-300 uppercase tracking-wider">Secure Access Portal</span>
+            </motion.div>
+
+            <h1 className="text-3xl font-bold text-white mb-2">
+              Authentication Required
             </h1>
-            <p className="text-gray-600">
-              Sign in to your account to continue
+            <p className="text-blue-300">
+              Enter your credentials to access the system
             </p>
           </div>
 
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-              <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-red-800">{error}</div>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="mb-6 p-4 cyber-surface border border-red-500/50 rounded-lg flex items-start gap-3"
+            >
+              <AlertCircle className="h-5 w-5 text-red-400 flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-red-400 font-medium">{error}</div>
+            </motion.div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-bold text-blue-300 mb-2 uppercase tracking-wider">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-neon-blue" />
                 <input
                   id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  placeholder="you@example.com"
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="your.email@domain.com"
+                  className="w-full pl-12 pr-4 py-3.5 bg-cyber-surface border border-neon-blue/30 rounded-lg focus:ring-2 focus:ring-neon-blue focus:border-neon-blue text-white placeholder-blue-400/50 transition-all"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-bold text-blue-300 mb-2 uppercase tracking-wider">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-neon-blue" />
                 <input
                   id="password"
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  placeholder="••••••••"
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="••••••••••••"
+                  className="w-full pl-12 pr-4 py-3.5 bg-cyber-surface border border-neon-blue/30 rounded-lg focus:ring-2 focus:ring-neon-blue focus:border-neon-blue text-white placeholder-blue-400/50 transition-all"
                 />
               </div>
             </div>
 
             <div className="flex items-center justify-between text-sm">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
-                <span className="text-gray-700">Remember me</span>
+              <label className="flex items-center gap-2 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  className="rounded border-neon-blue/30 bg-cyber-surface text-neon-blue focus:ring-neon-blue focus:ring-offset-0"
+                />
+                <span className="text-blue-300 group-hover:text-neon-blue transition-colors">Remember me</span>
               </label>
-              <Link to="/auth/forgot-password" className="text-blue-600 hover:text-blue-700 font-medium">
+              <Link
+                to="/auth/forgot-password"
+                className="text-neon-blue hover:text-neon-purple font-semibold transition-colors"
+              >
                 Forgot password?
               </Link>
             </div>
@@ -121,35 +163,37 @@ export function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full px-6 py-4 bg-gradient-to-r from-neon-indigo to-neon-purple text-white font-bold rounded-lg neon-glow hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
                   <Loader2 className="h-5 w-5 animate-spin" />
-                  Signing in...
+                  Authenticating...
                 </>
               ) : (
-                "Sign In"
+                <>
+                  <ShieldCheck className="h-5 w-5" />
+                  Access System
+                </>
               )}
             </button>
           </form>
 
-          <div className="mt-6">
+          <div className="mt-8">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
+                <div className="w-full border-t border-neon-blue/20"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Or continue with</span>
+                <span className="px-4 bg-cyber-surface text-blue-400 font-semibold">Alternative Access</span>
               </div>
             </div>
 
             <button
               onClick={() => {
-                // Simulate Google OAuth - In production, integrate with Supabase OAuth
                 toast.info("Google OAuth integration available - configure in Supabase settings");
               }}
-              className="mt-4 w-full flex items-center justify-center gap-3 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              className="mt-6 w-full flex items-center justify-center gap-3 px-6 py-3.5 border border-neon-blue/30 rounded-lg hover:bg-neon-blue/5 hover:border-neon-blue/50 transition-all cyber-surface"
             >
               <svg className="h-5 w-5" viewBox="0 0 24 24">
                 <path
@@ -169,32 +213,38 @@ export function LoginPage() {
                   d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                 />
               </svg>
-              <span className="text-gray-700 font-medium">Continue with Google</span>
+              <span className="text-blue-300 font-semibold">Continue with Google</span>
             </button>
           </div>
 
-          <div className="mt-8 text-center text-sm text-gray-600">
-            Don't have an account?{" "}
-            <Link to="/auth/signup" className="text-blue-600 hover:text-blue-700 font-medium">
-              Sign up
+          <div className="mt-8 text-center text-sm">
+            <span className="text-blue-400">New to the system? </span>
+            <Link to="/auth/signup" className="text-neon-blue hover:text-neon-purple font-bold transition-colors">
+              Register Access
             </Link>
           </div>
 
           {/* Demo Credentials */}
-          <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-            <div className="text-xs font-medium text-blue-900 mb-2">Demo Credentials:</div>
-            <div className="text-xs text-blue-700 space-y-1">
-              <div><strong>Admin:</strong> admin@jscyberhub.com</div>
-              <div><strong>Provider:</strong> provider@jscyberhub.com</div>
-              <div><strong>User:</strong> user@example.com</div>
-              <div><strong>Password:</strong> any password</div>
+          <div className="mt-8 p-4 cyber-surface rounded-lg border border-neon-blue/30">
+            <div className="flex items-center gap-2 mb-3">
+              <Fingerprint className="h-4 w-4 text-neon-blue" />
+              <div className="text-xs font-bold text-blue-300 uppercase tracking-wider">Test Credentials</div>
+            </div>
+            <div className="text-xs text-blue-400 space-y-1.5 font-mono">
+              <div><span className="text-neon-blue font-bold">Admin:</span> admin@jscyberhub.com</div>
+              <div><span className="text-neon-purple font-bold">Provider:</span> provider@jscyberhub.com</div>
+              <div><span className="text-blue-400 font-bold">User:</span> user@example.com</div>
+              <div className="pt-1 border-t border-neon-blue/20 mt-2"><span className="text-green-400 font-bold">Pass:</span> any password</div>
             </div>
           </div>
         </div>
 
-        <p className="text-center text-sm text-gray-500 mt-8">
-          Protected by industry-standard encryption
-        </p>
+        <div className="text-center mt-8 flex items-center justify-center gap-2">
+          <Shield className="h-4 w-4 text-neon-blue" />
+          <p className="text-sm text-blue-400 font-semibold">
+            Military-grade AES-256 encryption
+          </p>
+        </div>
       </motion.div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { Outlet, Link, useLocation, useNavigate } from "react-router";
-import { Home, LayoutDashboard, Briefcase, Calendar, Users, Star, CreditCard, LogOut, Shield } from "lucide-react";
+import { Home, LayoutDashboard, Briefcase, Calendar, Users, Star, CreditCard, LogOut, Shield, ShieldCheck } from "lucide-react";
 import { useAuth } from "../../../context/AuthContext";
+import { motion } from "motion/react";
 
 export function AdminDashboardLayout() {
   const location = useLocation();
@@ -27,35 +28,43 @@ export function AdminDashboardLayout() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-cyber-dark relative overflow-hidden">
+      {/* Background Grid */}
+      <div className="absolute inset-0 cyber-grid opacity-10 pointer-events-none" />
+
       {/* Top Bar */}
-      <header className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white sticky top-0 z-40 shadow-lg">
+      <header className="cyber-surface backdrop-blur-xl border-b border-neon-blue/20 sticky top-0 z-40">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                <Shield className="h-5 w-5 text-blue-600" />
+            <Link to="/" className="flex items-center gap-3 group">
+              <div className="w-9 h-9 bg-gradient-to-br from-neon-indigo to-neon-purple rounded-lg flex items-center justify-center group-hover:neon-glow transition-all">
+                <Shield className="h-5 w-5 text-white" />
               </div>
               <div>
-                <span className="text-lg font-bold">JS.CyberHub</span>
-                <span className="ml-2 text-xs bg-white/20 px-2 py-0.5 rounded-full">Admin</span>
+                <div className="flex items-baseline gap-0.5">
+                  <span className="text-lg font-bold text-white">JS</span>
+                  <span className="text-lg font-bold gradient-text">.CyberHub</span>
+                </div>
+                <span className="text-xs bg-neon-blue/20 text-neon-blue px-2 py-0.5 rounded-md font-bold uppercase tracking-wider border border-neon-blue/30">
+                  Admin Portal
+                </span>
               </div>
             </Link>
 
             <div className="flex items-center gap-4">
               <Link
                 to="/"
-                className="text-sm text-white/80 hover:text-white flex items-center gap-2"
+                className="text-sm text-blue-300 hover:text-neon-blue flex items-center gap-2 font-semibold transition-colors"
               >
                 <Home className="h-4 w-4" />
-                <span className="hidden sm:inline">View Site</span>
+                <span className="hidden sm:inline">Public Site</span>
               </Link>
-              <div className="flex items-center gap-3 pl-4 border-l border-white/20">
+              <div className="flex items-center gap-3 pl-4 border-l border-neon-blue/20">
                 <div className="text-right hidden sm:block">
-                  <div className="text-sm font-medium">{user?.name}</div>
-                  <div className="text-xs text-white/70">Administrator</div>
+                  <div className="text-sm font-bold text-white">{user?.name}</div>
+                  <div className="text-xs text-neon-blue uppercase tracking-wider">System Admin</div>
                 </div>
-                <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white font-medium">
+                <div className="w-10 h-10 bg-gradient-to-br from-neon-indigo to-neon-purple rounded-lg flex items-center justify-center text-white font-bold border border-neon-blue/30">
                   {user?.name?.charAt(0).toUpperCase()}
                 </div>
               </div>
@@ -64,60 +73,80 @@ export function AdminDashboardLayout() {
         </div>
       </header>
 
-      <div className="flex">
+      <div className="flex relative z-10">
         {/* Sidebar */}
-        <aside className="w-64 bg-white border-r border-gray-200 min-h-[calc(100vh-4rem)] sticky top-16 hidden md:block">
-          <nav className="p-4 space-y-1">
-            {navigation.map((item) => {
+        <aside className="w-64 cyber-surface border-r border-neon-blue/20 min-h-[calc(100vh-4rem)] sticky top-16 hidden md:block">
+          <nav className="p-4 space-y-2">
+            {navigation.map((item, index) => {
               const Icon = item.icon;
+              const active = isActive(item.href);
               return (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                    isActive(item.href)
-                      ? "bg-blue-50 text-blue-600"
-                      : "text-gray-700 hover:bg-gray-50"
+                  className={`relative flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-bold transition-all group ${
+                    active
+                      ? "bg-neon-blue/10 text-neon-blue neon-border"
+                      : "text-blue-300 hover:bg-neon-blue/5 hover:text-neon-blue"
                   }`}
                 >
                   <Icon className="h-5 w-5" />
-                  {item.name}
+                  <span className="uppercase tracking-wider">{item.name}</span>
+                  {active && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-neon-indigo to-neon-purple rounded-r"
+                    />
+                  )}
                 </Link>
               );
             })}
             <button
               onClick={handleLogout}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition-colors mt-4"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-bold text-red-400 hover:bg-red-500/10 hover:border-red-500/30 border border-transparent transition-all mt-6 uppercase tracking-wider"
             >
               <LogOut className="h-5 w-5" />
               Logout
             </button>
+
+            {/* Status Indicator */}
+            <div className="mt-8 p-4 cyber-card rounded-lg neon-border">
+              <div className="flex items-center gap-2 mb-2">
+                <ShieldCheck className="h-4 w-4 text-neon-blue" />
+                <span className="text-xs font-bold text-blue-300 uppercase tracking-wider">System Status</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                <span className="text-xs font-bold text-green-400 uppercase tracking-wider">All Systems Online</span>
+              </div>
+            </div>
           </nav>
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 min-h-[calc(100vh-4rem)]">
           <Outlet />
         </main>
       </div>
 
       {/* Mobile Bottom Nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-40">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 cyber-surface backdrop-blur-xl border-t border-neon-blue/20 px-4 py-2 z-40">
         <div className="flex items-center justify-around">
           {navigation.slice(0, 5).map((item) => {
             const Icon = item.icon;
+            const active = isActive(item.href);
             return (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`flex flex-col items-center gap-1 px-2 py-2 rounded-lg text-xs font-medium transition-colors ${
-                  isActive(item.href)
-                    ? "text-blue-600"
-                    : "text-gray-600"
+                className={`flex flex-col items-center gap-1 px-2 py-2 rounded-lg text-xs font-bold transition-all ${
+                  active
+                    ? "text-neon-blue"
+                    : "text-blue-400 hover:text-neon-blue"
                 }`}
               >
                 <Icon className="h-5 w-5" />
-                <span className="text-[10px]">{item.name}</span>
+                <span className="text-[10px] uppercase tracking-wider">{item.name}</span>
               </Link>
             );
           })}
