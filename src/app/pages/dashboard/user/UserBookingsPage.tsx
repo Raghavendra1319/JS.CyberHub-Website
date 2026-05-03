@@ -12,7 +12,7 @@ export function UserBookingsPage() {
       date: new Date(2026, 1, 20),
       time: "10:00 AM",
       status: "confirmed",
-      price: 799,
+      price: 28000,
       location: "Remote"
     },
     {
@@ -21,7 +21,7 @@ export function UserBookingsPage() {
       date: new Date(2026, 1, 25),
       time: "02:00 PM",
       status: "pending",
-      price: 2999,
+      price: 85000,
       location: "On-site"
     }
   ];
@@ -112,7 +112,7 @@ export function UserBookingsPage() {
                     </div>
                     <div className="text-right">
                       <div className="text-2xl font-bold text-gray-900 mb-1">
-                        ${booking.price}
+                        ₹{booking.price.toLocaleString('en-IN')}
                       </div>
                       <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium capitalize ${getStatusColor(booking.status)}`}>
                         {booking.status}

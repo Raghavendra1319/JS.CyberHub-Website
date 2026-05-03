@@ -213,7 +213,7 @@ export function BookingDateTimePage() {
                 <div className="pt-4 border-t border-gray-200">
                   <div className="flex justify-between items-center">
                     <span className="text-gray-600">Total</span>
-                    <span className="text-2xl font-bold text-gray-900">${service.price}</span>
+                    <span className="text-2xl font-bold text-gray-900">₹{service.price.toLocaleString('en-IN')}</span>
                   </div>
                 </div>
               </div>

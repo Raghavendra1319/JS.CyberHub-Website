@@ -333,7 +333,7 @@ export function HomePage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-cyber-surface via-cyber-surface/50 to-transparent" />
 
                       <div className="absolute top-4 right-4 px-4 py-2 rounded-lg text-sm font-bold gradient-text cyber-surface neon-border">
-                        ${service.price}
+                        ₹{service.price.toLocaleString('en-IN')}
                       </div>
 
                       {/* Scan Lines */}

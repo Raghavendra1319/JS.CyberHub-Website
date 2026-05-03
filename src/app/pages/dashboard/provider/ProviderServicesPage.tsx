@@ -10,8 +10,8 @@ export function ProviderServicesPage() {
       id: 1,
       name: "Network Security Audit",
       category: "Security",
-      price: "$799",
-      duration: "3-4 hours",
+      price: "₹28,000",
+      duration: "2-3 days",
       bookings: 45,
       rating: 4.9,
       active: true
@@ -20,8 +20,8 @@ export function ProviderServicesPage() {
       id: 2,
       name: "Custom Website Development",
       category: "Development",
-      price: "$2,999",
-      duration: "2-3 weeks",
+      price: "₹85,000",
+      duration: "3-5 weeks",
       bookings: 32,
       rating: 4.8,
       active: true
@@ -30,8 +30,8 @@ export function ProviderServicesPage() {
       id: 3,
       name: "Business Consulting Session",
       category: "Consulting",
-      price: "$599",
-      duration: "2 hours",
+      price: "₹18,000",
+      duration: "3 hours",
       bookings: 28,
       rating: 4.9,
       active: true
@@ -40,8 +40,8 @@ export function ProviderServicesPage() {
       id: 4,
       name: "Cybersecurity Training",
       category: "Training",
-      price: "$899",
-      duration: "1 day",
+      price: "₹28,000",
+      duration: "Full day",
       bookings: 18,
       rating: 5.0,
       active: false

@@ -6,7 +6,7 @@ export function PricingPage() {
   const plans = [
     {
       name: "Starter",
-      price: 499,
+      price: 15000,
       period: "per service",
       description: "Perfect for individual projects and small businesses",
       features: [
@@ -21,7 +21,7 @@ export function PricingPage() {
     },
     {
       name: "Professional",
-      price: 1499,
+      price: 45000,
       period: "per month",
       description: "Ideal for growing businesses with regular needs",
       features: [
@@ -59,21 +59,21 @@ export function PricingPage() {
   const addOns = [
     {
       name: "Priority Support",
-      price: 99,
+      price: 3000,
       period: "per month",
       description: "Get dedicated support with guaranteed response times",
       icon: Zap,
     },
     {
       name: "Advanced Security Package",
-      price: 299,
+      price: 9000,
       period: "per month",
       description: "24/7 monitoring and threat intelligence",
       icon: Shield,
     },
     {
       name: "Custom Integration",
-      price: "From 499",
+      price: "From 15,000",
       period: "one-time",
       description: "Integrate our services with your existing tools",
       icon: Sparkles,

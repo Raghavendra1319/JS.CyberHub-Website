@@ -80,7 +80,7 @@ export function BookingSelectServicePage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <div className="absolute top-3 right-3 bg-white px-3 py-1 rounded-full text-sm font-semibold text-blue-600">
-                    ${service.price}
+                    ₹{service.price.toLocaleString('en-IN')}
                   </div>
                 </div>
 

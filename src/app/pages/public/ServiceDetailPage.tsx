@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from "react-router";
-import { ArrowLeft, Clock, DollarSign, CheckCircle, ArrowRight, Star } from "lucide-react";
+import { ArrowLeft, Clock, IndianRupee, CheckCircle, ArrowRight, Star } from "lucide-react";
 import { motion } from "motion/react";
 import { services } from "../../data/services";
 
@@ -78,11 +78,11 @@ export function ServiceDetailPage() {
                 <div className="grid md:grid-cols-3 gap-4">
                   <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-lg">
                     <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <DollarSign className="h-5 w-5 text-white" />
+                      <IndianRupee className="h-5 w-5 text-white" />
                     </div>
                     <div>
                       <div className="text-sm text-gray-600">Starting at</div>
-                      <div className="font-bold text-gray-900">${service.price}</div>
+                      <div className="font-bold text-gray-900">₹{service.price.toLocaleString('en-IN')}</div>
                     </div>
                   </div>
 
@@ -141,7 +141,7 @@ export function ServiceDetailPage() {
               <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
                 <div className="mb-6">
                   <div className="text-3xl font-bold text-gray-900 mb-1">
-                    ${service.price}
+                    ₹{service.price.toLocaleString('en-IN')}
                   </div>
                   <div className="text-gray-600">One-time payment</div>
                 </div>
