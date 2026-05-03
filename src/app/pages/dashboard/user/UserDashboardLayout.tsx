@@ -1,6 +1,7 @@
 import { Outlet, Link, useLocation, useNavigate } from "react-router";
-import { Home, Calendar, History, User, CreditCard, Star, LogOut, Shield } from "lucide-react";
+import { Home, Calendar, History, User, CreditCard, Star, LogOut, Shield, FileText } from "lucide-react";
 import { useAuth } from "../../../context/AuthContext";
+import { NotificationBell } from "../../../components/NotificationBell";
 
 export function UserDashboardLayout() {
   const location = useLocation();
@@ -10,8 +11,9 @@ export function UserDashboardLayout() {
   const navigation = [
     { name: "My Bookings", href: "/dashboard", icon: Calendar },
     { name: "History", href: "/dashboard/history", icon: History },
-    { name: "Profile", href: "/dashboard/profile", icon: User },
+    { name: "Invoices", href: "/dashboard/invoices", icon: FileText },
     { name: "Payments", href: "/dashboard/payments", icon: CreditCard },
+    { name: "Profile", href: "/dashboard/profile", icon: User },
     { name: "Reviews", href: "/dashboard/reviews", icon: Star },
   ];
 
@@ -46,6 +48,7 @@ export function UserDashboardLayout() {
                 <Home className="h-4 w-4" />
                 <span className="hidden sm:inline">Back to Home</span>
               </Link>
+              <NotificationBell />
               <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
                 <div className="text-right hidden sm:block">
                   <div className="text-sm font-medium text-gray-900">{user?.name}</div>

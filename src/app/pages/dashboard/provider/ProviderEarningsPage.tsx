@@ -1,63 +1,71 @@
-import { DollarSign, TrendingUp, Download, Calendar } from "lucide-react";
+import { IndianRupee, TrendingUp, Download, Calendar, TrendingDown, Wallet, CreditCard } from "lucide-react";
 import { motion } from "motion/react";
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 
 export function ProviderEarningsPage() {
   const stats = [
-    { label: "Total Earnings", value: "$12,450", change: "+15.3%", trend: "up" },
-    { label: "This Month", value: "$4,200", change: "+8.2%", trend: "up" },
-    { label: "Pending", value: "$850", change: "-", trend: "neutral" },
-    { label: "Avg per Booking", value: "$723", change: "+5.1%", trend: "up" }
+    { label: "Total Earnings", value: 425000, change: "+15.3%", trend: "up", icon: Wallet },
+    { label: "This Month", value: 132000, change: "+8.2%", trend: "up", icon: TrendingUp },
+    { label: "Pending Payments", value: 28000, change: "-12%", trend: "down", icon: CreditCard },
+    { label: "Avg per Booking", value: 24500, change: "+5.1%", trend: "up", icon: IndianRupee }
   ];
 
   const earningsData = [
-    { month: "Jan", earnings: 2400, bookings: 8 },
-    { month: "Feb", earnings: 1800, bookings: 6 },
-    { month: "Mar", earnings: 3200, bookings: 10 },
-    { month: "Apr", earnings: 2800, bookings: 9 },
-    { month: "May", earnings: 3800, bookings: 12 },
-    { month: "Jun", earnings: 4200, bookings: 14 },
+    { month: "Jan", earnings: 84000, bookings: 8 },
+    { month: "Feb", earnings: 56000, bookings: 6 },
+    { month: "Mar", earnings: 98000, bookings: 10 },
+    { month: "Apr", earnings: 75000, bookings: 9 },
+    { month: "May", earnings: 112000, bookings: 12 },
   ];
+
+  const serviceBreakdown = [
+    { name: "Security Audits", value: 165000, percentage: 38.8 },
+    { name: "Development", value: 142000, percentage: 33.4 },
+    { name: "Consulting", value: 75000, percentage: 17.6 },
+    { name: "Training", value: 43000, percentage: 10.2 }
+  ];
+
+  const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6'];
 
   const recentTransactions = [
     {
       id: "TXN-001",
-      client: "TechCorp Inc.",
+      client: "TechCorp India Pvt Ltd",
       service: "Network Security Audit",
-      date: "2026-03-02",
-      amount: "$799",
+      date: "2026-05-02",
+      amount: 28000,
       status: "completed"
     },
     {
       id: "TXN-002",
-      client: "StartupXYZ",
+      client: "StartupXYZ Solutions",
       service: "Website Development",
-      date: "2026-03-01",
-      amount: "$2,999",
+      date: "2026-05-01",
+      amount: 85000,
       status: "completed"
     },
     {
       id: "TXN-003",
-      client: "SmallBiz Co",
+      client: "SmallBiz Enterprises",
       service: "Business Consulting",
-      date: "2026-02-28",
-      amount: "$599",
+      date: "2026-04-28",
+      amount: 18000,
       status: "pending"
     },
     {
       id: "TXN-004",
       client: "Enterprise LLC",
       service: "Cybersecurity Training",
-      date: "2026-02-25",
-      amount: "$899",
+      date: "2026-04-25",
+      amount: 28000,
       status: "completed"
     },
     {
       id: "TXN-005",
-      client: "Digital Co",
+      client: "Digital Innovations",
       service: "Security Assessment",
-      date: "2026-02-20",
-      amount: "$1,299",
+      date: "2026-04-20",
+      amount: 45000,
       status: "completed"
     },
   ];
@@ -79,38 +87,46 @@ export function ProviderEarningsPage() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {stats.map((stat, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
-            className="bg-white rounded-2xl p-6 shadow-sm"
-          >
-            <div className="flex items-start justify-between mb-2">
-              <div className="text-sm text-gray-600">{stat.label}</div>
-              {stat.trend !== "neutral" && (
-                <div className={`flex items-center gap-1 text-sm font-medium ${
-                  stat.trend === "up" ? "text-green-600" : "text-red-600"
-                }`}>
-                  <TrendingUp className="h-4 w-4" />
-                  {stat.change}
+        {stats.map((stat, index) => {
+          const Icon = stat.icon;
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow"
+            >
+              <div className="flex items-start justify-between mb-2">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <Icon className="h-6 w-6 text-blue-600" />
                 </div>
-              )}
-            </div>
-            <div className="text-3xl font-bold text-gray-900">{stat.value}</div>
-          </motion.div>
-        ))}
+                {stat.change && (
+                  <div className={`flex items-center gap-1 text-sm font-medium ${
+                    stat.trend === "up" ? "text-green-600" : stat.trend === "down" ? "text-red-600" : "text-gray-600"
+                  }`}>
+                    {stat.trend === "up" ? <TrendingUp className="h-4 w-4" /> : stat.trend === "down" ? <TrendingDown className="h-4 w-4" /> : null}
+                    {stat.change}
+                  </div>
+                )}
+              </div>
+              <div className="text-sm text-gray-600 mb-1">{stat.label}</div>
+              <div className="text-3xl font-bold text-gray-900">
+                ₹{stat.value.toLocaleString('en-IN')}
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
 
       {/* Charts */}
-      <div className="grid lg:grid-cols-2 gap-6 mb-8">
+      <div className="grid lg:grid-cols-3 gap-6 mb-8">
         {/* Earnings Trend */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-white rounded-2xl p-6 shadow-sm"
+          className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm"
         >
           <h3 className="text-lg font-semibold text-gray-900 mb-6">Earnings Trend</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -118,11 +134,11 @@ export function ProviderEarningsPage() {
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
               <XAxis dataKey="month" stroke="#9ca3af" />
               <YAxis stroke="#9ca3af" />
-              <Tooltip />
-              <Line 
-                type="monotone" 
-                dataKey="earnings" 
-                stroke="#10b981" 
+              <Tooltip formatter={(value: number) => `₹${value.toLocaleString('en-IN')}`} />
+              <Line
+                type="monotone"
+                dataKey="earnings"
+                stroke="#10b981"
                 strokeWidth={3}
                 dot={{ fill: "#10b981", r: 4 }}
                 activeDot={{ r: 6 }}
@@ -131,31 +147,71 @@ export function ProviderEarningsPage() {
           </ResponsiveContainer>
         </motion.div>
 
-        {/* Bookings vs Earnings */}
+        {/* Service Breakdown */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           className="bg-white rounded-2xl p-6 shadow-sm"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">Monthly Bookings</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-6">Service Breakdown</h3>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={earningsData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-              <XAxis dataKey="month" stroke="#9ca3af" />
-              <YAxis stroke="#9ca3af" />
-              <Tooltip />
-              <Bar dataKey="bookings" fill="#6366f1" radius={[8, 8, 0, 0]} />
-            </BarChart>
+            <PieChart>
+              <Pie
+                data={serviceBreakdown}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={({ percentage }) => `${percentage}%`}
+                outerRadius={80}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {serviceBreakdown.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip formatter={(value: number) => `₹${value.toLocaleString('en-IN')}`} />
+            </PieChart>
           </ResponsiveContainer>
+          <div className="mt-4 space-y-2">
+            {serviceBreakdown.map((service, index) => (
+              <div key={index} className="flex items-center justify-between text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index] }} />
+                  <span className="text-gray-600">{service.name}</span>
+                </div>
+                <span className="font-semibold text-gray-900">₹{service.value.toLocaleString('en-IN')}</span>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </div>
+
+      {/* Monthly Bookings Bar Chart */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        className="bg-white rounded-2xl p-6 shadow-sm mb-8"
+      >
+        <h3 className="text-lg font-semibold text-gray-900 mb-6">Monthly Bookings Overview</h3>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={earningsData}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+            <XAxis dataKey="month" stroke="#9ca3af" />
+            <YAxis stroke="#9ca3af" />
+            <Tooltip />
+            <Bar dataKey="bookings" fill="#6366f1" radius={[8, 8, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </motion.div>
 
       {/* Recent Transactions */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.6 }}
+        transition={{ duration: 0.6, delay: 0.7 }}
         className="bg-white rounded-2xl shadow-sm overflow-hidden"
       >
         <div className="p-6 border-b border-gray-200">
@@ -214,7 +270,7 @@ export function ProviderEarningsPage() {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-semibold text-gray-900">{transaction.amount}</div>
+                    <div className="text-sm font-semibold text-gray-900">₹{transaction.amount.toLocaleString('en-IN')}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${

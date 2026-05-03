@@ -26,7 +26,9 @@ import { BookingConfirmationPage } from "./pages/booking/BookingConfirmationPage
 // User Dashboard
 import { UserDashboardLayout } from "./pages/dashboard/user/UserDashboardLayout";
 import { UserBookingsPage } from "./pages/dashboard/user/UserBookingsPage";
+import { BookingTrackingPage } from "./pages/dashboard/user/BookingTrackingPage";
 import { UserHistoryPage } from "./pages/dashboard/user/UserHistoryPage";
+import { UserInvoicesPage } from "./pages/dashboard/user/UserInvoicesPage";
 import { UserProfilePage } from "./pages/dashboard/user/UserProfilePage";
 import { UserPaymentsPage } from "./pages/dashboard/user/UserPaymentsPage";
 import { UserReviewsPage } from "./pages/dashboard/user/UserReviewsPage";
@@ -36,6 +38,7 @@ import { ProviderDashboardLayout } from "./pages/dashboard/provider/ProviderDash
 import { ProviderOverviewPage } from "./pages/dashboard/provider/ProviderOverviewPage";
 import { ProviderServicesPage } from "./pages/dashboard/provider/ProviderServicesPage";
 import { ProviderBookingsPage } from "./pages/dashboard/provider/ProviderBookingsPage";
+import { ProviderAvailabilityPage } from "./pages/dashboard/provider/ProviderAvailabilityPage";
 import { ProviderEarningsPage } from "./pages/dashboard/provider/ProviderEarningsPage";
 import { ProviderReviewsPage } from "./pages/dashboard/provider/ProviderReviewsPage";
 import { ProviderMessagesPage } from "./pages/dashboard/provider/ProviderMessagesPage";
@@ -96,7 +99,9 @@ export const router = createBrowserRouter([
     Component: UserDashboardLayout,
     children: [
       { index: true, Component: UserBookingsPage },
+      { path: "booking/:id", Component: BookingTrackingPage },
       { path: "history", Component: UserHistoryPage },
+      { path: "invoices", Component: UserInvoicesPage },
       { path: "profile", Component: UserProfilePage },
       { path: "payments", Component: UserPaymentsPage },
       { path: "reviews", Component: UserReviewsPage },
@@ -109,6 +114,7 @@ export const router = createBrowserRouter([
       { index: true, Component: ProviderOverviewPage },
       { path: "services", Component: ProviderServicesPage },
       { path: "bookings", Component: ProviderBookingsPage },
+      { path: "availability", Component: ProviderAvailabilityPage },
       { path: "earnings", Component: ProviderEarningsPage },
       { path: "reviews", Component: ProviderReviewsPage },
       { path: "messages", Component: ProviderMessagesPage },

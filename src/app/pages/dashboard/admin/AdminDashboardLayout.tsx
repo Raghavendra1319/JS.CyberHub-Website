@@ -2,6 +2,7 @@ import { Outlet, Link, useLocation, useNavigate } from "react-router";
 import { Home, LayoutDashboard, Briefcase, Calendar, Users, Star, CreditCard, LogOut, Shield, ShieldCheck } from "lucide-react";
 import { useAuth } from "../../../context/AuthContext";
 import { motion } from "motion/react";
+import { NotificationBell } from "../../../components/NotificationBell";
 
 export function AdminDashboardLayout() {
   const location = useLocation();
@@ -59,6 +60,7 @@ export function AdminDashboardLayout() {
                 <Home className="h-4 w-4" />
                 <span className="hidden sm:inline">Public Site</span>
               </Link>
+              <NotificationBell />
               <div className="flex items-center gap-3 pl-4 border-l border-neon-blue/20">
                 <div className="text-right hidden sm:block">
                   <div className="text-sm font-bold text-white">{user?.name}</div>

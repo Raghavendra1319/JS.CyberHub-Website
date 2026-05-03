@@ -6,7 +6,8 @@ export function AdminOverviewPage() {
   const stats = [
     {
       name: "Total Revenue",
-      value: "$45,231",
+      value: "₹15,84,000",
+      rawValue: 1584000,
       change: "+12.5%",
       trend: "up",
       icon: DollarSign,
@@ -39,12 +40,11 @@ export function AdminOverviewPage() {
   ];
 
   const revenueData = [
-    { month: "Jan", revenue: 4000 },
-    { month: "Feb", revenue: 3000 },
-    { month: "Mar", revenue: 5000 },
-    { month: "Apr", revenue: 4500 },
-    { month: "May", revenue: 6000 },
-    { month: "Jun", revenue: 5500 },
+    { month: "Jan", revenue: 140000 },
+    { month: "Feb", revenue: 105000 },
+    { month: "Mar", revenue: 175000 },
+    { month: "Apr", revenue: 157500 },
+    { month: "May", revenue: 210000 },
   ];
 
   const bookingsData = [

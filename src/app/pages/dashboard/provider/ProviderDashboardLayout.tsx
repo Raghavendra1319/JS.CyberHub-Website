@@ -1,22 +1,22 @@
 import { Outlet, Link, useLocation, useNavigate } from "react-router";
-import { 
-  LayoutDashboard, 
-  Calendar, 
-  DollarSign, 
-  Star, 
-  Settings, 
+import {
+  LayoutDashboard,
+  Calendar,
+  DollarSign,
+  Star,
+  Settings,
   MessageSquare,
   LogOut,
   Menu,
   X,
   Shield,
   User,
-  Bell,
   Briefcase
 } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useAuth } from "../../../context/AuthContext";
+import { NotificationBell } from "../../../components/NotificationBell";
 
 export function ProviderDashboardLayout() {
   const location = useLocation();
@@ -28,6 +28,7 @@ export function ProviderDashboardLayout() {
     { path: "/provider", label: "Overview", icon: LayoutDashboard },
     { path: "/provider/services", label: "My Services", icon: Briefcase },
     { path: "/provider/bookings", label: "Bookings", icon: Calendar },
+    { path: "/provider/availability", label: "Availability", icon: Calendar },
     { path: "/provider/earnings", label: "Earnings", icon: DollarSign },
     { path: "/provider/reviews", label: "Reviews", icon: Star },
     { path: "/provider/messages", label: "Messages", icon: MessageSquare },
@@ -158,11 +159,8 @@ export function ProviderDashboardLayout() {
           </div>
           
           <div className="flex items-center gap-4">
-            <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors">
-              <Bell className="h-5 w-5 text-gray-600" />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-            </button>
-            
+            <NotificationBell />
+
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-medium text-sm">
                 {user?.name?.charAt(0) || "P"}
