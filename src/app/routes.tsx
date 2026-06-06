@@ -33,6 +33,14 @@ import { UserProfilePage } from "./pages/dashboard/user/UserProfilePage";
 import { UserPaymentsPage } from "./pages/dashboard/user/UserPaymentsPage";
 import { UserReviewsPage } from "./pages/dashboard/user/UserReviewsPage";
 
+// Cybersecurity Modules
+import { VulnerabilityDashboard } from "./pages/cybersecurity/VulnerabilityDashboard";
+import { IncidentDashboard } from "./pages/cybersecurity/IncidentDashboard";
+import { SecurityScoreDashboard } from "./pages/cybersecurity/SecurityScoreDashboard";
+
+// Support System
+import { TicketDashboard } from "./pages/support/TicketDashboard";
+
 // Provider Dashboard
 import { ProviderDashboardLayout } from "./pages/dashboard/provider/ProviderDashboardLayout";
 import { ProviderOverviewPage } from "./pages/dashboard/provider/ProviderOverviewPage";
@@ -105,6 +113,10 @@ export const router = createBrowserRouter([
       { path: "profile", Component: UserProfilePage },
       { path: "payments", Component: UserPaymentsPage },
       { path: "reviews", Component: UserReviewsPage },
+      { path: "security-score", Component: SecurityScoreDashboard },
+      { path: "vulnerability", Component: VulnerabilityDashboard },
+      { path: "incidents", Component: IncidentDashboard },
+      { path: "support", Component: TicketDashboard },
     ],
   },
   {

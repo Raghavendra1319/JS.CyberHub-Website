@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation, useNavigate } from "react-router";
-import { Home, Calendar, History, User, CreditCard, Star, LogOut, Shield, FileText } from "lucide-react";
+import { Home, Calendar, History, User, CreditCard, Star, LogOut, Shield, FileText, AlertTriangle, AlertOctagon, MessageSquare } from "lucide-react";
 import { useAuth } from "../../../context/AuthContext";
 import { NotificationBell } from "../../../components/NotificationBell";
 
@@ -10,6 +10,10 @@ export function UserDashboardLayout() {
 
   const navigation = [
     { name: "My Bookings", href: "/dashboard", icon: Calendar },
+    { name: "Security Score", href: "/dashboard/security-score", icon: Shield },
+    { name: "Vulnerabilities", href: "/dashboard/vulnerability", icon: AlertTriangle },
+    { name: "Incidents", href: "/dashboard/incidents", icon: AlertOctagon },
+    { name: "Support Tickets", href: "/dashboard/support", icon: MessageSquare },
     { name: "History", href: "/dashboard/history", icon: History },
     { name: "Invoices", href: "/dashboard/invoices", icon: FileText },
     { name: "Payments", href: "/dashboard/payments", icon: CreditCard },
