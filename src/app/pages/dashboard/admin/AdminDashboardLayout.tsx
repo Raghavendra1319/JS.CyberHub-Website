@@ -1,7 +1,7 @@
 import { Outlet, Link, useLocation, useNavigate } from "react-router";
 import { Home, LayoutDashboard, Briefcase, Calendar, Users, Star, CreditCard, LogOut, Shield, ShieldCheck } from "lucide-react";
 import { useAuth } from "../../../context/AuthContext";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { NotificationBell } from "../../../components/NotificationBell";
 
 export function AdminDashboardLayout() {
@@ -126,8 +126,19 @@ export function AdminDashboardLayout() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 min-h-[calc(100vh-4rem)]">
-          <Outlet />
+        <main className="flex-1 min-h-[calc(100vh-4rem)]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+              className="p-4 sm:p-6 lg:p-8"
+            >
+              <Outlet />
+            </motion.div>
+          </AnimatePresence>
         </main>
       </div>
 

@@ -237,12 +237,12 @@ export function IncidentDashboard() {
           <h3 className="text-lg font-semibold text-gray-900 mb-6">Incident Trend</h3>
           <ResponsiveContainer width="100%" height={250}>
             <LineChart data={incidentTrend}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-              <XAxis dataKey="month" stroke="#9ca3af" />
-              <YAxis stroke="#9ca3af" />
-              <Tooltip />
-              <Line type="monotone" dataKey="incidents" stroke="#ef4444" strokeWidth={2} name="Reported" />
-              <Line type="monotone" dataKey="resolved" stroke="#10b981" strokeWidth={2} name="Resolved" />
+              <CartesianGrid key="grid" strokeDasharray="3 3" stroke="#f0f0f0" />
+              <XAxis key="xaxis" dataKey="month" stroke="#9ca3af" />
+              <YAxis key="yaxis" stroke="#9ca3af" />
+              <Tooltip key="tooltip" />
+              <Line key="line-incidents" type="monotone" dataKey="incidents" stroke="#ef4444" strokeWidth={2} name="Reported" />
+              <Line key="line-resolved" type="monotone" dataKey="resolved" stroke="#10b981" strokeWidth={2} name="Resolved" />
             </LineChart>
           </ResponsiveContainer>
         </motion.div>
@@ -257,11 +257,11 @@ export function IncidentDashboard() {
           <h3 className="text-lg font-semibold text-gray-900 mb-6">Incidents by Category</h3>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={categoryData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-              <XAxis dataKey="category" stroke="#9ca3af" angle={-45} textAnchor="end" height={80} />
-              <YAxis stroke="#9ca3af" />
-              <Tooltip />
-              <Bar dataKey="count" fill="#6366f1" radius={[8, 8, 0, 0]} />
+              <CartesianGrid key="grid" strokeDasharray="3 3" stroke="#f0f0f0" />
+              <XAxis key="xaxis" dataKey="category" stroke="#9ca3af" angle={-45} textAnchor="end" height={80} />
+              <YAxis key="yaxis" stroke="#9ca3af" />
+              <Tooltip key="tooltip" />
+              <Bar key="bar-count" dataKey="count" fill="#6366f1" radius={[8, 8, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </motion.div>

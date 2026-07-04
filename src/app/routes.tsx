@@ -37,6 +37,7 @@ import { UserReviewsPage } from "./pages/dashboard/user/UserReviewsPage";
 import { VulnerabilityDashboard } from "./pages/cybersecurity/VulnerabilityDashboard";
 import { IncidentDashboard } from "./pages/cybersecurity/IncidentDashboard";
 import { SecurityScoreDashboard } from "./pages/cybersecurity/SecurityScoreDashboard";
+import { ThreatIntelligenceDashboard } from "./pages/cybersecurity/ThreatIntelligenceDashboard";
 
 // Support System
 import { TicketDashboard } from "./pages/support/TicketDashboard";
@@ -117,6 +118,7 @@ export const router = createBrowserRouter([
       { path: "vulnerability", Component: VulnerabilityDashboard },
       { path: "incidents", Component: IncidentDashboard },
       { path: "support", Component: TicketDashboard },
+      { path: "threat-intelligence", Component: ThreatIntelligenceDashboard },
     ],
   },
   {
