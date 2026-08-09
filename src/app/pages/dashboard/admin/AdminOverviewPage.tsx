@@ -1,243 +1,300 @@
-import { TrendingUp, TrendingDown, DollarSign, Users, Calendar, Star, Activity, Shield, Zap } from "lucide-react";
+import { Link } from "react-router";
 import { motion } from "motion/react";
-import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import {
+  TrendingUp, TrendingDown, DollarSign, Users, Calendar,
+  Star, Activity, Clock, AlertTriangle, ChevronRight
+} from "lucide-react";
+import {
+  AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid,
+  Tooltip, ResponsiveContainer, Cell
+} from "recharts";
+import { dataService } from "../../../services/dataService";
+
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (!active || !payload?.length) return null;
+  return (
+    <div className="bg-card border border-border rounded-lg p-3 text-xs shadow-xl">
+      <p className="text-muted-foreground mb-1">{label}</p>
+      {payload.map((e: any) => (
+        <div key={e.name} className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: e.color }} />
+          <span className="text-muted-foreground">{e.name}:</span>
+          <span className="text-foreground font-semibold">
+            {e.name === "Revenue" ? `₹${Number(e.value).toLocaleString("en-IN")}` : e.value}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export function AdminOverviewPage() {
-  const stats = [
-    {
-      name: "Total Revenue",
-      value: "₹15,84,000",
-      rawValue: 1584000,
-      change: "+12.5%",
-      trend: "up",
-      icon: DollarSign,
-      label: "REVENUE"
-    },
-    {
-      name: "Total Bookings",
-      value: "234",
-      change: "+8.2%",
-      trend: "up",
-      icon: Calendar,
-      label: "DEPLOYMENTS"
-    },
-    {
-      name: "Active Users",
-      value: "1,234",
-      change: "+23.1%",
-      trend: "up",
-      icon: Users,
-      label: "USERS"
-    },
-    {
-      name: "Security Rating",
-      value: "A+",
-      change: "+0.2",
-      trend: "up",
-      icon: Shield,
-      label: "RATING"
-    }
+  const stats    = dataService.getAdminStats();
+  const revenue  = dataService.getMonthlyRevenue();
+  const users    = dataService.getAdminUsers();
+  const bookings = dataService.getBookings("", "admin");
+  const services = dataService.getServices();
+
+  const recentBookings = [...bookings]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 6);
+
+  const recentUsers = [...users].filter((u) => u.role === "user").slice(0, 5);
+
+  const statCards = [
+    { label: "Total Revenue",   value: `₹${(stats.totalRevenue / 100000).toFixed(2)}L`, change: `+${stats.revenueGrowth}%`, up: true,  icon: DollarSign, color: "green",  sub: "This financial year"     },
+    { label: "Total Bookings",  value: String(stats.totalBookings),                      change: `+${stats.bookingsGrowth}%`,up: true,  icon: Calendar,   color: "blue",   sub: `${stats.pendingBookings} pending` },
+    { label: "Active Users",    value: stats.activeUsers.toLocaleString("en-IN"),        change: `+${stats.usersGrowth}%`,  up: true,  icon: Users,      color: "purple", sub: "Registered clients"      },
+    { label: "Avg Rating",      value: String(stats.avgRating),                          change: "+0.12",                   up: true,  icon: Star,       color: "yellow", sub: `${stats.activeServices} active services` },
   ];
 
-  const revenueData = [
-    { month: "Jan", revenue: 140000 },
-    { month: "Feb", revenue: 105000 },
-    { month: "Mar", revenue: 175000 },
-    { month: "Apr", revenue: 157500 },
-    { month: "May", revenue: 210000 },
-  ];
+  const colorMap: Record<string, { icon: string; bg: string }> = {
+    green:  { icon: "text-green-400",  bg: "bg-green-500/10 border-green-500/20"   },
+    blue:   { icon: "text-blue-400",   bg: "bg-blue-500/10 border-blue-500/20"     },
+    purple: { icon: "text-purple-400", bg: "bg-purple-500/10 border-purple-500/20" },
+    yellow: { icon: "text-yellow-400", bg: "bg-yellow-500/10 border-yellow-500/20" },
+  };
 
-  const bookingsData = [
-    { service: "Security", count: 45 },
-    { service: "Development", count: 32 },
-    { service: "Consulting", count: 28 },
-    { service: "Training", count: 18 },
-  ];
+  function bookingBadge(status: string) {
+    const m: Record<string, string> = {
+      confirmed: "bg-blue-500/15 text-blue-400 border-blue-500/25",
+      pending:   "bg-yellow-500/15 text-yellow-400 border-yellow-500/25",
+      "in-progress": "bg-purple-500/15 text-purple-400 border-purple-500/25",
+      completed: "bg-green-500/15 text-green-400 border-green-500/25",
+      cancelled: "bg-red-500/15 text-red-400 border-red-500/25",
+    };
+    return `inline-flex px-2 py-0.5 rounded-full border text-[10px] font-semibold uppercase tracking-wide ${m[status] ?? "bg-muted text-muted-foreground border-border"}`;
+  }
 
   return (
-    <div className="space-y-8">
+    <div className="p-6 space-y-6 max-w-[1400px] mx-auto">
       {/* Header */}
-      <div>
-        <div className="flex items-center gap-3 mb-3">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-xs font-bold text-green-400 uppercase tracking-wider">System Online</span>
+      <div className="flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+            <span className="text-xs font-semibold text-green-400 uppercase tracking-wider">System Online</span>
           </div>
-          <span className="text-blue-400">•</span>
-          <span className="text-xs font-semibold text-blue-400 uppercase tracking-wider">Command Center</span>
+          <h1 className="text-2xl font-bold text-foreground">Mission Control</h1>
+          <p className="text-sm text-muted-foreground">
+            {new Date().toLocaleDateString("en-IN", { dateStyle: "full" })}
+          </p>
         </div>
-        <h1 className="text-4xl font-bold text-white mb-2">Mission Control</h1>
-        <p className="text-blue-300">Real-time operational intelligence and system status</p>
+        <div className="flex gap-2">
+          <Link to="/admin/bookings" className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-muted/50 border border-border text-xs text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors">
+            <Calendar className="w-3.5 h-3.5" /> Bookings
+          </Link>
+          <Link to="/admin/users" className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-primary/10 border border-primary/20 text-xs text-primary font-semibold hover:bg-primary/20 transition-colors">
+            <Users className="w-3.5 h-3.5" /> Manage Users
+          </Link>
+        </div>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, index) => {
-          const Icon = stat.icon;
-          const TrendIcon = stat.trend === "up" ? TrendingUp : TrendingDown;
-
+      {/* Stat Cards */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {statCards.map((s, i) => {
+          const c = colorMap[s.color];
           return (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
+              key={s.label}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="cyber-card rounded-xl p-6 neon-border hover:neon-glow transition-all group relative overflow-hidden"
+              transition={{ delay: i * 0.07 }}
+              className="cyber-card rounded-xl p-5"
             >
-              {/* Background Accent */}
-              <div className="absolute inset-0 bg-gradient-to-br from-neon-blue/5 to-neon-purple/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-
-              <div className="relative">
-                <div className="flex items-start justify-between mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 rounded-lg flex items-center justify-center border border-neon-blue/30 group-hover:scale-110 transition-transform">
-                    <Icon className="h-6 w-6 text-neon-blue" />
-                  </div>
-                  <div className={`flex items-center gap-1 px-2 py-1 rounded-md text-xs font-bold ${
-                    stat.trend === "up"
-                      ? "bg-green-500/10 text-green-400 border border-green-500/30"
-                      : "bg-red-500/10 text-red-400 border border-red-500/30"
-                  }`}>
-                    <TrendIcon className="h-3 w-3" />
-                    {stat.change}
-                  </div>
+              <div className="flex items-start justify-between mb-3">
+                <div className={`p-2 rounded-lg border ${c.bg}`}>
+                  <s.icon className={`w-4 h-4 ${c.icon}`} />
                 </div>
-                <div className="text-4xl font-bold text-white mb-2">{stat.value}</div>
-                <div className="text-xs font-bold text-neon-blue uppercase tracking-wider">{stat.label}</div>
+                <div className={`flex items-center gap-0.5 text-xs font-semibold ${s.up ? "text-green-400" : "text-red-400"}`}>
+                  {s.up ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+                  {s.change}
+                </div>
               </div>
+              <p className="text-2xl font-bold text-foreground mb-0.5">{s.value}</p>
+              <p className="text-sm font-medium text-foreground/80">{s.label}</p>
+              <p className="text-[10px] text-muted-foreground mt-0.5">{s.sub}</p>
             </motion.div>
           );
         })}
       </div>
 
       {/* Charts */}
-      <div className="grid lg:grid-cols-2 gap-6">
-        {/* Revenue Chart */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="cyber-card rounded-xl p-6 neon-border"
+          transition={{ delay: 0.3 }}
+          className="lg:col-span-2 cyber-card rounded-xl p-5"
         >
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              <Activity className="h-5 w-5 text-neon-blue" />
-              Revenue Intelligence
-            </h3>
-            <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">Last 6 Months</span>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="text-sm font-semibold text-foreground">Revenue — 2026</h2>
+              <p className="text-xs text-muted-foreground">Monthly performance</p>
+            </div>
+            <Activity className="w-4 h-4 text-muted-foreground" />
           </div>
-          <ResponsiveContainer width="100%" height={300}>
-            <AreaChart data={revenueData}>
+          <ResponsiveContainer width="100%" height={200}>
+            <AreaChart data={revenue} margin={{ top: 0, right: 0, left: -10, bottom: 0 }}>
               <defs>
-                <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#6366f1" stopOpacity={0.6}/>
-                  <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
+                <linearGradient id="adminRevGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%"  stopColor="#6366f1" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#6366f1" stopOpacity={0}   />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(99, 102, 241, 0.1)" />
-              <XAxis dataKey="month" stroke="#94a3b8" style={{ fontSize: '12px', fontWeight: 600 }} />
-              <YAxis stroke="#94a3b8" style={{ fontSize: '12px', fontWeight: 600 }} />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: 'rgba(19, 19, 26, 0.95)',
-                  border: '1px solid rgba(99, 102, 241, 0.3)',
-                  borderRadius: '8px',
-                  color: '#e0e7ff'
-                }}
-              />
-              <Area type="monotone" dataKey="revenue" stroke="#6366f1" strokeWidth={2} fillOpacity={1} fill="url(#colorRevenue)" />
+              <CartesianGrid key="grid"    strokeDasharray="3 3" stroke="rgba(99,102,241,0.08)" />
+              <XAxis        key="xaxis"   dataKey="month" tick={{ fontSize: 10, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
+              <YAxis        key="yaxis"   tick={{ fontSize: 10, fill: "#94a3b8" }} axisLine={false} tickLine={false} tickFormatter={(v) => `₹${(v/100000).toFixed(1)}L`} />
+              <Tooltip      key="tooltip" content={<CustomTooltip />} />
+              <Area key="area" type="monotone" dataKey="revenue" name="Revenue" stroke="#6366f1" fill="url(#adminRevGrad)" strokeWidth={2} dot={false} />
             </AreaChart>
           </ResponsiveContainer>
         </motion.div>
 
-        {/* Bookings by Service */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="cyber-card rounded-xl p-6 neon-border"
+          transition={{ delay: 0.38 }}
+          className="cyber-card rounded-xl p-5"
         >
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              <Zap className="h-5 w-5 text-neon-purple" />
-              Service Distribution
-            </h3>
-            <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">Active Deployments</span>
+          <div className="mb-4">
+            <h2 className="text-sm font-semibold text-foreground">Bookings / Month</h2>
+            <p className="text-xs text-muted-foreground">2026</p>
           </div>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={bookingsData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(99, 102, 241, 0.1)" />
-              <XAxis dataKey="service" stroke="#94a3b8" style={{ fontSize: '12px', fontWeight: 600 }} />
-              <YAxis stroke="#94a3b8" style={{ fontSize: '12px', fontWeight: 600 }} />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: 'rgba(19, 19, 26, 0.95)',
-                  border: '1px solid rgba(168, 85, 247, 0.3)',
-                  borderRadius: '8px',
-                  color: '#e0e7ff'
-                }}
-              />
-              <Bar dataKey="count" fill="#a855f7" radius={[8, 8, 0, 0]} />
+          <ResponsiveContainer width="100%" height={200}>
+            <BarChart data={revenue} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
+              <CartesianGrid key="grid"    strokeDasharray="3 3" stroke="rgba(99,102,241,0.08)" />
+              <XAxis        key="xaxis"   dataKey="month" tick={{ fontSize: 10, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
+              <YAxis        key="yaxis"   tick={{ fontSize: 10, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
+              <Tooltip      key="tooltip" content={<CustomTooltip />} />
+              <Bar key="bar" dataKey="bookings" name="Bookings" radius={[4, 4, 0, 0]}>
+                {revenue.map((_, idx) => (
+                  <Cell key={idx} fill={`hsl(${250 + idx * 8}, 70%, ${55 + idx * 2}%)`} />
+                ))}
+              </Bar>
             </BarChart>
           </ResponsiveContainer>
         </motion.div>
       </div>
 
       {/* Recent Activity */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.6 }}
-        className="cyber-card rounded-xl p-6 neon-border"
-      >
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-bold text-white flex items-center gap-2">
-            <Activity className="h-5 w-5 text-neon-blue" />
-            Live Operations Feed
-          </h3>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-xs font-bold text-green-400 uppercase tracking-wider">Real-time</span>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45 }}
+          className="cyber-card rounded-xl p-5"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-semibold text-foreground">Recent Bookings</h2>
+            <Link to="/admin/bookings" className="text-xs text-primary hover:underline flex items-center gap-0.5">
+              View all <ChevronRight className="w-3 h-3" />
+            </Link>
           </div>
-        </div>
-        <div className="space-y-3">
-          {[
-            { customer: "John Doe", service: "Network Security Audit", amount: "$799", status: "confirmed", id: "JD" },
-            { customer: "Jane Smith", service: "Custom Website Development", amount: "$2,999", status: "pending", id: "JS" },
-            { customer: "Mike Johnson", service: "Business Consulting", amount: "$599", status: "confirmed", id: "MJ" },
-            { customer: "Sarah Williams", service: "Cybersecurity Training", amount: "$899", status: "confirmed", id: "SW" },
-          ].map((booking, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="flex items-center justify-between p-4 rounded-lg hover:bg-neon-blue/5 transition-all border border-transparent hover:border-neon-blue/30 group"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-neon-indigo to-neon-purple rounded-lg flex items-center justify-center text-white font-bold text-sm border border-neon-blue/30 group-hover:neon-glow transition-all">
-                  {booking.id}
+          <div className="space-y-2">
+            {recentBookings.map((b) => (
+              <div key={b.id} className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-muted/20 transition-colors">
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium text-foreground truncate">{b.serviceName}</p>
+                  <p className="text-[10px] text-muted-foreground">{b.id} · {b.date}</p>
                 </div>
-                <div>
-                  <div className="font-bold text-white mb-1">{booking.customer}</div>
-                  <div className="text-sm text-blue-300">{booking.service}</div>
+                <div className="text-right flex-shrink-0">
+                  <span className={bookingBadge(b.status)}>{b.status}</span>
+                  <p className="text-[10px] text-muted-foreground mt-0.5">₹{b.amount.toLocaleString("en-IN")}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-6">
-                <div className="text-right">
-                  <div className="font-bold text-white text-lg mb-1">{booking.amount}</div>
-                  <span className={`text-xs font-bold px-3 py-1.5 rounded-md uppercase tracking-wider ${
-                    booking.status === "confirmed"
-                      ? "bg-green-500/10 text-green-400 border border-green-500/30"
-                      : "bg-yellow-500/10 text-yellow-400 border border-yellow-500/30"
-                  }`}>
-                    {booking.status}
-                  </span>
+            ))}
+          </div>
+        </motion.div>
+
+        <div className="space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.52 }}
+            className="cyber-card rounded-xl p-5"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-sm font-semibold text-foreground">Recent Users</h2>
+              <Link to="/admin/users" className="text-xs text-primary hover:underline flex items-center gap-0.5">
+                View all <ChevronRight className="w-3 h-3" />
+              </Link>
+            </div>
+            <div className="space-y-2">
+              {recentUsers.map((u) => (
+                <div key={u.id} className="flex items-center gap-3 py-1.5">
+                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
+                    {u.name.charAt(0)}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium text-foreground truncate">{u.name}</p>
+                    <p className="text-[10px] text-muted-foreground truncate">{u.company ?? u.email}</p>
+                  </div>
+                  <div className="text-right flex-shrink-0">
+                    <p className="text-[10px] text-muted-foreground">{u.bookings} bookings</p>
+                    <span className={`text-[9px] font-semibold ${u.isActive ? "text-green-400" : "text-red-400"}`}>
+                      {u.isActive ? "ACTIVE" : "SUSPENDED"}
+                    </span>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.58 }}
+            className="cyber-card rounded-xl p-4"
+          >
+            <h2 className="text-sm font-semibold text-foreground mb-3">Pending Actions</h2>
+            <div className="space-y-2">
+              {[
+                { label: "Pending Bookings", count: stats.pendingBookings, icon: Clock,          color: "text-yellow-400", to: "/admin/bookings" },
+                { label: "Pending Payouts",  count: stats.pendingPayouts,  icon: DollarSign,     color: "text-orange-400", to: "/admin/payments" },
+                { label: "Suspended Users",  count: users.filter((u) => !u.isActive).length, icon: AlertTriangle, color: "text-red-400", to: "/admin/users" },
+              ].map((item) => (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  className="flex items-center gap-3 p-2.5 rounded-lg hover:bg-muted/20 transition-colors"
+                >
+                  <item.icon className={`w-4 h-4 flex-shrink-0 ${item.color}`} />
+                  <span className="flex-1 text-xs text-muted-foreground">{item.label}</span>
+                  <span className={`text-sm font-bold ${item.color}`}>{item.count}</span>
+                  <ChevronRight className="w-3 h-3 text-muted-foreground" />
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.62 }}
+            className="cyber-card rounded-xl p-4"
+          >
+            <h2 className="text-sm font-semibold text-foreground mb-3">Service Catalogue</h2>
+            <div className="grid grid-cols-3 gap-2 text-center">
+              <div className="p-2 rounded-lg bg-green-500/10 border border-green-500/20">
+                <p className="text-lg font-bold text-green-400">{services.filter((s) => s.isActive).length}</p>
+                <p className="text-[10px] text-muted-foreground">Live</p>
               </div>
-            </motion.div>
-          ))}
+              <div className="p-2 rounded-lg bg-muted/40 border border-border">
+                <p className="text-lg font-bold text-muted-foreground">{services.filter((s) => !s.isActive).length}</p>
+                <p className="text-[10px] text-muted-foreground">Paused</p>
+              </div>
+              <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
+                <p className="text-lg font-bold text-primary">{services.length}</p>
+                <p className="text-[10px] text-muted-foreground">Total</p>
+              </div>
+            </div>
+            <Link to="/admin/services" className="mt-3 flex items-center justify-center gap-1 text-xs text-primary hover:underline">
+              Manage services <ChevronRight className="w-3 h-3" />
+            </Link>
+          </motion.div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

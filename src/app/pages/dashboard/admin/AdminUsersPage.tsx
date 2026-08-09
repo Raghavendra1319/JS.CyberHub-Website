@@ -1,355 +1,291 @@
-import { useState } from "react";
-import { Search, Filter, Shield, UserCheck, UserX, Mail, Phone, Calendar, MoreVertical } from "lucide-react";
-import { motion } from "motion/react";
-import { format } from "date-fns";
+import { useState, Fragment } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Search, Shield, UserCheck, UserX, ChevronDown, Users, Mail } from "lucide-react";
 import { toast } from "sonner";
+import { dataService } from "../../../services/dataService";
+import type { UserRole } from "../../../services/authService";
+
+type FilterRole = "all" | UserRole;
+type FilterStatus = "all" | "active" | "suspended";
+
+const ROLE_COLORS: Record<string, string> = {
+  admin:    "bg-red-500/15 text-red-400 border-red-500/25",
+  provider: "bg-purple-500/15 text-purple-400 border-purple-500/25",
+  user:     "bg-blue-500/15 text-blue-400 border-blue-500/25",
+};
 
 export function AdminUsersPage() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filterRole, setFilterRole] = useState("all");
-  const [filterStatus, setFilterStatus] = useState("all");
+  const [search, setSearch]           = useState("");
+  const [filterRole, setFilterRole]   = useState<FilterRole>("all");
+  const [filterStatus, setFilterStatus] = useState<FilterStatus>("all");
+  const [expandedId, setExpandedId]   = useState<string | null>(null);
+  const [users, setUsers]             = useState(() => dataService.getAdminUsers());
 
-  // Mock data
-  const users = [
-    {
-      id: "USR001",
-      name: "Rajesh Kumar",
-      email: "rajesh@example.com",
-      phone: "+91 9876543210",
-      role: "user",
-      status: "active",
-      joinedDate: new Date(2025, 10, 15),
-      totalBookings: 5,
-      totalSpent: 4500,
-      lastActive: new Date(2026, 2, 10),
-    },
-    {
-      id: "USR002",
-      name: "Priya Sharma",
-      email: "priya@example.com",
-      phone: "+91 9876543211",
-      role: "user",
-      status: "active",
-      joinedDate: new Date(2025, 11, 20),
-      totalBookings: 3,
-      totalSpent: 2800,
-      lastActive: new Date(2026, 2, 12),
-    },
-    {
-      id: "PRV001",
-      name: "Amit Patel",
-      email: "amit@example.com",
-      phone: "+91 9876543212",
-      role: "provider",
-      status: "active",
-      joinedDate: new Date(2025, 9, 10),
-      totalServices: 8,
-      totalEarnings: 15000,
-      lastActive: new Date(2026, 2, 13),
-    },
-    {
-      id: "USR003",
-      name: "Sneha Desai",
-      email: "sneha@example.com",
-      phone: "+91 9876543213",
-      role: "user",
-      status: "inactive",
-      joinedDate: new Date(2025, 8, 5),
-      totalBookings: 1,
-      totalSpent: 500,
-      lastActive: new Date(2026, 1, 20),
-    },
-    {
-      id: "PRV002",
-      name: "Vikram Singh",
-      email: "vikram@example.com",
-      phone: "+91 9876543214",
-      role: "provider",
-      status: "active",
-      joinedDate: new Date(2025, 10, 1),
-      totalServices: 12,
-      totalEarnings: 25000,
-      lastActive: new Date(2026, 2, 14),
-    },
-    {
-      id: "USR004",
-      name: "Anjali Mehta",
-      email: "anjali@example.com",
-      phone: "+91 9876543215",
-      role: "user",
-      status: "active",
-      joinedDate: new Date(2026, 0, 10),
-      totalBookings: 7,
-      totalSpent: 6200,
-      lastActive: new Date(2026, 2, 11),
-    },
-  ];
-
-  const filteredUsers = users.filter((user) => {
-    const matchesSearch =
-      searchQuery === "" ||
-      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.id.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesRole = filterRole === "all" || user.role === filterRole;
-    const matchesStatus = filterStatus === "all" || user.status === filterStatus;
-    return matchesSearch && matchesRole && matchesStatus;
+  const filtered = users.filter((u) => {
+    const matchSearch =
+      !search ||
+      u.name.toLowerCase().includes(search.toLowerCase()) ||
+      u.email.toLowerCase().includes(search.toLowerCase()) ||
+      (u.company ?? "").toLowerCase().includes(search.toLowerCase());
+    const matchRole   = filterRole === "all" || u.role === filterRole;
+    const matchStatus = filterStatus === "all" || (filterStatus === "active" ? u.isActive : !u.isActive);
+    return matchSearch && matchRole && matchStatus;
   });
 
-  const stats = {
-    total: users.length,
-    users: users.filter((u) => u.role === "user").length,
+  const handleToggleStatus = (id: string, currentlyActive: boolean) => {
+    dataService.toggleUserStatus(id);
+    setUsers([...dataService.getAdminUsers()]);
+    toast.success(currentlyActive ? "User suspended." : "User reactivated.");
+  };
+
+  const handleRoleChange = (id: string, role: UserRole) => {
+    dataService.updateUserRole(id, role);
+    setUsers([...dataService.getAdminUsers()]);
+    toast.success(`Role updated to ${role}.`);
+  };
+
+  const counts = {
+    total:     users.length,
+    active:    users.filter((u) => u.isActive).length,
+    suspended: users.filter((u) => !u.isActive).length,
+    admins:    users.filter((u) => u.role === "admin").length,
     providers: users.filter((u) => u.role === "provider").length,
-    active: users.filter((u) => u.status === "active").length,
-  };
-
-  const getRoleBadgeColor = (role: string) => {
-    switch (role) {
-      case "user":
-        return "bg-blue-100 text-blue-700";
-      case "provider":
-        return "bg-purple-100 text-purple-700";
-      case "admin":
-        return "bg-red-100 text-red-700";
-      default:
-        return "bg-gray-100 text-gray-700";
-    }
-  };
-
-  const handleStatusToggle = (userId: string, currentStatus: string) => {
-    const newStatus = currentStatus === "active" ? "inactive" : "active";
-    toast.success(`User ${userId} status changed to ${newStatus}`);
+    clients:   users.filter((u) => u.role === "user").length,
   };
 
   return (
-    <div>
+    <div className="p-6 space-y-5 max-w-[1200px] mx-auto">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Users Management</h1>
-        <p className="text-gray-600 mt-1">Monitor and manage all platform users</p>
-      </div>
-
-      {/* Stats Cards */}
-      <div className="grid md:grid-cols-4 gap-6 mb-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl p-6 shadow-lg"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-              <UserCheck className="h-6 w-6 text-blue-600" />
-            </div>
-          </div>
-          <div className="text-3xl font-bold text-gray-900 mb-1">{stats.total}</div>
-          <div className="text-gray-600">Total Users</div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl p-6 shadow-lg"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-              <UserCheck className="h-6 w-6 text-green-600" />
-            </div>
-          </div>
-          <div className="text-3xl font-bold text-gray-900 mb-1">{stats.users}</div>
-          <div className="text-gray-600">Customers</div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-white rounded-2xl p-6 shadow-lg"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-              <Shield className="h-6 w-6 text-purple-600" />
-            </div>
-          </div>
-          <div className="text-3xl font-bold text-gray-900 mb-1">{stats.providers}</div>
-          <div className="text-gray-600">Providers</div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="bg-white rounded-2xl p-6 shadow-lg"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
-              <UserCheck className="h-6 w-6 text-indigo-600" />
-            </div>
-          </div>
-          <div className="text-3xl font-bold text-gray-900 mb-1">{stats.active}</div>
-          <div className="text-gray-600">Active Users</div>
-        </motion.div>
-      </div>
-
-      {/* Filters */}
-      <div className="bg-white rounded-xl p-4 shadow-md mb-6">
-        <div className="flex flex-col sm:flex-row gap-4">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search by name, email, or ID..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-            />
-          </div>
-
-          <div className="flex items-center gap-2">
-            <Filter className="h-5 w-5 text-gray-600" />
-            <select
-              value={filterRole}
-              onChange={(e) => setFilterRole(e.target.value)}
-              className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-            >
-              <option value="all">All Roles</option>
-              <option value="user">Users</option>
-              <option value="provider">Providers</option>
-            </select>
-            <select
-              value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
-            >
-              <option value="all">All Status</option>
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
-          </div>
+      <div className="flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <h1 className="text-xl font-bold text-foreground">User Management</h1>
+          <p className="text-sm text-muted-foreground">Manage roles, access, and account status</p>
         </div>
       </div>
 
-      {/* Users Table */}
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+      {/* Summary cards */}
+      <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+        {[
+          { label: "Total",     value: counts.total,     color: "text-foreground"   },
+          { label: "Active",    value: counts.active,    color: "text-green-400"    },
+          { label: "Suspended", value: counts.suspended, color: "text-red-400"      },
+          { label: "Admins",    value: counts.admins,    color: "text-red-400"      },
+          { label: "Providers", value: counts.providers, color: "text-purple-400"   },
+          { label: "Clients",   value: counts.clients,   color: "text-blue-400"     },
+        ].map((c) => (
+          <div key={c.label} className="cyber-card rounded-xl p-3 text-center">
+            <p className={`text-xl font-bold ${c.color}`}>{c.value}</p>
+            <p className="text-[10px] text-muted-foreground">{c.label}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Filters */}
+      <div className="flex flex-col sm:flex-row gap-3">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
+          <input
+            type="text"
+            placeholder="Search by name, email, or company…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full pl-9 pr-4 py-2 text-sm bg-muted/40 border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50"
+          />
+        </div>
+        <select
+          value={filterRole}
+          onChange={(e) => setFilterRole(e.target.value as FilterRole)}
+          className="text-sm bg-muted/40 border border-border rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-primary/50"
+        >
+          <option value="all">All Roles</option>
+          <option value="admin">Admin</option>
+          <option value="provider">Provider</option>
+          <option value="user">Client</option>
+        </select>
+        <select
+          value={filterStatus}
+          onChange={(e) => setFilterStatus(e.target.value as FilterStatus)}
+          className="text-sm bg-muted/40 border border-border rounded-lg px-3 py-2 text-foreground focus:outline-none focus:border-primary/50"
+        >
+          <option value="all">All Status</option>
+          <option value="active">Active</option>
+          <option value="suspended">Suspended</option>
+        </select>
+      </div>
+
+      {/* Table */}
+      <div className="cyber-card rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
-              <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  User
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Contact
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Role
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Activity
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Joined
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Status
-                </th>
-                <th className="px-6 py-4 text-right text-sm font-semibold text-gray-900">
-                  Actions
-                </th>
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="border-b border-border bg-muted/20">
+                {["User", "Role", "Company", "Bookings", "Spend", "Joined", "Last Login", "Status", "Actions"].map((h) => (
+                  <th key={h} className="px-4 py-3 text-left text-muted-foreground font-medium whitespace-nowrap">{h}</th>
+                ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
-              {filteredUsers.map((user, index) => (
-                <motion.tr
-                  key={user.id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="hover:bg-gray-50 transition-colors"
-                >
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                        {user.name.charAt(0)}
-                      </div>
-                      <div>
-                        <div className="font-semibold text-gray-900">{user.name}</div>
-                        <div className="text-sm text-gray-500">{user.id}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <Mail className="h-4 w-4" />
-                        {user.email}
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <Phone className="h-4 w-4" />
-                        {user.phone}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span
-                      className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium capitalize ${getRoleBadgeColor(
-                        user.role
-                      )}`}
+            <tbody className="divide-y divide-border/40">
+              <AnimatePresence>
+                {filtered.map((u, i) => (
+                  <Fragment key={u.id}>
+                    <motion.tr
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ delay: i * 0.03 }}
+                      className="hover:bg-muted/20 transition-colors cursor-pointer"
+                      onClick={() => setExpandedId(expandedId === u.id ? null : u.id)}
                     >
-                      {user.role}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4">
-                    {user.role === "user" ? (
-                      <div className="text-sm">
-                        <div className="text-gray-900">
-                          {user.totalBookings} bookings
+                      {/* User */}
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0">
+                            {u.name.charAt(0)}
+                          </div>
+                          <div>
+                            <p className="font-medium text-foreground">{u.name}</p>
+                            <p className="text-muted-foreground text-[10px]">{u.email}</p>
+                          </div>
                         </div>
-                        <div className="text-gray-500">
-                          ₹{user.totalSpent.toLocaleString("en-IN")} spent
+                      </td>
+                      {/* Role */}
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        <span className={`inline-flex px-2 py-0.5 rounded-full border text-[10px] font-semibold uppercase tracking-wide ${ROLE_COLORS[u.role]}`}>
+                          {u.role}
+                        </span>
+                      </td>
+                      {/* Company */}
+                      <td className="px-4 py-3 whitespace-nowrap text-muted-foreground max-w-[140px] truncate">
+                        {u.company ?? "—"}
+                      </td>
+                      {/* Bookings */}
+                      <td className="px-4 py-3 whitespace-nowrap text-foreground font-medium text-center">{u.bookings}</td>
+                      {/* Spend */}
+                      <td className="px-4 py-3 whitespace-nowrap text-foreground">
+                        {u.spend > 0 ? `₹${u.spend.toLocaleString("en-IN")}` : "—"}
+                      </td>
+                      {/* Joined */}
+                      <td className="px-4 py-3 whitespace-nowrap text-muted-foreground">{u.joinedAt}</td>
+                      {/* Last Login */}
+                      <td className="px-4 py-3 whitespace-nowrap text-muted-foreground">{u.lastLogin.split("T")[0]}</td>
+                      {/* Status */}
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        <span className={`flex items-center gap-1 text-[10px] font-semibold ${u.isActive ? "text-green-400" : "text-red-400"}`}>
+                          <span className={`w-1.5 h-1.5 rounded-full ${u.isActive ? "bg-green-400 animate-pulse" : "bg-red-400"}`} />
+                          {u.isActive ? "Active" : "Suspended"}
+                        </span>
+                      </td>
+                      {/* Actions */}
+                      <td className="px-4 py-3 whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            onClick={() => handleToggleStatus(u.id, u.isActive)}
+                            className={`p-1.5 rounded-lg transition-colors ${u.isActive ? "text-red-400 hover:bg-red-500/10" : "text-green-400 hover:bg-green-500/10"}`}
+                            title={u.isActive ? "Suspend user" : "Reactivate user"}
+                          >
+                            {u.isActive ? <UserX className="w-3.5 h-3.5" /> : <UserCheck className="w-3.5 h-3.5" />}
+                          </button>
+                          <button
+                            onClick={() => setExpandedId(expandedId === u.id ? null : u.id)}
+                            className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/40 transition-colors"
+                          >
+                            <ChevronDown className={`w-3.5 h-3.5 transition-transform ${expandedId === u.id ? "rotate-180" : ""}`} />
+                          </button>
                         </div>
-                      </div>
-                    ) : (
-                      <div className="text-sm">
-                        <div className="text-gray-900">
-                          {user.totalServices} services
-                        </div>
-                        <div className="text-gray-500">
-                          ₹{user.totalEarnings?.toLocaleString("en-IN")} earned
-                        </div>
-                      </div>
-                    )}
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
-                      <Calendar className="h-4 w-4" />
-                      {format(user.joinedDate, "MMM d, yyyy")}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <button
-                      onClick={() => handleStatusToggle(user.id, user.status)}
-                      className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium transition-colors ${
-                        user.status === "active"
-                          ? "bg-green-100 text-green-700 hover:bg-green-200"
-                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                      }`}
-                    >
-                      {user.status === "active" ? <UserCheck className="h-3 w-3" /> : <UserX className="h-3 w-3" />}
-                      {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
-                    </button>
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center justify-end">
-                      <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
-                        <MoreVertical className="h-5 w-5" />
-                      </button>
-                    </div>
-                  </td>
-                </motion.tr>
-              ))}
+                      </td>
+                    </motion.tr>
+
+                    {/* Expanded row */}
+                    <AnimatePresence>
+                      {expandedId === u.id && (
+                        <motion.tr
+                          key={`${u.id}-expanded`}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                        >
+                          <td colSpan={9} className="px-4 pb-4 bg-muted/10">
+                            <div className="pt-3 border-t border-border/40 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                              {/* Contact */}
+                              <div>
+                                <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">Contact</p>
+                                <div className="space-y-1.5">
+                                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                    <Mail className="w-3 h-3 flex-shrink-0" />
+                                    {u.email}
+                                  </div>
+                                  {u.company && (
+                                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                      <Users className="w-3 h-3 flex-shrink-0" />
+                                      {u.company}
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Change role */}
+                              <div>
+                                <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">Change Role</p>
+                                <div className="flex gap-2">
+                                  {(["user", "provider", "admin"] as UserRole[]).map((r) => (
+                                    <button
+                                      key={r}
+                                      onClick={() => handleRoleChange(u.id, r)}
+                                      className={`px-3 py-1.5 rounded-lg text-[10px] font-semibold uppercase tracking-wide border transition-colors ${
+                                        u.role === r
+                                          ? ROLE_COLORS[r]
+                                          : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                                      }`}
+                                    >
+                                      {r}
+                                    </button>
+                                  ))}
+                                </div>
+                              </div>
+
+                              {/* Account actions */}
+                              <div>
+                                <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider mb-2">Account Actions</p>
+                                <div className="flex flex-wrap gap-2">
+                                  <button
+                                    onClick={() => handleToggleStatus(u.id, u.isActive)}
+                                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-semibold border transition-colors ${
+                                      u.isActive
+                                        ? "border-red-500/30 text-red-400 hover:bg-red-500/10"
+                                        : "border-green-500/30 text-green-400 hover:bg-green-500/10"
+                                    }`}
+                                  >
+                                    {u.isActive ? <><UserX className="w-3 h-3" /> Suspend</> : <><UserCheck className="w-3 h-3" /> Reactivate</>}
+                                  </button>
+                                  <button
+                                    onClick={() => { toast.info(`Password reset email sent to ${u.email}`); }}
+                                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-semibold border border-border text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors"
+                                  >
+                                    <Shield className="w-3 h-3" /> Reset Password
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </motion.tr>
+                      )}
+                    </AnimatePresence>
+                  </Fragment>
+                ))}
+              </AnimatePresence>
             </tbody>
           </table>
+
+          {filtered.length === 0 && (
+            <div className="py-12 text-center">
+              <Users className="w-8 h-8 text-muted-foreground/30 mx-auto mb-2" />
+              <p className="text-sm text-muted-foreground">No users match your filters</p>
+            </div>
+          )}
+        </div>
+
+        <div className="px-4 py-3 border-t border-border/50 text-xs text-muted-foreground">
+          Showing {filtered.length} of {users.length} users
         </div>
       </div>
     </div>

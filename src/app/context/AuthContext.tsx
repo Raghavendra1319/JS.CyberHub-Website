@@ -1,63 +1,51 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { authService } from "../services/authService";
+import type { AuthUser, UserRole } from "../services/authService";
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: "user" | "admin";
-  avatar?: string;
-}
+// Re-export so existing imports keep working
+export type { AuthUser as User };
 
 interface AuthContextType {
-  user: User | null;
+  user: AuthUser | null;
   login: (email: string, password: string) => Promise<void>;
   signup: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
   isAdmin: boolean;
+  isProvider: boolean;
+  isLoading: boolean;
+  hasRole: (...roles: UserRole[]) => boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Restore session from localStorage on mount
+  useEffect(() => {
+    const restored = authService.restoreSession();
+    if (restored) setUser(restored);
+    setIsLoading(false);
+  }, []);
 
   const login = async (email: string, password: string) => {
-    // Mock login - in real app, this would call an API
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Check if admin
-    if (email === "admin@jscyberhub.com") {
-      setUser({
-        id: "admin-1",
-        name: "Admin User",
-        email: email,
-        role: "admin",
-      });
-    } else {
-      setUser({
-        id: "user-1",
-        name: email.split("@")[0],
-        email: email,
-        role: "user",
-      });
-    }
+    const authedUser = await authService.login(email, password);
+    setUser(authedUser);
   };
 
   const signup = async (name: string, email: string, password: string) => {
-    // Mock signup
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setUser({
-      id: "user-new",
-      name: name,
-      email: email,
-      role: "user",
-    });
+    const newUser = await authService.signup(name, email, password);
+    setUser(newUser);
   };
 
   const logout = () => {
+    authService.logout();
     setUser(null);
   };
+
+  const hasRole = (...roles: UserRole[]) => authService.hasRole(user, ...roles);
 
   return (
     <AuthContext.Provider
@@ -68,6 +56,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         logout,
         isAuthenticated: !!user,
         isAdmin: user?.role === "admin",
+        isProvider: user?.role === "provider",
+        isLoading,
+        hasRole,
       }}
     >
       {children}

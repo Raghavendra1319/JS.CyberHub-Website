@@ -2,7 +2,7 @@ import { Outlet, Link, useLocation, useNavigate } from "react-router";
 import {
   Home, Calendar, History, User, CreditCard, Star, LogOut,
   Shield, FileText, AlertTriangle, AlertOctagon, MessageSquare,
-  Globe, ChevronRight, Menu, X
+  Globe, ChevronRight, Menu, X, LayoutDashboard
 } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
@@ -10,6 +10,7 @@ import { useAuth } from "../../../context/AuthContext";
 import { NotificationBell } from "../../../components/NotificationBell";
 
 const navigation = [
+  { name: "Client Portal",     href: "/dashboard/portal",             icon: LayoutDashboard,group: "core" },
   { name: "My Bookings",       href: "/dashboard",                    icon: Calendar,       group: "core" },
   { name: "Security Score",    href: "/dashboard/security-score",     icon: Shield,         group: "cyber" },
   { name: "Vulnerabilities",   href: "/dashboard/vulnerability",      icon: AlertTriangle,  group: "cyber" },

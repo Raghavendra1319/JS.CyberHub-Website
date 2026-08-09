@@ -42,6 +42,9 @@ import { ThreatIntelligenceDashboard } from "./pages/cybersecurity/ThreatIntelli
 // Support System
 import { TicketDashboard } from "./pages/support/TicketDashboard";
 
+// Client Portal
+import { ClientPortalPage } from "./pages/client/ClientPortalPage";
+
 // Provider Dashboard
 import { ProviderDashboardLayout } from "./pages/dashboard/provider/ProviderDashboardLayout";
 import { ProviderOverviewPage } from "./pages/dashboard/provider/ProviderOverviewPage";
@@ -66,10 +69,12 @@ import { AdminPaymentsPage } from "./pages/dashboard/admin/AdminPaymentsPage";
 import { NotFoundPage } from "./pages/errors/NotFoundPage";
 import { ServerErrorPage } from "./pages/errors/ServerErrorPage";
 
-// Layouts
+// Layouts & Guards
 import { PublicLayout } from "./layouts/PublicLayout";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 export const router = createBrowserRouter([
+  // ── Public ─────────────────────────────────────────────────────────────────
   {
     path: "/",
     Component: PublicLayout,
@@ -83,6 +88,8 @@ export const router = createBrowserRouter([
       { path: "contact", Component: ContactPage },
     ],
   },
+
+  // ── Auth ───────────────────────────────────────────────────────────────────
   {
     path: "/auth",
     children: [
@@ -92,6 +99,8 @@ export const router = createBrowserRouter([
       { path: "reset-password", Component: ResetPasswordPage },
     ],
   },
+
+  // ── Booking Flow (auth required) ───────────────────────────────────────────
   {
     path: "/booking",
     children: [
@@ -103,9 +112,15 @@ export const router = createBrowserRouter([
       { path: "confirmation/:bookingId", Component: BookingConfirmationPage },
     ],
   },
+
+  // ── User Dashboard (role: user) ────────────────────────────────────────────
   {
     path: "/dashboard",
-    Component: UserDashboardLayout,
+    element: (
+      <ProtectedRoute allowedRoles={["user", "admin", "provider"]}>
+        <UserDashboardLayout />
+      </ProtectedRoute>
+    ),
     children: [
       { index: true, Component: UserBookingsPage },
       { path: "booking/:id", Component: BookingTrackingPage },
@@ -119,11 +134,18 @@ export const router = createBrowserRouter([
       { path: "incidents", Component: IncidentDashboard },
       { path: "support", Component: TicketDashboard },
       { path: "threat-intelligence", Component: ThreatIntelligenceDashboard },
+      { path: "portal", Component: ClientPortalPage },
     ],
   },
+
+  // ── Provider Dashboard (role: provider) ───────────────────────────────────
   {
     path: "/provider",
-    Component: ProviderDashboardLayout,
+    element: (
+      <ProtectedRoute allowedRoles={["provider", "admin"]}>
+        <ProviderDashboardLayout />
+      </ProtectedRoute>
+    ),
     children: [
       { index: true, Component: ProviderOverviewPage },
       { path: "services", Component: ProviderServicesPage },
@@ -135,9 +157,15 @@ export const router = createBrowserRouter([
       { path: "settings", Component: ProviderSettingsPage },
     ],
   },
+
+  // ── Admin Dashboard (role: admin) ─────────────────────────────────────────
   {
     path: "/admin",
-    Component: AdminDashboardLayout,
+    element: (
+      <ProtectedRoute allowedRoles={["admin"]}>
+        <AdminDashboardLayout />
+      </ProtectedRoute>
+    ),
     children: [
       { index: true, Component: AdminOverviewPage },
       { path: "services", Component: AdminServicesPage },
@@ -147,12 +175,8 @@ export const router = createBrowserRouter([
       { path: "payments", Component: AdminPaymentsPage },
     ],
   },
-  {
-    path: "/500",
-    Component: ServerErrorPage,
-  },
-  {
-    path: "*",
-    Component: NotFoundPage,
-  },
+
+  // ── Errors ─────────────────────────────────────────────────────────────────
+  { path: "/500", Component: ServerErrorPage },
+  { path: "*", Component: NotFoundPage },
 ]);
