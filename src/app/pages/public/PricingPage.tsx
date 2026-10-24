@@ -81,7 +81,7 @@ export function PricingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="py-20 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -90,19 +90,19 @@ export function PricingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+            <div className="inline-flex items-center gap-2 bg-cyan-500/15 text-cyan-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Sparkles className="h-4 w-4" />
               <span>Flexible Pricing for Every Need</span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
               Choose Your{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
                 Perfect Plan
               </span>
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
               Transparent pricing with no hidden fees. Pay-as-you-go or subscribe for better rates.
             </p>
           </motion.div>
@@ -119,7 +119,7 @@ export function PricingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative bg-white rounded-2xl p-8 ${
+                className={`relative bg-card rounded-2xl p-8 ${
                   plan.popular
                     ? "shadow-2xl ring-2 ring-blue-600 scale-105"
                     : "shadow-lg hover:shadow-xl"
@@ -127,38 +127,38 @@ export function PricingPage() {
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-1 rounded-full text-sm font-medium">
+                    <span className="bg-gradient-to-r from-cyan-400 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-medium">
                       Most Popular
                     </span>
                   </div>
                 )}
 
                 <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
-                  <p className="text-gray-600">{plan.description}</p>
+                  <h3 className="text-2xl font-bold text-foreground mb-2">{plan.name}</h3>
+                  <p className="text-muted-foreground">{plan.description}</p>
                 </div>
 
                 <div className="mb-6">
                   <div className="flex items-baseline gap-2">
                     {typeof plan.price === "number" ? (
                       <>
-                        <span className="text-gray-500 text-lg">₹</span>
-                        <span className="text-5xl font-bold text-gray-900">
+                        <span className="text-muted-foreground text-lg">₹</span>
+                        <span className="text-5xl font-bold text-foreground">
                           {plan.price.toLocaleString("en-IN")}
                         </span>
                       </>
                     ) : (
-                      <span className="text-5xl font-bold text-gray-900">{plan.price}</span>
+                      <span className="text-5xl font-bold text-foreground">{plan.price}</span>
                     )}
                   </div>
-                  <p className="text-gray-600 mt-1">{plan.period}</p>
+                  <p className="text-muted-foreground mt-1">{plan.period}</p>
                 </div>
 
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3">
-                      <Check className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">{feature}</span>
+                      <Check className="h-5 w-5 text-green-400 flex-shrink-0 mt-0.5" />
+                      <span className="text-foreground/80">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -167,8 +167,8 @@ export function PricingPage() {
                   to={plan.name === "Enterprise" ? "/contact" : "/auth/signup"}
                   className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
                     plan.popular
-                      ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:shadow-lg"
-                      : "bg-gray-100 text-gray-900 hover:bg-gray-200"
+                      ? "bg-gradient-to-r from-cyan-400 to-blue-600 text-white hover:shadow-lg"
+                      : "bg-muted/40 text-foreground hover:bg-muted"
                   }`}
                 >
                   {plan.cta}
@@ -189,10 +189,10 @@ export function PricingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Enhance Your Plan
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Customize your experience with premium add-ons
             </p>
           </motion.div>
@@ -204,17 +204,17 @@ export function PricingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all"
+                className="bg-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all"
               >
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
-                  <addon.icon className="h-6 w-6 text-blue-600" />
+                <div className="w-12 h-12 bg-cyan-500/15 rounded-xl flex items-center justify-center mb-4">
+                  <addon.icon className="h-6 w-6 text-cyan-500" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{addon.name}</h3>
-                <p className="text-gray-600 mb-4">{addon.description}</p>
+                <h3 className="text-xl font-bold text-foreground mb-2">{addon.name}</h3>
+                <p className="text-muted-foreground mb-4">{addon.description}</p>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-gray-500">₹</span>
-                  <span className="text-2xl font-bold text-gray-900">{addon.price}</span>
-                  <span className="text-gray-600">/ {addon.period}</span>
+                  <span className="text-muted-foreground">₹</span>
+                  <span className="text-2xl font-bold text-foreground">{addon.price}</span>
+                  <span className="text-muted-foreground">/ {addon.period}</span>
                 </div>
               </motion.div>
             ))}
@@ -223,7 +223,7 @@ export function PricingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-muted/20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -231,7 +231,7 @@ export function PricingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Pricing FAQs
             </h2>
           </motion.div>
@@ -260,10 +260,10 @@ export function PricingPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                className="bg-white rounded-xl p-6 shadow-md"
+                className="bg-card rounded-xl p-6 shadow-md"
               >
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{faq.q}</h3>
-                <p className="text-gray-600">{faq.a}</p>
+                <h3 className="text-lg font-semibold text-foreground mb-2">{faq.q}</h3>
+                <p className="text-muted-foreground">{faq.a}</p>
               </motion.div>
             ))}
           </div>
@@ -277,25 +277,25 @@ export function PricingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-12 text-center"
+            className="bg-gradient-to-r from-cyan-400 to-blue-600 rounded-2xl p-12 text-center"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Still Have Questions?
             </h2>
-            <p className="text-blue-100 text-lg mb-8">
+            <p className="text-cyan-100/70 text-lg mb-8">
               Our team is here to help you choose the perfect plan for your needs
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-blue-600 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-card text-cyan-500 rounded-lg font-medium hover:bg-muted/40 transition-colors"
               >
                 Contact Sales
                 <ArrowRight className="h-5 w-5" />
               </Link>
               <Link
                 to="/auth/signup"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-medium hover:bg-white/10 transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-medium hover:bg-card/10 transition-colors"
               >
                 Start Free Trial
               </Link>

@@ -86,10 +86,10 @@ export function ProviderBookingsPage() {
 
   const getStatusBadge = (status: string) => {
     const styles = {
-      confirmed: "bg-blue-100 text-blue-700",
-      pending: "bg-yellow-100 text-yellow-700",
-      completed: "bg-green-100 text-green-700",
-      cancelled: "bg-red-100 text-red-700"
+      confirmed: "bg-cyan-500/15 text-cyan-400",
+      pending: "bg-cyan-500/15 text-cyan-400",
+      completed: "bg-green-500/15 text-green-400",
+      cancelled: "bg-red-500/15 text-red-400"
     };
     
     return styles[status as keyof typeof styles] || styles.pending;
@@ -97,9 +97,9 @@ export function ProviderBookingsPage() {
 
   const getPaymentBadge = (payment: string) => {
     const styles = {
-      paid: "bg-green-100 text-green-700",
-      pending: "bg-yellow-100 text-yellow-700",
-      refunded: "bg-gray-100 text-gray-700"
+      paid: "bg-green-500/15 text-green-400",
+      pending: "bg-cyan-500/15 text-cyan-400",
+      refunded: "bg-muted/40 text-foreground/80"
     };
     
     return styles[payment as keyof typeof styles] || styles.pending;
@@ -108,28 +108,28 @@ export function ProviderBookingsPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Bookings</h1>
-        <p className="text-gray-600 mt-1">Manage and track all your service bookings</p>
+        <h1 className="text-3xl font-bold text-foreground">Bookings</h1>
+        <p className="text-muted-foreground mt-1">Manage and track all your service bookings</p>
       </div>
 
       {/* Search and Filters */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm mb-6">
+      <div className="bg-card rounded-2xl p-6 shadow-sm mb-6">
         <div className="flex flex-col lg:flex-row gap-4">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
             <input
               type="text"
               placeholder="Search by client, service, or booking ID..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full pl-11 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
             />
           </div>
           
           <select 
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
           >
             <option value="all">All Status</option>
             <option value="confirmed">Confirmed</option>
@@ -153,10 +153,10 @@ export function ProviderBookingsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="bg-white rounded-xl p-4 shadow-sm"
+            className="bg-card rounded-xl p-4 shadow-sm"
           >
-            <div className="text-2xl font-bold text-gray-900 mb-1">{stat.count}</div>
-            <div className="text-sm text-gray-600">{stat.label}</div>
+            <div className="text-2xl font-bold text-foreground mb-1">{stat.count}</div>
+            <div className="text-sm text-muted-foreground">{stat.label}</div>
           </motion.div>
         ))}
       </div>
@@ -169,7 +169,7 @@ export function ProviderBookingsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
-            className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+            className="bg-card rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
           >
             <div className="flex flex-col lg:flex-row lg:items-start gap-6">
               {/* Left: Client Info */}
@@ -177,16 +177,16 @@ export function ProviderBookingsPage() {
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-medium text-lg">
+                      <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-white font-medium text-lg">
                         {booking.client.charAt(0)}
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900">{booking.client}</h3>
-                        <p className="text-sm text-gray-600">ID: {booking.id}</p>
+                        <h3 className="text-lg font-semibold text-foreground">{booking.client}</h3>
+                        <p className="text-sm text-muted-foreground">ID: {booking.id}</p>
                       </div>
                     </div>
                     
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-3">
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-3">
                       <div className="flex items-center gap-1">
                         <Mail className="h-4 w-4" />
                         {booking.clientEmail}
@@ -208,11 +208,11 @@ export function ProviderBookingsPage() {
                   </div>
                 </div>
 
-                <div className="p-4 bg-gray-50 rounded-lg">
-                  <div className="font-medium text-gray-900 mb-3">{booking.service}</div>
+                <div className="p-4 bg-muted/20 rounded-lg">
+                  <div className="font-medium text-foreground mb-3">{booking.service}</div>
                   
                   <div className="grid md:grid-cols-3 gap-4 text-sm">
-                    <div className="flex items-center gap-2 text-gray-600">
+                    <div className="flex items-center gap-2 text-muted-foreground">
                       <Calendar className="h-4 w-4" />
                       {new Date(booking.date).toLocaleDateString('en-US', { 
                         month: 'short', 
@@ -220,11 +220,11 @@ export function ProviderBookingsPage() {
                         year: 'numeric' 
                       })}
                     </div>
-                    <div className="flex items-center gap-2 text-gray-600">
+                    <div className="flex items-center gap-2 text-muted-foreground">
                       <Clock className="h-4 w-4" />
                       {booking.time}
                     </div>
-                    <div className="flex items-center gap-2 text-gray-600">
+                    <div className="flex items-center gap-2 text-muted-foreground">
                       <MapPin className="h-4 w-4" />
                       {booking.location}
                     </div>
@@ -235,8 +235,8 @@ export function ProviderBookingsPage() {
               {/* Right: Amount and Actions */}
               <div className="flex flex-col items-end gap-4">
                 <div className="text-right">
-                  <div className="text-sm text-gray-600 mb-1">Total Amount</div>
-                  <div className="text-2xl font-bold text-gray-900">{booking.amount}</div>
+                  <div className="text-sm text-muted-foreground mb-1">Total Amount</div>
+                  <div className="text-2xl font-bold text-foreground">{booking.amount}</div>
                 </div>
                 
                 <div className="flex gap-2">
@@ -251,11 +251,11 @@ export function ProviderBookingsPage() {
                     </>
                   )}
                   {booking.status === "confirmed" && (
-                    <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                    <button className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-cyan-600 transition-colors text-sm font-medium">
                       Start Service
                     </button>
                   )}
-                  <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
+                  <button className="px-4 py-2 border border-border rounded-lg hover:bg-muted/20 transition-colors text-sm font-medium">
                     View Details
                   </button>
                 </div>
@@ -266,12 +266,12 @@ export function ProviderBookingsPage() {
       </div>
 
       {filteredBookings.length === 0 && (
-        <div className="bg-white rounded-2xl p-12 shadow-sm text-center">
-          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Calendar className="h-8 w-8 text-gray-400" />
+        <div className="bg-card rounded-2xl p-12 shadow-sm text-center">
+          <div className="w-16 h-16 bg-muted/40 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Calendar className="h-8 w-8 text-muted-foreground/70" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No bookings found</h3>
-          <p className="text-gray-600">Try adjusting your search or filters</p>
+          <h3 className="text-lg font-semibold text-foreground mb-2">No bookings found</h3>
+          <p className="text-muted-foreground">Try adjusting your search or filters</p>
         </div>
       )}
     </div>

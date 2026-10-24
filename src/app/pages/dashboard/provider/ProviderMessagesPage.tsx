@@ -123,22 +123,22 @@ export function ProviderMessagesPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Messages</h1>
-        <p className="text-gray-600 mt-1">Communicate with your clients</p>
+        <h1 className="text-3xl font-bold text-foreground">Messages</h1>
+        <p className="text-muted-foreground mt-1">Communicate with your clients</p>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm overflow-hidden" style={{ height: 'calc(100vh - 280px)' }}>
+      <div className="bg-card rounded-2xl shadow-sm overflow-hidden" style={{ height: 'calc(100vh - 280px)' }}>
         <div className="flex h-full">
           {/* Conversations List */}
-          <div className="w-full lg:w-96 border-r border-gray-200 flex flex-col">
+          <div className="w-full lg:w-96 border-r border-border flex flex-col">
             {/* Search */}
-            <div className="p-4 border-b border-gray-200">
+            <div className="p-4 border-b border-border">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
                 <input
                   type="text"
                   placeholder="Search conversations..."
-                  className="w-full pl-11 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-11 pr-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -149,14 +149,14 @@ export function ProviderMessagesPage() {
                 <div
                   key={conversation.id}
                   onClick={() => setSelectedChat(conversation.id)}
-                  className={`flex items-start gap-3 p-4 cursor-pointer transition-colors border-b border-gray-100 ${
+                  className={`flex items-start gap-3 p-4 cursor-pointer transition-colors border-b border-border ${
                     selectedChat === conversation.id
-                      ? "bg-blue-50"
-                      : "hover:bg-gray-50"
+                      ? "bg-card"
+                      : "hover:bg-muted/20"
                   }`}
                 >
                   <div className="relative flex-shrink-0">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-medium">
+                    <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-white font-medium">
                       {conversation.clientInitial}
                     </div>
                     {conversation.online && (
@@ -166,14 +166,14 @@ export function ProviderMessagesPage() {
                   
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between mb-1">
-                      <h4 className="font-semibold text-gray-900 truncate">{conversation.client}</h4>
-                      <span className="text-xs text-gray-500 flex-shrink-0 ml-2">{conversation.time}</span>
+                      <h4 className="font-semibold text-foreground truncate">{conversation.client}</h4>
+                      <span className="text-xs text-muted-foreground flex-shrink-0 ml-2">{conversation.time}</span>
                     </div>
-                    <p className="text-sm text-gray-600 truncate">{conversation.lastMessage}</p>
+                    <p className="text-sm text-muted-foreground truncate">{conversation.lastMessage}</p>
                   </div>
                   
                   {conversation.unread > 0 && (
-                    <div className="flex-shrink-0 w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-medium">
+                    <div className="flex-shrink-0 w-5 h-5 bg-primary rounded-full flex items-center justify-center text-white text-xs font-medium">
                       {conversation.unread}
                     </div>
                   )}
@@ -185,10 +185,10 @@ export function ProviderMessagesPage() {
           {/* Chat Area */}
           <div className="flex-1 flex flex-col">
             {/* Chat Header */}
-            <div className="p-4 border-b border-gray-200 flex items-center justify-between">
+            <div className="p-4 border-b border-border flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-medium">
+                  <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-white font-medium">
                     {selectedConversation?.clientInitial}
                   </div>
                   {selectedConversation?.online && (
@@ -196,22 +196,22 @@ export function ProviderMessagesPage() {
                   )}
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">{selectedConversation?.client}</h3>
-                  <p className="text-xs text-gray-500">
+                  <h3 className="font-semibold text-foreground">{selectedConversation?.client}</h3>
+                  <p className="text-xs text-muted-foreground">
                     {selectedConversation?.online ? "Active now" : "Offline"}
                   </p>
                 </div>
               </div>
               
               <div className="flex items-center gap-2">
-                <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                  <Phone className="h-5 w-5 text-gray-600" />
+                <button className="p-2 hover:bg-muted/40 rounded-lg transition-colors">
+                  <Phone className="h-5 w-5 text-muted-foreground" />
                 </button>
-                <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                  <Video className="h-5 w-5 text-gray-600" />
+                <button className="p-2 hover:bg-muted/40 rounded-lg transition-colors">
+                  <Video className="h-5 w-5 text-muted-foreground" />
                 </button>
-                <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-                  <MoreVertical className="h-5 w-5 text-gray-600" />
+                <button className="p-2 hover:bg-muted/40 rounded-lg transition-colors">
+                  <MoreVertical className="h-5 w-5 text-muted-foreground" />
                 </button>
               </div>
             </div>
@@ -230,25 +230,25 @@ export function ProviderMessagesPage() {
                       <div
                         className={`px-4 py-2 rounded-2xl ${
                           msg.sender === "provider"
-                            ? "bg-blue-600 text-white"
-                            : "bg-gray-100 text-gray-900"
+                            ? "bg-primary text-white"
+                            : "bg-muted/40 text-foreground"
                         }`}
                       >
                         <p className="text-sm">{msg.text}</p>
                       </div>
                     ) : (
-                      <div className="flex items-center gap-3 px-4 py-3 bg-gray-100 rounded-2xl">
-                        <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                          <File className="h-5 w-5 text-blue-600" />
+                      <div className="flex items-center gap-3 px-4 py-3 bg-muted/40 rounded-2xl">
+                        <div className="w-10 h-10 bg-cyan-500/15 rounded-lg flex items-center justify-center">
+                          <File className="h-5 w-5 text-cyan-500" />
                         </div>
                         <div className="flex-1">
-                          <div className="text-sm font-medium text-gray-900">{msg.text}</div>
-                          <div className="text-xs text-gray-500">PDF • 245 KB</div>
+                          <div className="text-sm font-medium text-foreground">{msg.text}</div>
+                          <div className="text-xs text-muted-foreground">PDF • 245 KB</div>
                         </div>
                       </div>
                     )}
                     <div
-                      className={`text-xs text-gray-500 mt-1 ${
+                      className={`text-xs text-muted-foreground mt-1 ${
                         msg.sender === "provider" ? "text-right" : "text-left"
                       }`}
                     >
@@ -265,7 +265,7 @@ export function ProviderMessagesPage() {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex justify-start"
                 >
-                  <div className="bg-gray-100 px-4 py-3 rounded-2xl">
+                  <div className="bg-muted/40 px-4 py-3 rounded-2xl">
                     <div className="flex gap-1">
                       <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
                       <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
@@ -277,20 +277,20 @@ export function ProviderMessagesPage() {
             </div>
 
             {/* Message Input */}
-            <div className="p-4 border-t border-gray-200">
+            <div className="p-4 border-t border-border">
               <form onSubmit={handleSendMessage} className="flex items-end gap-2">
                 <div className="flex gap-2">
                   <button
                     type="button"
-                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                    className="p-2 hover:bg-muted/40 rounded-lg transition-colors"
                   >
-                    <Paperclip className="h-5 w-5 text-gray-600" />
+                    <Paperclip className="h-5 w-5 text-muted-foreground" />
                   </button>
                   <button
                     type="button"
-                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                    className="p-2 hover:bg-muted/40 rounded-lg transition-colors"
                   >
-                    <Image className="h-5 w-5 text-gray-600" />
+                    <Image className="h-5 w-5 text-muted-foreground" />
                   </button>
                 </div>
                 
@@ -305,14 +305,14 @@ export function ProviderMessagesPage() {
                   }}
                   placeholder="Type a message..."
                   rows={1}
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  className="flex-1 px-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none"
                   style={{ maxHeight: "120px" }}
                 />
                 
                 <button
                   type="submit"
                   disabled={!message.trim()}
-                  className="p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="p-3 bg-primary text-white rounded-lg hover:bg-cyan-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="h-5 w-5" />
                 </button>

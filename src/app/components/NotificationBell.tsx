@@ -43,7 +43,7 @@ export function NotificationBell() {
       case 'error':
         return 'bg-red-500/20 text-red-400 border-red-500/30';
       default:
-        return 'bg-neon-blue/20 text-neon-blue border-neon-blue/30';
+        return 'bg-cyan-500/10 text-cyan-400 border-border';
     }
   };
 
@@ -51,11 +51,11 @@ export function NotificationBell() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 rounded-lg cyber-surface border border-cyber-border hover:border-neon-blue transition-all"
+        className="relative p-2 rounded-lg cyber-surface border border-cyber-border hover:border-cyan-500/30 transition-all"
       >
-        <Bell className="h-5 w-5 text-gray-400" />
+        <Bell className="h-5 w-5 text-muted-foreground/70" />
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 w-5 h-5 bg-neon-purple rounded-full text-xs font-bold text-white flex items-center justify-center animate-pulse">
+          <span className="absolute -top-1 -right-1 w-5 h-5 bg-cyan-500 rounded-full text-xs font-bold text-white flex items-center justify-center animate-pulse">
             {unreadCount}
           </span>
         )}
@@ -73,14 +73,14 @@ export function NotificationBell() {
             <div className="p-4 border-b border-cyber-border flex items-center justify-between">
               <div>
                 <h3 className="font-bold text-white">Notifications</h3>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-muted-foreground/70">
                   {unreadCount} unread notification{unreadCount !== 1 ? 's' : ''}
                 </p>
               </div>
               {unreadCount > 0 && (
                 <button
                   onClick={markAllAsRead}
-                  className="text-xs text-neon-blue hover:text-neon-purple transition-colors flex items-center gap-1"
+                  className="text-xs text-cyan-400 hover:text-cyan-400 transition-colors flex items-center gap-1"
                 >
                   <CheckCheck className="h-3 w-3" />
                   Mark all read
@@ -91,8 +91,8 @@ export function NotificationBell() {
             <div className="max-h-[500px] overflow-y-auto custom-scrollbar">
               {notifications.length === 0 ? (
                 <div className="p-8 text-center">
-                  <Bell className="h-12 w-12 text-gray-600 mx-auto mb-3" />
-                  <p className="text-gray-400">No notifications</p>
+                  <Bell className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
+                  <p className="text-muted-foreground/70">No notifications</p>
                 </div>
               ) : (
                 <div className="divide-y divide-cyber-border">
@@ -100,7 +100,7 @@ export function NotificationBell() {
                     <div
                       key={notification.id}
                       className={`p-4 transition-all hover:bg-cyber-hover ${
-                        !notification.read ? 'bg-neon-blue/5' : ''
+                        !notification.read ? 'bg-cyan-500/5' : ''
                       }`}
                     >
                       <div className="flex items-start gap-3">
@@ -118,14 +118,14 @@ export function NotificationBell() {
                               {notification.title}
                             </h4>
                             {!notification.read && (
-                              <div className="w-2 h-2 rounded-full bg-neon-blue flex-shrink-0 mt-1" />
+                              <div className="w-2 h-2 rounded-full bg-cyan-500 flex-shrink-0 mt-1" />
                             )}
                           </div>
 
-                          <p className="text-sm text-gray-400 mb-2">{notification.message}</p>
+                          <p className="text-sm text-muted-foreground/70 mb-2">{notification.message}</p>
 
                           <div className="flex items-center justify-between">
-                            <span className="text-xs text-gray-500">
+                            <span className="text-xs text-muted-foreground">
                               {formatDistanceToNow(notification.timestamp, { addSuffix: true })}
                             </span>
 
@@ -137,7 +137,7 @@ export function NotificationBell() {
                                     markAsRead(notification.id);
                                     setIsOpen(false);
                                   }}
-                                  className="text-xs text-neon-blue hover:text-neon-purple transition-colors"
+                                  className="text-xs text-cyan-400 hover:text-cyan-400 transition-colors"
                                 >
                                   {notification.actionLabel || 'View'}
                                 </Link>
@@ -146,7 +146,7 @@ export function NotificationBell() {
                               {!notification.read && (
                                 <button
                                   onClick={() => markAsRead(notification.id)}
-                                  className="text-gray-500 hover:text-neon-blue transition-colors"
+                                  className="text-muted-foreground hover:text-cyan-400 transition-colors"
                                   title="Mark as read"
                                 >
                                   <Check className="h-3 w-3" />
@@ -155,7 +155,7 @@ export function NotificationBell() {
 
                               <button
                                 onClick={() => clearNotification(notification.id)}
-                                className="text-gray-500 hover:text-red-400 transition-colors"
+                                className="text-muted-foreground hover:text-red-400 transition-colors"
                                 title="Delete"
                               >
                                 <Trash2 className="h-3 w-3" />
@@ -175,7 +175,7 @@ export function NotificationBell() {
                 <Link
                   to="/dashboard/notifications"
                   onClick={() => setIsOpen(false)}
-                  className="block text-center text-sm text-neon-blue hover:text-neon-purple transition-colors"
+                  className="block text-center text-sm text-cyan-400 hover:text-cyan-400 transition-colors"
                 >
                   View all notifications
                 </Link>

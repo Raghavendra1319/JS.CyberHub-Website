@@ -68,11 +68,11 @@ export function UserHistoryPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "completed":
-        return "bg-green-100 text-green-700";
+        return "bg-green-500/15 text-green-400";
       case "cancelled":
-        return "bg-red-100 text-red-700";
+        return "bg-red-500/15 text-red-400";
       default:
-        return "bg-gray-100 text-gray-700";
+        return "bg-muted/40 text-foreground/80";
     }
   };
 
@@ -109,8 +109,8 @@ export function UserHistoryPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Booking History</h1>
-        <p className="text-gray-600 mt-1">View all your past bookings and transactions</p>
+        <h1 className="text-3xl font-bold text-foreground">Booking History</h1>
+        <p className="text-muted-foreground mt-1">View all your past bookings and transactions</p>
       </div>
 
       {/* Stats Cards */}
@@ -119,29 +119,29 @@ export function UserHistoryPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
-          className="bg-white rounded-xl p-4 shadow-md"
+          className="bg-card rounded-xl p-4 shadow-md"
         >
-          <div className="text-sm text-gray-600 mb-1">Total Bookings</div>
-          <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
+          <div className="text-sm text-muted-foreground mb-1">Total Bookings</div>
+          <div className="text-2xl font-bold text-foreground">{stats.total}</div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.1 }}
-          className="bg-white rounded-xl p-4 shadow-md"
+          className="bg-card rounded-xl p-4 shadow-md"
         >
-          <div className="text-sm text-gray-600 mb-1">Completed</div>
-          <div className="text-2xl font-bold text-green-600">{stats.completed}</div>
+          <div className="text-sm text-muted-foreground mb-1">Completed</div>
+          <div className="text-2xl font-bold text-green-400">{stats.completed}</div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.2 }}
-          className="bg-white rounded-xl p-4 shadow-md"
+          className="bg-card rounded-xl p-4 shadow-md"
         >
-          <div className="text-sm text-gray-600 mb-1">Cancelled</div>
+          <div className="text-sm text-muted-foreground mb-1">Cancelled</div>
           <div className="text-2xl font-bold text-red-600">{stats.cancelled}</div>
         </motion.div>
 
@@ -149,37 +149,37 @@ export function UserHistoryPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.3 }}
-          className="bg-white rounded-xl p-4 shadow-md"
+          className="bg-card rounded-xl p-4 shadow-md"
         >
-          <div className="text-sm text-gray-600 mb-1">Total Spent</div>
-          <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+          <div className="text-sm text-muted-foreground mb-1">Total Spent</div>
+          <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
             ₹{stats.totalSpent.toLocaleString("en-IN")}
           </div>
         </motion.div>
       </div>
 
       {/* Filters and Search */}
-      <div className="bg-white rounded-xl p-4 shadow-md mb-6">
+      <div className="bg-card rounded-xl p-4 shadow-md mb-6">
         <div className="flex flex-col sm:flex-row gap-4">
           {/* Search */}
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
             <input
               type="text"
               placeholder="Search by service name or booking ID..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="w-full pl-11 pr-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
             />
           </div>
 
           {/* Filter */}
           <div className="flex items-center gap-2">
-            <Filter className="h-5 w-5 text-gray-600" />
+            <Filter className="h-5 w-5 text-muted-foreground" />
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="px-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
             >
               <option value="all">All Status</option>
               <option value="completed">Completed</option>
@@ -188,7 +188,7 @@ export function UserHistoryPage() {
           </div>
 
           {/* Export Button */}
-          <button className="inline-flex items-center gap-2 px-4 py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+          <button className="inline-flex items-center gap-2 px-4 py-2.5 bg-muted/40 text-foreground/80 rounded-lg hover:bg-muted transition-colors">
             <Download className="h-5 w-5" />
             <span className="hidden sm:inline">Export</span>
           </button>
@@ -198,12 +198,12 @@ export function UserHistoryPage() {
       {/* History List */}
       <div className="space-y-4">
         {filteredHistory.length === 0 ? (
-          <div className="bg-white rounded-xl p-12 text-center shadow-md">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Calendar className="h-8 w-8 text-gray-400" />
+          <div className="bg-card rounded-xl p-12 text-center shadow-md">
+            <div className="w-16 h-16 bg-muted/40 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Calendar className="h-8 w-8 text-muted-foreground/70" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">No bookings found</h3>
-            <p className="text-gray-600">Try adjusting your search or filter criteria</p>
+            <h3 className="text-lg font-semibold text-foreground mb-2">No bookings found</h3>
+            <p className="text-muted-foreground">Try adjusting your search or filter criteria</p>
           </div>
         ) : (
           filteredHistory.map((booking, index) => (
@@ -212,16 +212,16 @@ export function UserHistoryPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
+              className="bg-card rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow"
             >
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                      <h3 className="text-lg font-semibold text-foreground mb-1">
                         {booking.serviceName}
                       </h3>
-                      <p className="text-sm text-gray-500">Booking ID: {booking.id}</p>
+                      <p className="text-sm text-muted-foreground">Booking ID: {booking.id}</p>
                     </div>
                     <span
                       className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(
@@ -233,7 +233,7 @@ export function UserHistoryPage() {
                     </span>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4" />
                       {format(booking.date, "MMM d, yyyy")}
@@ -242,12 +242,12 @@ export function UserHistoryPage() {
                       <Clock className="h-4 w-4" />
                       {booking.time}
                     </div>
-                    <div className="font-semibold text-gray-900">₹{booking.price}</div>
+                    <div className="font-semibold text-foreground">₹{booking.price}</div>
                   </div>
 
                   {booking.rating && (
                     <div className="flex items-center gap-2 mt-3">
-                      <span className="text-sm text-gray-600">Your rating:</span>
+                      <span className="text-sm text-muted-foreground">Your rating:</span>
                       <div className="flex">
                         {[...Array(5)].map((_, i) => (
                           <svg
@@ -273,11 +273,11 @@ export function UserHistoryPage() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-2">
-                  <button className="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium">
+                  <button className="px-4 py-2 bg-card text-cyan-500 rounded-lg hover:bg-cyan-500/15 transition-colors text-sm font-medium">
                     View Details
                   </button>
                   {booking.status === "completed" && (
-                    <button className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors text-sm font-medium">
+                    <button className="px-4 py-2 bg-muted/40 text-foreground/80 rounded-lg hover:bg-muted transition-colors text-sm font-medium">
                       Book Again
                     </button>
                   )}

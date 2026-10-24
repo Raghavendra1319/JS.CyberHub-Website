@@ -169,7 +169,7 @@ export function AdminPaymentsPage() {
           <div className="text-3xl font-bold mb-1">
             ₹{stats.totalRevenue.toLocaleString("en-IN")}
           </div>
-          <div className="text-blue-100">Total Revenue</div>
+          <div className="text-cyan-100/70">Total Revenue</div>
         </motion.div>
 
         <motion.div

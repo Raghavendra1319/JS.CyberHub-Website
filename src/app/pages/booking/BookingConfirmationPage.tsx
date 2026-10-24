@@ -20,19 +20,19 @@ export function BookingConfirmationPage() {
   if (!bookingData.serviceName) {
     // If accessed directly without booking data, show minimal confirmation
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-muted/20 flex items-center justify-center">
         <div className="max-w-md w-full mx-4">
-          <div className="bg-white rounded-2xl p-8 text-center shadow-lg">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="h-8 w-8 text-green-600" />
+          <div className="bg-card rounded-2xl p-8 text-center shadow-lg">
+            <div className="w-16 h-16 bg-green-500/15 rounded-full flex items-center justify-center mx-auto mb-4">
+              <CheckCircle className="h-8 w-8 text-green-400" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Booking Confirmed!</h1>
-            <p className="text-gray-600 mb-6">
+            <h1 className="text-2xl font-bold text-foreground mb-2">Booking Confirmed!</h1>
+            <p className="text-muted-foreground mb-6">
               Your booking ID is: <span className="font-mono font-semibold">{bookingId}</span>
             </p>
             <Link
               to="/dashboard"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow"
             >
               <Home className="h-5 w-5" />
               Go to Dashboard
@@ -92,13 +92,13 @@ export function BookingConfirmationPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               Booking Confirmed!
             </h1>
-            <p className="text-lg text-gray-600 mb-2">
+            <p className="text-lg text-muted-foreground mb-2">
               Thank you for choosing JS.CyberHub
             </p>
-            <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">
+            <div className="inline-flex items-center gap-2 bg-green-500/15 text-green-300 px-4 py-2 rounded-full font-medium">
               <span>Booking ID:</span>
               <span className="font-mono font-bold">{bookingId}</span>
             </div>
@@ -110,25 +110,25 @@ export function BookingConfirmationPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white rounded-2xl shadow-lg overflow-hidden mb-6"
+          className="bg-card rounded-2xl shadow-lg overflow-hidden mb-6"
         >
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white">
+          <div className="bg-gradient-to-r from-cyan-400 to-blue-600 p-6 text-white">
             <h2 className="text-2xl font-bold mb-2">Booking Details</h2>
-            <p className="text-blue-100">A confirmation email has been sent to {bookingData.customerEmail}</p>
+            <p className="text-cyan-100/70">A confirmation email has been sent to {bookingData.customerEmail}</p>
           </div>
 
           {/* Details Grid */}
           <div className="p-6 space-y-6">
             {/* Service Info */}
             <div>
-              <h3 className="text-sm font-medium text-gray-500 mb-3">Service Information</h3>
-              <div className="bg-gray-50 rounded-xl p-4">
-                <div className="font-semibold text-lg text-gray-900 mb-1">
+              <h3 className="text-sm font-medium text-muted-foreground mb-3">Service Information</h3>
+              <div className="bg-muted/20 rounded-xl p-4">
+                <div className="font-semibold text-lg text-foreground mb-1">
                   {bookingData.serviceName}
                 </div>
-                <div className="text-gray-600">
-                  Amount Paid: <span className="font-bold text-green-600">
+                <div className="text-muted-foreground">
+                  Amount Paid: <span className="font-bold text-green-400">
                     ₹{bookingData.servicePrice! + Math.round(bookingData.servicePrice! * 0.18)}
                   </span>
                 </div>
@@ -137,33 +137,33 @@ export function BookingConfirmationPage() {
 
             {/* Appointment Details */}
             <div>
-              <h3 className="text-sm font-medium text-gray-500 mb-3">Appointment Details</h3>
+              <h3 className="text-sm font-medium text-muted-foreground mb-3">Appointment Details</h3>
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="flex items-start gap-4 p-4 bg-blue-50 rounded-xl">
-                  <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start gap-4 p-4 bg-card rounded-xl">
+                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
                     <Calendar className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-sm text-blue-700 font-medium mb-1">Date</div>
-                    <div className="font-semibold text-gray-900">
+                    <div className="text-sm text-cyan-400 font-medium mb-1">Date</div>
+                    <div className="font-semibold text-foreground">
                       {format(bookingData.date!, "EEEE")}
                     </div>
-                    <div className="text-gray-700">
+                    <div className="text-foreground/80">
                       {format(bookingData.date!, "MMMM d, yyyy")}
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 p-4 bg-indigo-50 rounded-xl">
-                  <div className="w-12 h-12 bg-indigo-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start gap-4 p-4 bg-cyan-500/8 rounded-xl">
+                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
                     <Clock className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-sm text-indigo-700 font-medium mb-1">Time</div>
-                    <div className="font-semibold text-gray-900 text-lg">
+                    <div className="text-sm text-cyan-400 font-medium mb-1">Time</div>
+                    <div className="font-semibold text-foreground text-lg">
                       {bookingData.timeSlot}
                     </div>
-                    <div className="text-gray-700 text-sm">
+                    <div className="text-foreground/80 text-sm">
                       Indian Standard Time
                     </div>
                   </div>
@@ -173,20 +173,20 @@ export function BookingConfirmationPage() {
 
             {/* Contact Information */}
             <div>
-              <h3 className="text-sm font-medium text-gray-500 mb-3">Your Contact Information</h3>
+              <h3 className="text-sm font-medium text-muted-foreground mb-3">Your Contact Information</h3>
               <div className="space-y-3">
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                  <Mail className="h-5 w-5 text-gray-600" />
+                <div className="flex items-center gap-3 p-3 bg-muted/20 rounded-lg">
+                  <Mail className="h-5 w-5 text-muted-foreground" />
                   <div>
-                    <div className="text-sm text-gray-600">Email</div>
-                    <div className="font-medium text-gray-900">{bookingData.customerEmail}</div>
+                    <div className="text-sm text-muted-foreground">Email</div>
+                    <div className="font-medium text-foreground">{bookingData.customerEmail}</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                  <Phone className="h-5 w-5 text-gray-600" />
+                <div className="flex items-center gap-3 p-3 bg-muted/20 rounded-lg">
+                  <Phone className="h-5 w-5 text-muted-foreground" />
                   <div>
-                    <div className="text-sm text-gray-600">Phone</div>
-                    <div className="font-medium text-gray-900">{bookingData.customerPhone}</div>
+                    <div className="text-sm text-muted-foreground">Phone</div>
+                    <div className="font-medium text-foreground">{bookingData.customerPhone}</div>
                   </div>
                 </div>
               </div>
@@ -194,10 +194,10 @@ export function BookingConfirmationPage() {
 
             {bookingData.notes && (
               <div>
-                <h3 className="text-sm font-medium text-gray-500 mb-3">Additional Notes</h3>
-                <div className="p-4 bg-gray-50 rounded-xl">
-                  <FileText className="h-5 w-5 text-gray-600 mb-2" />
-                  <p className="text-gray-700">{bookingData.notes}</p>
+                <h3 className="text-sm font-medium text-muted-foreground mb-3">Additional Notes</h3>
+                <div className="p-4 bg-muted/20 rounded-xl">
+                  <FileText className="h-5 w-5 text-muted-foreground mb-2" />
+                  <p className="text-foreground/80">{bookingData.notes}</p>
                 </div>
               </div>
             )}
@@ -209,31 +209,31 @@ export function BookingConfirmationPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-blue-50 border border-blue-200 rounded-2xl p-6 mb-6"
+          className="bg-card border border-blue-200 rounded-2xl p-6 mb-6"
         >
-          <h3 className="text-lg font-bold text-gray-900 mb-4">What happens next?</h3>
+          <h3 className="text-lg font-bold text-foreground mb-4">What happens next?</h3>
           <div className="space-y-3">
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
+              <div className="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
                 1
               </div>
-              <div className="text-gray-700">
+              <div className="text-foreground/80">
                 You'll receive a confirmation email with all booking details
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
+              <div className="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
                 2
               </div>
-              <div className="text-gray-700">
+              <div className="text-foreground/80">
                 Our team will contact you 24 hours before the appointment
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
+              <div className="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">
                 3
               </div>
-              <div className="text-gray-700">
+              <div className="text-foreground/80">
                 You can track your booking status in your dashboard
               </div>
             </div>
@@ -249,7 +249,7 @@ export function BookingConfirmationPage() {
         >
           <button
             onClick={handleDownloadReceipt}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-white border-2 border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors"
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-card border-2 border-border text-foreground/80 font-medium rounded-lg hover:bg-muted/20 transition-colors"
           >
             <Download className="h-5 w-5" />
             Download Receipt
@@ -257,7 +257,7 @@ export function BookingConfirmationPage() {
           
           <button
             onClick={handleShare}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-white border-2 border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors"
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-card border-2 border-border text-foreground/80 font-medium rounded-lg hover:bg-muted/20 transition-colors"
           >
             <Share2 className="h-5 w-5" />
             Share Booking
@@ -265,7 +265,7 @@ export function BookingConfirmationPage() {
           
           <Link
             to="/dashboard"
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow"
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow"
           >
             <Home className="h-5 w-5" />
             Go to Dashboard
@@ -279,13 +279,13 @@ export function BookingConfirmationPage() {
           transition={{ delay: 0.7 }}
           className="mt-8 text-center"
         >
-          <p className="text-gray-600 mb-2">Need help? Contact our support team</p>
+          <p className="text-muted-foreground mb-2">Need help? Contact our support team</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
-            <a href="mailto:raghavendrakanade13@gmail.com" className="text-blue-600 hover:text-blue-700 font-medium">
+            <a href="mailto:raghavendrakanade13@gmail.com" className="text-cyan-500 hover:text-cyan-400 font-medium">
               raghavendrakanade13@gmail.com
             </a>
-            <span className="hidden sm:inline text-gray-400">•</span>
-            <a href="tel:+918446173815" className="text-blue-600 hover:text-blue-700 font-medium">
+            <span className="hidden sm:inline text-muted-foreground/70">•</span>
+            <a href="tel:+918446173815" className="text-cyan-500 hover:text-cyan-400 font-medium">
               +91 8446173815
             </a>
           </div>

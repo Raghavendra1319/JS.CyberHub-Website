@@ -64,30 +64,30 @@ export function ProviderServicesPage() {
     <div>
       <div className="mb-8">
         <div className="flex items-center justify-between mb-2">
-          <h1 className="text-3xl font-bold text-gray-900">My Services</h1>
-          <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow">
+          <h1 className="text-3xl font-bold text-foreground">My Services</h1>
+          <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow">
             <Plus className="h-5 w-5" />
             Add Service
           </button>
         </div>
-        <p className="text-gray-600">Manage your service offerings</p>
+        <p className="text-muted-foreground">Manage your service offerings</p>
       </div>
 
       {/* Search and Filters */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm mb-6">
+      <div className="bg-card rounded-2xl p-6 shadow-sm mb-6">
         <div className="flex flex-col lg:flex-row gap-4">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
             <input
               type="text"
               placeholder="Search services..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full pl-11 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
             />
           </div>
           
-          <select className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          <select className="px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
             <option value="">All Categories</option>
             <option value="security">Security</option>
             <option value="development">Development</option>
@@ -95,7 +95,7 @@ export function ProviderServicesPage() {
             <option value="training">Training</option>
           </select>
           
-          <select className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          <select className="px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
             <option value="">All Status</option>
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
@@ -111,21 +111,21 @@ export function ProviderServicesPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
-            className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+            className="bg-card rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
           >
             <div className="flex flex-col lg:flex-row lg:items-center gap-6">
               {/* Service Info */}
               <div className="flex-1">
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-1">
+                    <h3 className="text-xl font-semibold text-foreground mb-1">
                       {service.name}
                     </h3>
                     <div className="flex items-center gap-3 text-sm">
-                      <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full font-medium">
+                      <span className="px-3 py-1 bg-cyan-500/15 text-cyan-400 rounded-full font-medium">
                         {service.category}
                       </span>
-                      <span className="text-gray-600">{service.duration}</span>
+                      <span className="text-muted-foreground">{service.duration}</span>
                     </div>
                   </div>
                   
@@ -134,35 +134,35 @@ export function ProviderServicesPage() {
                     className="flex items-center gap-2"
                   >
                     {service.active ? (
-                      <ToggleRight className="h-8 w-8 text-green-600" />
+                      <ToggleRight className="h-8 w-8 text-green-400" />
                     ) : (
-                      <ToggleLeft className="h-8 w-8 text-gray-400" />
+                      <ToggleLeft className="h-8 w-8 text-muted-foreground/70" />
                     )}
                   </button>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                   <div>
-                    <div className="text-sm text-gray-600 mb-1">Price</div>
-                    <div className="text-lg font-semibold text-gray-900">{service.price}</div>
+                    <div className="text-sm text-muted-foreground mb-1">Price</div>
+                    <div className="text-lg font-semibold text-foreground">{service.price}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-600 mb-1">Bookings</div>
-                    <div className="text-lg font-semibold text-gray-900">{service.bookings}</div>
+                    <div className="text-sm text-muted-foreground mb-1">Bookings</div>
+                    <div className="text-lg font-semibold text-foreground">{service.bookings}</div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-600 mb-1">Rating</div>
+                    <div className="text-sm text-muted-foreground mb-1">Rating</div>
                     <div className="flex items-center gap-1">
-                      <span className="text-lg font-semibold text-gray-900">{service.rating}</span>
+                      <span className="text-lg font-semibold text-foreground">{service.rating}</span>
                       <span className="text-yellow-500">★</span>
                     </div>
                   </div>
                   <div>
-                    <div className="text-sm text-gray-600 mb-1">Status</div>
+                    <div className="text-sm text-muted-foreground mb-1">Status</div>
                     <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
                       service.active 
-                        ? "bg-green-100 text-green-700" 
-                        : "bg-gray-100 text-gray-700"
+                        ? "bg-green-500/15 text-green-400" 
+                        : "bg-muted/40 text-foreground/80"
                     }`}>
                       {service.active ? "Active" : "Inactive"}
                     </span>
@@ -172,11 +172,11 @@ export function ProviderServicesPage() {
 
               {/* Actions */}
               <div className="flex lg:flex-col gap-2">
-                <button className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                <button className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-border rounded-lg hover:bg-muted/20 transition-colors">
                   <Eye className="h-4 w-4" />
                   <span className="text-sm font-medium">View</span>
                 </button>
-                <button className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-blue-300 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
+                <button className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-blue-300 text-cyan-500 rounded-lg hover:bg-card transition-colors">
                   <Edit className="h-4 w-4" />
                   <span className="text-sm font-medium">Edit</span>
                 </button>
@@ -191,12 +191,12 @@ export function ProviderServicesPage() {
       </div>
 
       {filteredServices.length === 0 && (
-        <div className="bg-white rounded-2xl p-12 shadow-sm text-center">
-          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Search className="h-8 w-8 text-gray-400" />
+        <div className="bg-card rounded-2xl p-12 shadow-sm text-center">
+          <div className="w-16 h-16 bg-muted/40 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Search className="h-8 w-8 text-muted-foreground/70" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No services found</h3>
-          <p className="text-gray-600">Try adjusting your search or filters</p>
+          <h3 className="text-lg font-semibold text-foreground mb-2">No services found</h3>
+          <p className="text-muted-foreground">Try adjusting your search or filters</p>
         </div>
       )}
     </div>

@@ -15,7 +15,7 @@ export function HomePage() {
 
         {/* Animated Glows */}
         <motion.div
-          className="absolute top-20 right-10 w-[600px] h-[600px] bg-neon-indigo rounded-full blur-[120px] opacity-20"
+          className="absolute top-20 right-10 w-[600px] h-[600px] bg-cyan-500 rounded-full blur-[120px] opacity-20"
           animate={{
             scale: [1, 1.3, 1],
             opacity: [0.2, 0.3, 0.2],
@@ -23,7 +23,7 @@ export function HomePage() {
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-20 left-10 w-[500px] h-[500px] bg-neon-purple rounded-full blur-[120px] opacity-15"
+          className="absolute bottom-20 left-10 w-[500px] h-[500px] bg-cyan-500 rounded-full blur-[120px] opacity-15"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.15, 0.25, 0.15],
@@ -33,7 +33,7 @@ export function HomePage() {
 
         {/* Scan Line Effect */}
         <motion.div
-          className="absolute inset-0 w-full h-0.5 bg-gradient-to-r from-transparent via-neon-blue to-transparent opacity-30"
+          className="absolute inset-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-30"
           animate={{
             y: [0, "100vh", 0],
           }}
@@ -53,8 +53,8 @@ export function HomePage() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-8 cyber-surface neon-border"
               >
-                <div className="w-2 h-2 bg-neon-blue rounded-full animate-pulse" />
-                <span className="text-blue-300">CYBER DEFENSE SYSTEM ACTIVE</span>
+                <div className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse" />
+                <span className="text-muted-foreground">CYBER DEFENSE SYSTEM ACTIVE</span>
               </motion.div>
 
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
@@ -66,21 +66,21 @@ export function HomePage() {
                 Next-Gen Cybersecurity Command Center
               </h2>
 
-              <p className="text-lg md:text-xl text-blue-200 mb-10 leading-relaxed max-w-xl">
+              <p className="text-lg md:text-xl text-foreground/70 mb-10 leading-relaxed max-w-xl">
                 Advanced threat protection, penetration testing, and security consulting powered by AI-driven defense systems. Secure your digital infrastructure.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
                 <Link
                   to="/services"
-                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-neon-indigo to-neon-purple font-semibold rounded-xl neon-glow hover:scale-105 transition-transform text-white"
+                  className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-400 to-blue-600 font-semibold rounded-xl neon-glow hover:scale-105 transition-transform text-white"
                 >
                   Deploy Protection
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-neon-blue text-blue-300 font-semibold rounded-xl hover:bg-neon-blue/10 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent border-2 border-cyan-500/30 text-muted-foreground font-semibold rounded-xl hover:bg-cyan-500/10 transition-colors"
                 >
                   <Radar className="h-5 w-5" />
                   System Scan
@@ -101,9 +101,9 @@ export function HomePage() {
                     transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                     className="cyber-surface rounded-lg p-4"
                   >
-                    <stat.icon className="h-5 w-5 text-neon-blue mb-2" />
+                    <stat.icon className="h-5 w-5 text-cyan-400 mb-2" />
                     <p className="text-2xl font-bold text-white mb-1">{stat.value}</p>
-                    <p className="text-xs text-blue-300 uppercase tracking-wider">{stat.label}</p>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</p>
                   </motion.div>
                 ))}
               </div>
@@ -129,7 +129,7 @@ export function HomePage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 1, delay: 0.6 }}
-                  className="absolute inset-0 border-2 border-neon-blue/30 rounded-2xl"
+                  className="absolute inset-0 border-2 border-border rounded-2xl"
                 >
                   {/* Corner Brackets */}
                   {["top-left", "top-right", "bottom-left", "bottom-right"].map((corner) => (
@@ -139,7 +139,7 @@ export function HomePage() {
                         corner.includes("top") ? "top-4" : "bottom-4"
                       } ${
                         corner.includes("left") ? "left-4" : "right-4"
-                      } border-neon-blue border-2 ${
+                      } border-cyan-500/30 border-2 ${
                         corner === "top-left" ? "border-b-0 border-r-0" :
                         corner === "top-right" ? "border-b-0 border-l-0" :
                         corner === "bottom-left" ? "border-t-0 border-r-0" :
@@ -158,12 +158,12 @@ export function HomePage() {
                 className="absolute -bottom-6 -left-6 cyber-surface rounded-xl p-6 neon-border"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 bg-gradient-to-br from-neon-blue to-neon-purple rounded-xl flex items-center justify-center neon-glow">
+                  <div className="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-xl flex items-center justify-center neon-glow">
                     <ShieldCheck className="h-8 w-8 text-white" />
                   </div>
                   <div>
                     <p className="text-3xl font-bold gradient-text">A+</p>
-                    <p className="text-sm text-blue-300">Security Rating</p>
+                    <p className="text-sm text-muted-foreground">Security Rating</p>
                   </div>
                 </div>
               </motion.div>
@@ -200,7 +200,7 @@ export function HomePage() {
               viewport={{ once: true }}
               className="inline-block mb-4"
             >
-              <span className="text-sm font-bold text-neon-blue uppercase tracking-wider">DEFENSE CAPABILITIES</span>
+              <span className="text-sm font-bold text-cyan-400 uppercase tracking-wider">DEFENSE CAPABILITIES</span>
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -216,7 +216,7 @@ export function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-lg text-blue-300 max-w-2xl mx-auto"
+              className="text-lg text-muted-foreground max-w-2xl mx-auto"
             >
               Advanced security infrastructure powered by AI threat detection
             </motion.p>
@@ -263,13 +263,13 @@ export function HomePage() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group cyber-card rounded-xl p-8 hover:neon-glow transition-all duration-300"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-neon-blue/20 to-neon-purple/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-neon-blue/30">
-                  <feature.icon className="h-8 w-8 text-neon-blue" />
+                <div className="w-16 h-16 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-border">
+                  <feature.icon className="h-8 w-8 text-cyan-400" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-blue-300 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
@@ -288,7 +288,7 @@ export function HomePage() {
               viewport={{ once: true }}
               className="inline-block mb-4"
             >
-              <span className="text-sm font-bold text-neon-purple uppercase tracking-wider">MISSION CRITICAL</span>
+              <span className="text-sm font-bold text-orange-400 uppercase tracking-wider">MISSION CRITICAL</span>
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -304,7 +304,7 @@ export function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-lg text-blue-300 max-w-2xl mx-auto"
+              className="text-lg text-muted-foreground max-w-2xl mx-auto"
             >
               Most deployed security solutions by enterprise clients
             </motion.p>
@@ -337,22 +337,22 @@ export function HomePage() {
                       </div>
 
                       {/* Scan Lines */}
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neon-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
 
                     <div className="p-6">
-                      <div className="text-xs font-bold text-neon-blue uppercase tracking-wider mb-3">
+                      <div className="text-xs font-bold text-cyan-400 uppercase tracking-wider mb-3">
                         {service.category}
                       </div>
                       <h3 className="text-2xl font-bold text-white mb-3 group-hover:gradient-text transition-all">
                         {service.name}
                       </h3>
-                      <p className="text-blue-300 mb-6 leading-relaxed">
+                      <p className="text-muted-foreground mb-6 leading-relaxed">
                         {service.shortDescription}
                       </p>
-                      <div className="flex items-center justify-between pt-4 border-t border-neon-blue/20">
-                        <span className="text-sm text-blue-400 font-medium">{service.duration}</span>
-                        <span className="text-neon-blue font-semibold group-hover:gap-2 flex items-center gap-1 transition-all">
+                      <div className="flex items-center justify-between pt-4 border-t border-border">
+                        <span className="text-sm text-muted-foreground/80 font-medium">{service.duration}</span>
+                        <span className="text-cyan-400 font-semibold group-hover:gap-2 flex items-center gap-1 transition-all">
                           Deploy
                           <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                         </span>
@@ -372,7 +372,7 @@ export function HomePage() {
           >
             <Link
               to="/services"
-              className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-neon-indigo to-neon-purple font-bold rounded-xl neon-glow hover:scale-105 transition-transform text-white text-lg"
+              className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-cyan-400 to-blue-600 font-bold rounded-xl neon-glow hover:scale-105 transition-transform text-white text-lg"
             >
               View All Solutions
               <ArrowRight className="h-6 w-6" />
@@ -387,7 +387,7 @@ export function HomePage() {
 
         {/* Animated Background Elements */}
         <motion.div
-          className="absolute top-0 left-1/4 w-96 h-96 bg-neon-indigo rounded-full blur-[100px] opacity-20"
+          className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500 rounded-full blur-[100px] opacity-20"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.2, 0.3, 0.2],
@@ -395,7 +395,7 @@ export function HomePage() {
           transition={{ duration: 8, repeat: Infinity }}
         />
         <motion.div
-          className="absolute bottom-0 right-1/4 w-96 h-96 bg-neon-purple rounded-full blur-[100px] opacity-20"
+          className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500 rounded-full blur-[100px] opacity-20"
           animate={{
             scale: [1, 1.3, 1],
             opacity: [0.2, 0.25, 0.2],
@@ -418,8 +418,8 @@ export function HomePage() {
               className="inline-block mb-8"
             >
               <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full cyber-surface neon-border">
-                <ShieldCheck className="h-5 w-5 text-neon-blue" />
-                <span className="text-sm font-bold text-blue-300 uppercase tracking-wider">
+                <ShieldCheck className="h-5 w-5 text-cyan-400" />
+                <span className="text-sm font-bold text-muted-foreground uppercase tracking-wider">
                   ACTIVATE DEFENSE PROTOCOL
                 </span>
               </div>
@@ -429,14 +429,14 @@ export function HomePage() {
               Ready to <span className="gradient-text">Secure</span> Your Infrastructure?
             </h2>
 
-            <p className="text-xl text-blue-300 mb-12 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground mb-12 leading-relaxed max-w-3xl mx-auto">
               Deploy enterprise-grade cybersecurity solutions and protect your digital assets from advanced threats
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
                 to="/services"
-                className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-neon-indigo to-neon-purple font-bold rounded-xl neon-glow hover:scale-105 transition-all text-white text-lg"
+                className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-cyan-400 to-blue-600 font-bold rounded-xl neon-glow hover:scale-105 transition-all text-white text-lg"
               >
                 <Shield className="h-6 w-6" />
                 Deploy Security
@@ -444,7 +444,7 @@ export function HomePage() {
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-transparent border-2 border-neon-blue text-blue-300 font-bold rounded-xl hover:bg-neon-blue/10 transition-all text-lg"
+                className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-transparent border-2 border-cyan-500/30 text-muted-foreground font-bold rounded-xl hover:bg-cyan-500/10 transition-all text-lg"
               >
                 <Radar className="h-6 w-6" />
                 Request Audit
@@ -461,7 +461,7 @@ export function HomePage() {
             >
               {["ISO 27001", "SOC 2", "GDPR", "PCI DSS"].map((cert) => (
                 <div key={cert} className="cyber-surface px-6 py-3 rounded-lg neon-border">
-                  <span className="text-sm font-bold text-blue-300">{cert}</span>
+                  <span className="text-sm font-bold text-muted-foreground">{cert}</span>
                 </div>
               ))}
             </motion.div>

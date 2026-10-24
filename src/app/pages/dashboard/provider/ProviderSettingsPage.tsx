@@ -24,14 +24,14 @@ export function ProviderSettingsPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-        <p className="text-gray-600 mt-1">Manage your account preferences and settings</p>
+        <h1 className="text-3xl font-bold text-foreground">Settings</h1>
+        <p className="text-muted-foreground mt-1">Manage your account preferences and settings</p>
       </div>
 
       <div className="grid lg:grid-cols-4 gap-6">
         {/* Tabs Sidebar */}
         <div className="lg:col-span-1">
-          <div className="bg-white rounded-2xl p-2 shadow-sm">
+          <div className="bg-card rounded-2xl p-2 shadow-sm">
             <nav className="space-y-1">
               {tabs.map((tab) => {
                 const Icon = tab.icon;
@@ -41,8 +41,8 @@ export function ProviderSettingsPage() {
                     onClick={() => setActiveTab(tab.id)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-left ${
                       activeTab === tab.id
-                        ? "bg-blue-50 text-blue-600 font-medium"
-                        : "text-gray-700 hover:bg-gray-50"
+                        ? "bg-card text-cyan-500 font-medium"
+                        : "text-foreground/80 hover:bg-muted/20"
                     }`}
                   >
                     <Icon className="h-5 w-5" />
@@ -56,7 +56,7 @@ export function ProviderSettingsPage() {
 
         {/* Content Area */}
         <div className="lg:col-span-3">
-          <div className="bg-white rounded-2xl shadow-sm">
+          <div className="bg-card rounded-2xl shadow-sm">
             {/* Profile Settings */}
             {activeTab === "profile" && (
               <motion.div
@@ -64,23 +64,23 @@ export function ProviderSettingsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="p-6"
               >
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Profile Information</h2>
+                <h2 className="text-xl font-semibold text-foreground mb-6">Profile Information</h2>
 
                 {/* Profile Photo */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                  <label className="block text-sm font-medium text-foreground/80 mb-3">
                     Profile Photo
                   </label>
                   <div className="flex items-center gap-4">
-                    <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white text-2xl font-medium">
+                    <div className="w-20 h-20 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-medium">
                       JS
                     </div>
                     <div>
-                      <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
+                      <button className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg hover:bg-muted/20 transition-colors text-sm font-medium">
                         <Camera className="h-4 w-4" />
                         Change Photo
                       </button>
-                      <p className="text-xs text-gray-500 mt-1">JPG, PNG or GIF, max 2MB</p>
+                      <p className="text-xs text-muted-foreground mt-1">JPG, PNG or GIF, max 2MB</p>
                     </div>
                   </div>
                 </div>
@@ -88,77 +88,77 @@ export function ProviderSettingsPage() {
                 <div className="space-y-4">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-foreground/80 mb-2">
                         First Name
                       </label>
                       <input
                         type="text"
                         defaultValue="JS"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-foreground/80 mb-2">
                         Last Name
                       </label>
                       <input
                         type="text"
                         defaultValue="CyberHub"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-foreground/80 mb-2">
                       Email Address
                     </label>
                     <input
                       type="email"
                       defaultValue="raghavendrakanade13@gmail.com"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-foreground/80 mb-2">
                       Phone Number
                     </label>
                     <input
                       type="tel"
                       defaultValue="+91 8446173815"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-foreground/80 mb-2">
                       Location
                     </label>
                     <input
                       type="text"
                       defaultValue="Chhatrapati Sambhajinagar"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-foreground/80 mb-2">
                       Bio
                     </label>
                     <textarea
                       rows={4}
                       defaultValue="Professional cybersecurity consultant and business advisor specializing in network security, web development, and business consulting."
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                     />
                   </div>
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-gray-200 flex justify-end">
+                <div className="mt-6 pt-6 border-t border-border flex justify-end">
                   <button
                     onClick={handleSave}
                     disabled={loading}
-                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow disabled:opacity-50"
+                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow disabled:opacity-50"
                   >
                     <Save className="h-5 w-5" />
                     {loading ? "Saving..." : "Save Changes"}
@@ -174,38 +174,38 @@ export function ProviderSettingsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="p-6"
               >
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Security Settings</h2>
+                <h2 className="text-xl font-semibold text-foreground mb-6">Security Settings</h2>
 
                 <div className="space-y-6">
                   {/* Change Password */}
-                  <div className="p-4 border border-gray-200 rounded-lg">
+                  <div className="p-4 border border-border rounded-lg">
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <h3 className="font-medium text-gray-900 mb-1">Password</h3>
-                        <p className="text-sm text-gray-600">Last changed 3 months ago</p>
+                        <h3 className="font-medium text-foreground mb-1">Password</h3>
+                        <p className="text-sm text-muted-foreground">Last changed 3 months ago</p>
                       </div>
-                      <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
+                      <button className="px-4 py-2 border border-border rounded-lg hover:bg-muted/20 transition-colors text-sm font-medium">
                         Change Password
                       </button>
                     </div>
                   </div>
 
                   {/* Two-Factor Authentication */}
-                  <div className="p-4 border border-gray-200 rounded-lg">
+                  <div className="p-4 border border-border rounded-lg">
                     <div className="flex items-start justify-between">
                       <div>
-                        <h3 className="font-medium text-gray-900 mb-1">Two-Factor Authentication</h3>
-                        <p className="text-sm text-gray-600">Add an extra layer of security to your account</p>
+                        <h3 className="font-medium text-foreground mb-1">Two-Factor Authentication</h3>
+                        <p className="text-sm text-muted-foreground">Add an extra layer of security to your account</p>
                       </div>
-                      <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                      <button className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-cyan-600 transition-colors text-sm font-medium">
                         Enable
                       </button>
                     </div>
                   </div>
 
                   {/* Active Sessions */}
-                  <div className="p-4 border border-gray-200 rounded-lg">
-                    <h3 className="font-medium text-gray-900 mb-4">Active Sessions</h3>
+                  <div className="p-4 border border-border rounded-lg">
+                    <h3 className="font-medium text-foreground mb-4">Active Sessions</h3>
                     <div className="space-y-3">
                       {[
                         { device: "Chrome on Windows", location: "Mumbai, India", time: "Active now" },
@@ -213,11 +213,11 @@ export function ProviderSettingsPage() {
                       ].map((session, index) => (
                         <div key={index} className="flex items-center justify-between py-2">
                           <div>
-                            <div className="text-sm font-medium text-gray-900">{session.device}</div>
-                            <div className="text-xs text-gray-600">{session.location} • {session.time}</div>
+                            <div className="text-sm font-medium text-foreground">{session.device}</div>
+                            <div className="text-xs text-muted-foreground">{session.location} • {session.time}</div>
                           </div>
                           {index > 0 && (
-                            <button className="text-sm text-red-600 hover:text-red-700 font-medium">
+                            <button className="text-sm text-red-600 hover:text-red-400 font-medium">
                               Revoke
                             </button>
                           )}
@@ -236,7 +236,7 @@ export function ProviderSettingsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="p-6"
               >
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Notification Preferences</h2>
+                <h2 className="text-xl font-semibold text-foreground mb-6">Notification Preferences</h2>
 
                 <div className="space-y-6">
                   {[
@@ -247,10 +247,10 @@ export function ProviderSettingsPage() {
                     { title: "Payment Updates", description: "Payment confirmations and updates", enabled: true },
                     { title: "Marketing", description: "Tips, features, and promotional content", enabled: false },
                   ].map((notification, index) => (
-                    <div key={index} className="flex items-start justify-between py-4 border-b border-gray-200 last:border-0">
+                    <div key={index} className="flex items-start justify-between py-4 border-b border-border last:border-0">
                       <div className="flex-1">
-                        <h3 className="font-medium text-gray-900 mb-1">{notification.title}</h3>
-                        <p className="text-sm text-gray-600">{notification.description}</p>
+                        <h3 className="font-medium text-foreground mb-1">{notification.title}</h3>
+                        <p className="text-sm text-muted-foreground">{notification.description}</p>
                       </div>
                       <label className="relative inline-flex items-center cursor-pointer ml-4">
                         <input
@@ -258,17 +258,17 @@ export function ProviderSettingsPage() {
                           defaultChecked={notification.enabled}
                           className="sr-only peer"
                         />
-                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-card after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
                       </label>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-gray-200 flex justify-end">
+                <div className="mt-6 pt-6 border-t border-border flex justify-end">
                   <button
                     onClick={handleSave}
                     disabled={loading}
-                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow disabled:opacity-50"
+                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow disabled:opacity-50"
                   >
                     <Save className="h-5 w-5" />
                     {loading ? "Saving..." : "Save Preferences"}
@@ -284,33 +284,33 @@ export function ProviderSettingsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="p-6"
               >
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">Billing & Payments</h2>
+                <h2 className="text-xl font-semibold text-foreground mb-6">Billing & Payments</h2>
 
                 <div className="space-y-6">
                   {/* Payment Method */}
-                  <div className="p-4 border border-gray-200 rounded-lg">
+                  <div className="p-4 border border-border rounded-lg">
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <h3 className="font-medium text-gray-900 mb-1">Payment Method</h3>
-                        <p className="text-sm text-gray-600">How you receive payments from clients</p>
+                        <h3 className="font-medium text-foreground mb-1">Payment Method</h3>
+                        <p className="text-sm text-muted-foreground">How you receive payments from clients</p>
                       </div>
-                      <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
+                      <button className="px-4 py-2 border border-border rounded-lg hover:bg-muted/20 transition-colors text-sm font-medium">
                         Update
                       </button>
                     </div>
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                      <CreditCard className="h-5 w-5 text-gray-600" />
+                    <div className="flex items-center gap-3 p-3 bg-muted/20 rounded-lg">
+                      <CreditCard className="h-5 w-5 text-muted-foreground" />
                       <div>
-                        <div className="text-sm font-medium text-gray-900">Bank Account •••• 4567</div>
-                        <div className="text-xs text-gray-600">HDFC Bank</div>
+                        <div className="text-sm font-medium text-foreground">Bank Account •••• 4567</div>
+                        <div className="text-xs text-muted-foreground">HDFC Bank</div>
                       </div>
                     </div>
                   </div>
 
                   {/* Payout Schedule */}
-                  <div className="p-4 border border-gray-200 rounded-lg">
-                    <h3 className="font-medium text-gray-900 mb-4">Payout Schedule</h3>
-                    <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                  <div className="p-4 border border-border rounded-lg">
+                    <h3 className="font-medium text-foreground mb-4">Payout Schedule</h3>
+                    <select className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
                       <option>Weekly (Every Monday)</option>
                       <option>Bi-weekly</option>
                       <option>Monthly</option>
@@ -318,13 +318,13 @@ export function ProviderSettingsPage() {
                   </div>
 
                   {/* Tax Information */}
-                  <div className="p-4 border border-gray-200 rounded-lg">
+                  <div className="p-4 border border-border rounded-lg">
                     <div className="flex items-start justify-between">
                       <div>
-                        <h3 className="font-medium text-gray-900 mb-1">Tax Information</h3>
-                        <p className="text-sm text-gray-600">GST and tax details for invoicing</p>
+                        <h3 className="font-medium text-foreground mb-1">Tax Information</h3>
+                        <p className="text-sm text-muted-foreground">GST and tax details for invoicing</p>
                       </div>
-                      <button className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm font-medium">
+                      <button className="px-4 py-2 border border-border rounded-lg hover:bg-muted/20 transition-colors text-sm font-medium">
                         Manage
                       </button>
                     </div>

@@ -50,14 +50,14 @@ export function AdminOverviewPage() {
 
   const colorMap: Record<string, { icon: string; bg: string }> = {
     green:  { icon: "text-green-400",  bg: "bg-green-500/10 border-green-500/20"   },
-    blue:   { icon: "text-blue-400",   bg: "bg-blue-500/10 border-blue-500/20"     },
+    blue:   { icon: "text-muted-foreground/80",   bg: "bg-card0/10 border-blue-500/20"     },
     purple: { icon: "text-purple-400", bg: "bg-purple-500/10 border-purple-500/20" },
     yellow: { icon: "text-yellow-400", bg: "bg-yellow-500/10 border-yellow-500/20" },
   };
 
   function bookingBadge(status: string) {
     const m: Record<string, string> = {
-      confirmed: "bg-blue-500/15 text-blue-400 border-blue-500/25",
+      confirmed: "bg-card0/15 text-muted-foreground/80 border-blue-500/25",
       pending:   "bg-yellow-500/15 text-yellow-400 border-yellow-500/25",
       "in-progress": "bg-purple-500/15 text-purple-400 border-purple-500/25",
       completed: "bg-green-500/15 text-green-400 border-green-500/25",

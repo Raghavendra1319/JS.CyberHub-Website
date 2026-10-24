@@ -77,7 +77,7 @@ const services = [
     icon: Lock,
     title: "Network Security",
     description: "Protect your business network from unauthorized access and cyber attacks.",
-    gradient: "from-indigo-500 to-purple-500",
+    gradient: "from-cyan-400 to-blue-600",
     detailedInfo: {
       overview: "Enterprise-grade network security infrastructure that defends against intrusions, DDoS attacks, and unauthorized access. We design and implement multi-layered security architectures tailored to your business needs.",
       features: [
@@ -123,7 +123,7 @@ const services = [
     icon: Briefcase,
     title: "Business Consulting",
     description: "Strategic guidance to help your business grow, scale, and overcome challenges.",
-    gradient: "from-blue-600 to-indigo-600",
+    gradient: "from-cyan-400 to-blue-600",
     detailedInfo: {
       overview: "Expert business consulting services that provide strategic insights, operational improvements, and growth strategies. We partner with startups and SMBs to navigate challenges and capitalize on opportunities.",
       features: [
@@ -215,7 +215,7 @@ const services = [
     icon: Globe,
     title: "Website Development",
     description: "Professional, responsive websites that engage users and drive conversions.",
-    gradient: "from-blue-500 to-cyan-500",
+    gradient: "from-cyan-500 to-teal-500",
     detailedInfo: {
       overview: "Modern, high-performance website development that creates stunning digital experiences. We build responsive, SEO-optimized websites that convert visitors into customers and grow with your business.",
       features: [
@@ -274,7 +274,7 @@ export function Services() {
           transition={{ duration: 0.6 }}
         >
           <motion.div 
-            className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-4"
+            className="inline-flex items-center gap-2 bg-cyan-500/15 text-cyan-400 px-4 py-2 rounded-full text-sm font-medium mb-4"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -283,7 +283,7 @@ export function Services() {
             <span>Comprehensive Solutions</span>
           </motion.div>
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-4"
+            className="text-4xl md:text-5xl font-bold text-foreground mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -291,7 +291,7 @@ export function Services() {
             Our Services
           </motion.h2>
           <motion.p 
-            className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -320,7 +320,7 @@ export function Services() {
                   onClick={() => setSelectedService(service)}
                   className="cursor-pointer"
                 >
-                  <Card className="hover:shadow-xl transition-all duration-300 border-gray-200 group h-full">
+                  <Card className="hover:shadow-xl transition-all duration-300 border-border group h-full">
                     <CardHeader>
                       <motion.div 
                         className={`w-14 h-14 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center mb-4 shadow-lg`}
@@ -332,10 +332,10 @@ export function Services() {
                       <CardTitle className="text-xl font-semibold">{service.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <CardDescription className="text-base text-gray-600 leading-relaxed mb-4">
+                      <CardDescription className="text-base text-muted-foreground leading-relaxed mb-4">
                         {service.description}
                       </CardDescription>
-                      <div className="flex items-center gap-2 text-blue-600 font-medium text-sm group-hover:gap-3 transition-all">
+                      <div className="flex items-center gap-2 text-cyan-500 font-medium text-sm group-hover:gap-3 transition-all">
                         <span>Learn More</span>
                         <ArrowRight className="h-4 w-4" />
                       </div>
@@ -349,7 +349,7 @@ export function Services() {
 
         {/* CTA Section */}
         <motion.div 
-          className="mt-16 text-center bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-12 text-white shadow-xl relative overflow-hidden"
+          className="mt-16 text-center bg-gradient-to-r from-cyan-400 to-blue-600 rounded-2xl p-12 text-white shadow-xl relative overflow-hidden"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.6, delay: 1.5 }}
@@ -388,7 +388,7 @@ export function Services() {
             </motion.p>
             <motion.button 
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-              className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg text-lg"
+              className="bg-card text-cyan-500 px-8 py-4 rounded-lg font-semibold hover:bg-muted/40 transition-colors shadow-lg text-lg"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 1.9 }}
@@ -412,7 +412,7 @@ export function Services() {
             onClick={() => setSelectedService(null)}
           >
             <motion.div
-              className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+              className="bg-card rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
               initial={{ scale: 0.9, y: 50 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 50 }}
@@ -439,7 +439,7 @@ export function Services() {
                 <div className="relative z-10">
                   <div className="flex items-start justify-between mb-4">
                     <motion.div 
-                      className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg"
+                      className="w-16 h-16 bg-card/20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg"
                       initial={{ rotate: -180, scale: 0 }}
                       animate={{ rotate: 0, scale: 1 }}
                       transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
@@ -448,7 +448,7 @@ export function Services() {
                     </motion.div>
                     <motion.button
                       onClick={() => setSelectedService(null)}
-                      className="w-10 h-10 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-lg flex items-center justify-center transition-colors"
+                      className="w-10 h-10 bg-card/20 backdrop-blur-sm hover:bg-card/30 rounded-lg flex items-center justify-center transition-colors"
                       whileHover={{ scale: 1.1, rotate: 90 }}
                       whileTap={{ scale: 0.9 }}
                     >
@@ -483,8 +483,8 @@ export function Services() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                 >
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Overview</h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Overview</h3>
+                  <p className="text-muted-foreground text-lg leading-relaxed">
                     {selectedService.detailedInfo.overview}
                   </p>
                 </motion.div>
@@ -496,18 +496,18 @@ export function Services() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Key Features</h3>
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Key Features</h3>
                   <div className="grid md:grid-cols-2 gap-4">
                     {selectedService.detailedInfo.features.map((feature, index) => (
                       <motion.div
                         key={index}
-                        className="flex items-start gap-3 bg-gray-50 p-4 rounded-lg"
+                        className="flex items-start gap-3 bg-muted/20 p-4 rounded-lg"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.5 + index * 0.05 }}
                       >
-                        <CheckCircle className={`h-5 w-5 text-green-600 flex-shrink-0 mt-0.5`} />
-                        <span className="text-gray-700">{feature}</span>
+                        <CheckCircle className={`h-5 w-5 text-green-400 flex-shrink-0 mt-0.5`} />
+                        <span className="text-foreground/80">{feature}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -520,12 +520,12 @@ export function Services() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Business Benefits</h3>
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Business Benefits</h3>
                   <div className="space-y-3">
                     {selectedService.detailedInfo.benefits.map((benefit, index) => (
                       <motion.div
                         key={index}
-                        className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-100 rounded-lg"
+                        className="flex items-start gap-3 p-4 bg-card border border-border rounded-lg"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.7 + index * 0.05 }}
@@ -533,7 +533,7 @@ export function Services() {
                         <div className={`w-6 h-6 bg-gradient-to-br ${selectedService.gradient} rounded-full flex items-center justify-center flex-shrink-0 mt-0.5`}>
                           <span className="text-white text-xs font-bold">{index + 1}</span>
                         </div>
-                        <span className="text-gray-700">{benefit}</span>
+                        <span className="text-foreground/80">{benefit}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -541,7 +541,7 @@ export function Services() {
 
                 {/* CTA */}
                 <motion.div 
-                  className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200"
+                  className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-border"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8 }}
@@ -559,7 +559,7 @@ export function Services() {
                   </motion.button>
                   <motion.button
                     onClick={() => setSelectedService(null)}
-                    className="px-6 py-4 border-2 border-gray-300 rounded-lg font-semibold text-gray-700 hover:border-gray-400 hover:bg-gray-50 transition-all"
+                    className="px-6 py-4 border-2 border-border rounded-lg font-semibold text-foreground/80 hover:border-cyan-500/40 hover:bg-muted/20 transition-all"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >

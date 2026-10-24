@@ -81,8 +81,8 @@ export function ProviderOverviewPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Welcome Back!</h1>
-        <p className="text-gray-600 mt-1">Here's an overview of your service provider performance.</p>
+        <h1 className="text-3xl font-bold text-foreground">Welcome Back!</h1>
+        <p className="text-muted-foreground mt-1">Here's an overview of your service provider performance.</p>
       </div>
 
       {/* Stats Grid */}
@@ -96,21 +96,21 @@ export function ProviderOverviewPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+              className="bg-card rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className={`w-12 h-12 bg-${stat.color}-100 rounded-xl flex items-center justify-center`}>
                   <Icon className={`h-6 w-6 text-${stat.color}-600`} />
                 </div>
                 <div className={`flex items-center gap-1 text-sm font-medium ${
-                  stat.trend === "up" ? "text-green-600" : "text-red-600"
+                  stat.trend === "up" ? "text-green-400" : "text-red-600"
                 }`}>
                   <TrendingUp className="h-4 w-4" />
                   {stat.change}
                 </div>
               </div>
-              <div className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</div>
-              <div className="text-sm text-gray-600">{stat.name}</div>
+              <div className="text-3xl font-bold text-foreground mb-1">{stat.value}</div>
+              <div className="text-sm text-muted-foreground">{stat.name}</div>
             </motion.div>
           );
         })}
@@ -123,9 +123,9 @@ export function ProviderOverviewPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-white rounded-2xl p-6 shadow-sm"
+          className="bg-card rounded-2xl p-6 shadow-sm"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">Earnings Overview</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-6">Earnings Overview</h3>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={earningsData}>
               <defs>
@@ -148,9 +148,9 @@ export function ProviderOverviewPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="bg-white rounded-2xl p-6 shadow-sm"
+          className="bg-card rounded-2xl p-6 shadow-sm"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">Top Services</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-6">Top Services</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={servicesData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -168,26 +168,26 @@ export function ProviderOverviewPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.6 }}
-        className="bg-white rounded-2xl p-6 shadow-sm"
+        className="bg-card rounded-2xl p-6 shadow-sm"
       >
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold text-gray-900">Upcoming Bookings</h3>
-          <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+          <h3 className="text-lg font-semibold text-foreground">Upcoming Bookings</h3>
+          <button className="text-sm text-cyan-500 hover:text-cyan-400 font-medium">
             View All
           </button>
         </div>
         
         <div className="space-y-4">
           {upcomingBookings.map((booking, index) => (
-            <div key={index} className="flex items-center justify-between p-4 rounded-lg hover:bg-gray-50 transition-colors">
+            <div key={index} className="flex items-center justify-between p-4 rounded-lg hover:bg-muted/20 transition-colors">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-medium">
+                <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-white font-medium">
                   {booking.client.charAt(0)}
                 </div>
                 <div>
-                  <div className="font-medium text-gray-900">{booking.client}</div>
-                  <div className="text-sm text-gray-600">{booking.service}</div>
-                  <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
+                  <div className="font-medium text-foreground">{booking.client}</div>
+                  <div className="text-sm text-muted-foreground">{booking.service}</div>
+                  <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
                     <Clock className="h-3 w-3" />
                     {booking.date}
                   </div>
@@ -195,11 +195,11 @@ export function ProviderOverviewPage() {
               </div>
               <div className="flex items-center gap-4">
                 <div className="text-right">
-                  <div className="font-semibold text-gray-900">{booking.amount}</div>
+                  <div className="font-semibold text-foreground">{booking.amount}</div>
                   <span className={`text-xs font-medium px-2 py-1 rounded-full ${
                     booking.status === "confirmed" 
-                      ? "bg-green-100 text-green-700" 
-                      : "bg-yellow-100 text-yellow-700"
+                      ? "bg-green-500/15 text-green-400" 
+                      : "bg-cyan-500/15 text-cyan-400"
                   }`}>
                     {booking.status}
                   </span>

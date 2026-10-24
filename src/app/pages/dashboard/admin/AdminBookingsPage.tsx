@@ -90,15 +90,15 @@ export function AdminBookingsPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "confirmed":
-        return "bg-blue-100 text-blue-700";
+        return "bg-cyan-500/15 text-cyan-400";
       case "pending":
-        return "bg-yellow-100 text-yellow-700";
+        return "bg-cyan-500/15 text-cyan-400";
       case "completed":
-        return "bg-green-100 text-green-700";
+        return "bg-green-500/15 text-green-400";
       case "cancelled":
-        return "bg-red-100 text-red-700";
+        return "bg-red-500/15 text-red-400";
       default:
-        return "bg-gray-100 text-gray-700";
+        return "bg-muted/40 text-foreground/80";
     }
   };
 
@@ -125,8 +125,8 @@ export function AdminBookingsPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Bookings Management</h1>
-        <p className="text-gray-600 mt-1">Monitor and manage all platform bookings</p>
+        <h1 className="text-3xl font-bold text-foreground">Bookings Management</h1>
+        <p className="text-muted-foreground mt-1">Monitor and manage all platform bookings</p>
       </div>
 
       {/* Stats Cards */}
@@ -134,75 +134,75 @@ export function AdminBookingsPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-xl p-4 shadow-md"
+          className="bg-card rounded-xl p-4 shadow-md"
         >
-          <div className="text-2xl font-bold text-gray-900 mb-1">{stats.total}</div>
-          <div className="text-sm text-gray-600">Total</div>
+          <div className="text-2xl font-bold text-foreground mb-1">{stats.total}</div>
+          <div className="text-sm text-muted-foreground">Total</div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-xl p-4 shadow-md"
+          className="bg-card rounded-xl p-4 shadow-md"
         >
-          <div className="text-2xl font-bold text-blue-600 mb-1">{stats.confirmed}</div>
-          <div className="text-sm text-gray-600">Confirmed</div>
+          <div className="text-2xl font-bold text-cyan-500 mb-1">{stats.confirmed}</div>
+          <div className="text-sm text-muted-foreground">Confirmed</div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white rounded-xl p-4 shadow-md"
+          className="bg-card rounded-xl p-4 shadow-md"
         >
           <div className="text-2xl font-bold text-yellow-600 mb-1">{stats.pending}</div>
-          <div className="text-sm text-gray-600">Pending</div>
+          <div className="text-sm text-muted-foreground">Pending</div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white rounded-xl p-4 shadow-md"
+          className="bg-card rounded-xl p-4 shadow-md"
         >
-          <div className="text-2xl font-bold text-green-600 mb-1">{stats.completed}</div>
-          <div className="text-sm text-gray-600">Completed</div>
+          <div className="text-2xl font-bold text-green-400 mb-1">{stats.completed}</div>
+          <div className="text-sm text-muted-foreground">Completed</div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-white rounded-xl p-4 shadow-md"
+          className="bg-card rounded-xl p-4 shadow-md"
         >
-          <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-1">
+          <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent mb-1">
             ₹{stats.revenue.toLocaleString("en-IN")}
           </div>
-          <div className="text-sm text-gray-600">Revenue</div>
+          <div className="text-sm text-muted-foreground">Revenue</div>
         </motion.div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl p-4 shadow-md mb-6">
+      <div className="bg-card rounded-xl p-4 shadow-md mb-6">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
             <input
               type="text"
               placeholder="Search by customer name, booking ID, or service..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="w-full pl-11 pr-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
             />
           </div>
 
           <div className="flex items-center gap-2">
-            <Filter className="h-5 w-5 text-gray-600" />
+            <Filter className="h-5 w-5 text-muted-foreground" />
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="px-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
             >
               <option value="all">All Status</option>
               <option value="confirmed">Confirmed</option>
@@ -215,62 +215,62 @@ export function AdminBookingsPage() {
       </div>
 
       {/* Bookings Table */}
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+      <div className="bg-card rounded-2xl shadow-lg overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-muted/20 border-b border-border">
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
                   Booking ID
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
                   Customer
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
                   Service
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
                   Date & Time
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
                   Amount
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">
                   Status
                 </th>
-                <th className="px-6 py-4 text-right text-sm font-semibold text-gray-900">
+                <th className="px-6 py-4 text-right text-sm font-semibold text-foreground">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-border">
               {filteredBookings.map((booking, index) => (
                 <motion.tr
                   key={booking.id}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: index * 0.05 }}
-                  className="hover:bg-gray-50 transition-colors"
+                  className="hover:bg-muted/20 transition-colors"
                 >
                   <td className="px-6 py-4">
-                    <span className="font-mono text-sm text-gray-900">{booking.id}</span>
+                    <span className="font-mono text-sm text-foreground">{booking.id}</span>
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold">
+                      <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
                         {booking.customerName.charAt(0)}
                       </div>
                       <div>
-                        <div className="font-semibold text-gray-900">{booking.customerName}</div>
-                        <div className="text-sm text-gray-500">{booking.customerEmail}</div>
+                        <div className="font-semibold text-foreground">{booking.customerName}</div>
+                        <div className="text-sm text-muted-foreground">{booking.customerEmail}</div>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="text-gray-900">{booking.serviceName}</span>
+                    <span className="text-foreground">{booking.serviceName}</span>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="flex items-center gap-3 text-gray-600">
+                    <div className="flex items-center gap-3 text-muted-foreground">
                       <div className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />
                         {format(booking.date, "MMM d, yyyy")}
@@ -282,7 +282,7 @@ export function AdminBookingsPage() {
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="font-semibold text-gray-900">₹{booking.amount}</span>
+                    <span className="font-semibold text-foreground">₹{booking.amount}</span>
                   </td>
                   <td className="px-6 py-4">
                     <span
@@ -299,7 +299,7 @@ export function AdminBookingsPage() {
                       <select
                         value={booking.status}
                         onChange={(e) => handleStatusChange(booking.id, e.target.value)}
-                        className="px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                        className="px-3 py-1.5 border border-border rounded-lg text-sm focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                       >
                         <option value="pending">Pending</option>
                         <option value="confirmed">Confirmed</option>

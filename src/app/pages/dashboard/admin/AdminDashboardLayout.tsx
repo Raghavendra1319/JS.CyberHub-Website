@@ -34,11 +34,11 @@ export function AdminDashboardLayout() {
       <div className="absolute inset-0 cyber-grid opacity-10 pointer-events-none" />
 
       {/* Top Bar */}
-      <header className="cyber-surface backdrop-blur-xl border-b border-neon-blue/20 sticky top-0 z-40">
+      <header className="cyber-surface backdrop-blur-xl border-b border-border sticky top-0 z-40">
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center gap-3 group">
-              <div className="w-9 h-9 bg-gradient-to-br from-neon-indigo to-neon-purple rounded-lg flex items-center justify-center group-hover:neon-glow transition-all">
+              <div className="w-9 h-9 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center group-hover:neon-glow transition-all">
                 <Shield className="h-5 w-5 text-white" />
               </div>
               <div>
@@ -46,7 +46,7 @@ export function AdminDashboardLayout() {
                   <span className="text-lg font-bold text-white">JS</span>
                   <span className="text-lg font-bold gradient-text">.CyberHub</span>
                 </div>
-                <span className="text-xs bg-neon-blue/20 text-neon-blue px-2 py-0.5 rounded-md font-bold uppercase tracking-wider border border-neon-blue/30">
+                <span className="text-xs bg-cyan-500/10 text-cyan-400 px-2 py-0.5 rounded-md font-bold uppercase tracking-wider border border-border">
                   Admin Portal
                 </span>
               </div>
@@ -55,18 +55,18 @@ export function AdminDashboardLayout() {
             <div className="flex items-center gap-4">
               <Link
                 to="/"
-                className="text-sm text-blue-300 hover:text-neon-blue flex items-center gap-2 font-semibold transition-colors"
+                className="text-sm text-muted-foreground hover:text-cyan-400 flex items-center gap-2 font-semibold transition-colors"
               >
                 <Home className="h-4 w-4" />
                 <span className="hidden sm:inline">Public Site</span>
               </Link>
               <NotificationBell />
-              <div className="flex items-center gap-3 pl-4 border-l border-neon-blue/20">
+              <div className="flex items-center gap-3 pl-4 border-l border-border">
                 <div className="text-right hidden sm:block">
                   <div className="text-sm font-bold text-white">{user?.name}</div>
-                  <div className="text-xs text-neon-blue uppercase tracking-wider">System Admin</div>
+                  <div className="text-xs text-cyan-400 uppercase tracking-wider">System Admin</div>
                 </div>
-                <div className="w-10 h-10 bg-gradient-to-br from-neon-indigo to-neon-purple rounded-lg flex items-center justify-center text-white font-bold border border-neon-blue/30">
+                <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center text-white font-bold border border-border">
                   {user?.name?.charAt(0).toUpperCase()}
                 </div>
               </div>
@@ -77,7 +77,7 @@ export function AdminDashboardLayout() {
 
       <div className="flex relative z-10">
         {/* Sidebar */}
-        <aside className="w-64 cyber-surface border-r border-neon-blue/20 min-h-[calc(100vh-4rem)] sticky top-16 hidden md:block">
+        <aside className="w-64 cyber-surface border-r border-border min-h-[calc(100vh-4rem)] sticky top-16 hidden md:block">
           <nav className="p-4 space-y-2">
             {navigation.map((item, index) => {
               const Icon = item.icon;
@@ -88,8 +88,8 @@ export function AdminDashboardLayout() {
                   to={item.href}
                   className={`relative flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-bold transition-all group ${
                     active
-                      ? "bg-neon-blue/10 text-neon-blue neon-border"
-                      : "text-blue-300 hover:bg-neon-blue/5 hover:text-neon-blue"
+                      ? "bg-cyan-500/10 text-cyan-400 neon-border"
+                      : "text-muted-foreground hover:bg-cyan-500/5 hover:text-cyan-400"
                   }`}
                 >
                   <Icon className="h-5 w-5" />
@@ -97,7 +97,7 @@ export function AdminDashboardLayout() {
                   {active && (
                     <motion.div
                       layoutId="activeNav"
-                      className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-neon-indigo to-neon-purple rounded-r"
+                      className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-400 to-blue-600 rounded-r"
                     />
                   )}
                 </Link>
@@ -114,8 +114,8 @@ export function AdminDashboardLayout() {
             {/* Status Indicator */}
             <div className="mt-8 p-4 cyber-card rounded-lg neon-border">
               <div className="flex items-center gap-2 mb-2">
-                <ShieldCheck className="h-4 w-4 text-neon-blue" />
-                <span className="text-xs font-bold text-blue-300 uppercase tracking-wider">System Status</span>
+                <ShieldCheck className="h-4 w-4 text-cyan-400" />
+                <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">System Status</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
@@ -143,7 +143,7 @@ export function AdminDashboardLayout() {
       </div>
 
       {/* Mobile Bottom Nav */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 cyber-surface backdrop-blur-xl border-t border-neon-blue/20 px-4 py-2 z-40">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 cyber-surface backdrop-blur-xl border-t border-border px-4 py-2 z-40">
         <div className="flex items-center justify-around">
           {navigation.slice(0, 5).map((item) => {
             const Icon = item.icon;
@@ -154,8 +154,8 @@ export function AdminDashboardLayout() {
                 to={item.href}
                 className={`flex flex-col items-center gap-1 px-2 py-2 rounded-lg text-xs font-bold transition-all ${
                   active
-                    ? "text-neon-blue"
-                    : "text-blue-400 hover:text-neon-blue"
+                    ? "text-cyan-400"
+                    : "text-muted-foreground/80 hover:text-cyan-400"
                 }`}
               >
                 <Icon className="h-5 w-5" />

@@ -79,8 +79,8 @@ export function UserProfilePage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">My Profile</h1>
-        <p className="text-gray-600 mt-1">Manage your personal information and preferences</p>
+        <h1 className="text-3xl font-bold text-foreground">My Profile</h1>
+        <p className="text-muted-foreground mt-1">Manage your personal information and preferences</p>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6">
@@ -90,30 +90,30 @@ export function UserProfilePage() {
           animate={{ opacity: 1, y: 0 }}
           className="lg:col-span-1"
         >
-          <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
+          <div className="bg-card rounded-2xl p-6 shadow-lg text-center">
             <div className="relative inline-block mb-4">
-              <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white text-4xl font-bold">
+              <div className="w-32 h-32 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-white text-4xl font-bold">
                 {profileData.name
                   .split(" ")
                   .map((n) => n[0])
                   .join("")}
               </div>
-              <button className="absolute bottom-0 right-0 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors shadow-lg">
+              <button className="absolute bottom-0 right-0 w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white hover:bg-cyan-600 transition-colors shadow-lg">
                 <Camera className="h-5 w-5" />
               </button>
             </div>
 
-            <h2 className="text-2xl font-bold text-gray-900 mb-1">{profileData.name}</h2>
-            <p className="text-gray-600 mb-4">{profileData.email}</p>
+            <h2 className="text-2xl font-bold text-foreground mb-1">{profileData.name}</h2>
+            <p className="text-muted-foreground mb-4">{profileData.email}</p>
 
-            <div className="flex items-center justify-center gap-2 text-sm text-gray-600 mb-6">
+            <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-6">
               <Calendar className="h-4 w-4" />
               <span>Member since {profileData.joinedDate}</span>
             </div>
 
-            <div className="pt-6 border-t border-gray-200">
-              <div className="text-sm text-gray-600 mb-2">Account Status</div>
-              <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-full font-medium">
+            <div className="pt-6 border-t border-border">
+              <div className="text-sm text-muted-foreground mb-2">Account Status</div>
+              <div className="inline-flex items-center gap-2 bg-green-500/15 text-green-400 px-4 py-2 rounded-full font-medium">
                 <Shield className="h-4 w-4" />
                 Verified
               </div>
@@ -128,13 +128,13 @@ export function UserProfilePage() {
           transition={{ delay: 0.1 }}
           className="lg:col-span-2"
         >
-          <div className="bg-white rounded-2xl p-6 shadow-lg">
+          <div className="bg-card rounded-2xl p-6 shadow-lg">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-gray-900">Personal Information</h3>
+              <h3 className="text-xl font-bold text-foreground">Personal Information</h3>
               {!isEditing ? (
                 <button
                   onClick={handleEdit}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-cyan-600 transition-colors"
                 >
                   <Edit2 className="h-4 w-4" />
                   Edit Profile
@@ -143,7 +143,7 @@ export function UserProfilePage() {
                 <div className="flex gap-2">
                   <button
                     onClick={handleCancel}
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-muted/40 text-foreground/80 rounded-lg hover:bg-muted transition-colors"
                   >
                     <X className="h-4 w-4" />
                     Cancel
@@ -162,7 +162,7 @@ export function UserProfilePage() {
             <div className="grid md:grid-cols-2 gap-6">
               {/* Full Name */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-foreground/80 mb-2">
                   <div className="flex items-center gap-2">
                     <User className="h-4 w-4" />
                     Full Name
@@ -174,10 +174,10 @@ export function UserProfilePage() {
                     name="name"
                     value={tempData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                   />
                 ) : (
-                  <div className="px-4 py-2.5 bg-gray-50 rounded-lg text-gray-900">
+                  <div className="px-4 py-2.5 bg-muted/20 rounded-lg text-foreground">
                     {profileData.name}
                   </div>
                 )}
@@ -185,21 +185,21 @@ export function UserProfilePage() {
 
               {/* Email */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-foreground/80 mb-2">
                   <div className="flex items-center gap-2">
                     <Mail className="h-4 w-4" />
                     Email Address
                   </div>
                 </label>
-                <div className="px-4 py-2.5 bg-gray-50 rounded-lg text-gray-900">
+                <div className="px-4 py-2.5 bg-muted/20 rounded-lg text-foreground">
                   {profileData.email}
-                  <span className="text-xs text-gray-500 ml-2">(Cannot be changed)</span>
+                  <span className="text-xs text-muted-foreground ml-2">(Cannot be changed)</span>
                 </div>
               </div>
 
               {/* Phone */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-foreground/80 mb-2">
                   <div className="flex items-center gap-2">
                     <Phone className="h-4 w-4" />
                     Phone Number
@@ -211,10 +211,10 @@ export function UserProfilePage() {
                     name="phone"
                     value={tempData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                   />
                 ) : (
-                  <div className="px-4 py-2.5 bg-gray-50 rounded-lg text-gray-900">
+                  <div className="px-4 py-2.5 bg-muted/20 rounded-lg text-foreground">
                     {profileData.phone}
                   </div>
                 )}
@@ -222,7 +222,7 @@ export function UserProfilePage() {
 
               {/* City */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-foreground/80 mb-2">
                   <div className="flex items-center gap-2">
                     <MapPin className="h-4 w-4" />
                     City
@@ -234,10 +234,10 @@ export function UserProfilePage() {
                     name="city"
                     value={tempData.city}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                   />
                 ) : (
-                  <div className="px-4 py-2.5 bg-gray-50 rounded-lg text-gray-900">
+                  <div className="px-4 py-2.5 bg-muted/20 rounded-lg text-foreground">
                     {profileData.city}
                   </div>
                 )}
@@ -245,17 +245,17 @@ export function UserProfilePage() {
 
               {/* State */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">State</label>
+                <label className="block text-sm font-medium text-foreground/80 mb-2">State</label>
                 {isEditing ? (
                   <input
                     type="text"
                     name="state"
                     value={tempData.state}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                   />
                 ) : (
-                  <div className="px-4 py-2.5 bg-gray-50 rounded-lg text-gray-900">
+                  <div className="px-4 py-2.5 bg-muted/20 rounded-lg text-foreground">
                     {profileData.state}
                   </div>
                 )}
@@ -263,17 +263,17 @@ export function UserProfilePage() {
 
               {/* Pincode */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Pincode</label>
+                <label className="block text-sm font-medium text-foreground/80 mb-2">Pincode</label>
                 {isEditing ? (
                   <input
                     type="text"
                     name="pincode"
                     value={tempData.pincode}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                   />
                 ) : (
-                  <div className="px-4 py-2.5 bg-gray-50 rounded-lg text-gray-900">
+                  <div className="px-4 py-2.5 bg-muted/20 rounded-lg text-foreground">
                     {profileData.pincode}
                   </div>
                 )}
@@ -281,7 +281,7 @@ export function UserProfilePage() {
 
               {/* Address */}
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-foreground/80 mb-2">
                   Full Address
                 </label>
                 {isEditing ? (
@@ -290,10 +290,10 @@ export function UserProfilePage() {
                     value={tempData.address}
                     onChange={handleChange}
                     rows={3}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                   />
                 ) : (
-                  <div className="px-4 py-2.5 bg-gray-50 rounded-lg text-gray-900">
+                  <div className="px-4 py-2.5 bg-muted/20 rounded-lg text-foreground">
                     {profileData.address}
                   </div>
                 )}
@@ -302,16 +302,16 @@ export function UserProfilePage() {
           </div>
 
           {/* Password Section */}
-          <div className="bg-white rounded-2xl p-6 shadow-lg mt-6">
+          <div className="bg-card rounded-2xl p-6 shadow-lg mt-6">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h3 className="text-xl font-bold text-gray-900">Security</h3>
-                <p className="text-sm text-gray-600 mt-1">Manage your password and security settings</p>
+                <h3 className="text-xl font-bold text-foreground">Security</h3>
+                <p className="text-sm text-muted-foreground mt-1">Manage your password and security settings</p>
               </div>
               {!isChangingPassword && (
                 <button
                   onClick={() => setIsChangingPassword(true)}
-                  className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+                  className="px-4 py-2 bg-muted/40 text-foreground/80 rounded-lg hover:bg-muted transition-colors"
                 >
                   Change Password
                 </button>
@@ -326,7 +326,7 @@ export function UserProfilePage() {
                 className="space-y-4"
               >
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-foreground/80 mb-2">
                     Current Password
                   </label>
                   <input
@@ -335,12 +335,12 @@ export function UserProfilePage() {
                     value={passwordData.currentPassword}
                     onChange={handlePasswordChange}
                     required
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-foreground/80 mb-2">
                     New Password
                   </label>
                   <input
@@ -349,12 +349,12 @@ export function UserProfilePage() {
                     value={passwordData.newPassword}
                     onChange={handlePasswordChange}
                     required
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-foreground/80 mb-2">
                     Confirm New Password
                   </label>
                   <input
@@ -363,7 +363,7 @@ export function UserProfilePage() {
                     value={passwordData.confirmPassword}
                     onChange={handlePasswordChange}
                     required
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                    className="w-full px-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                   />
                 </div>
 
@@ -378,13 +378,13 @@ export function UserProfilePage() {
                         confirmPassword: "",
                       });
                     }}
-                    className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+                    className="flex-1 px-4 py-2 bg-muted/40 text-foreground/80 rounded-lg hover:bg-muted transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    className="flex-1 px-4 py-2 bg-primary text-white rounded-lg hover:bg-cyan-600 transition-colors"
                   >
                     Update Password
                   </button>

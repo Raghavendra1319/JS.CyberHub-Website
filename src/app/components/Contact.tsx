@@ -223,7 +223,7 @@ export function Contact() {
           transition={{ duration: 0.6 }}
         >
           <motion.div 
-            className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-4"
+            className="inline-flex items-center gap-2 bg-cyan-500/15 text-cyan-400 px-4 py-2 rounded-full text-sm font-medium mb-4"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -232,7 +232,7 @@ export function Contact() {
             <span>Contact Us</span>
           </motion.div>
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-4"
+            className="text-4xl md:text-5xl font-bold text-foreground mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -240,7 +240,7 @@ export function Contact() {
             Get In Touch
           </motion.h2>
           <motion.p 
-            className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -252,12 +252,12 @@ export function Contact() {
         <div className="grid lg:grid-cols-2 gap-12">
           <div className="space-y-8">
             <motion.div 
-              className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200"
+              className="bg-card rounded-2xl p-8 shadow-lg border border-border"
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">Contact Information</h3>
+              <h3 className="text-2xl font-semibold text-foreground mb-6">Contact Information</h3>
               <div className="space-y-6">
                 {[
                   { icon: Mail, label: "Email", value: "raghavendrakanade13@gmail.com", color: "blue" },
@@ -268,7 +268,7 @@ export function Contact() {
                   return (
                     <motion.div 
                       key={index}
-                      className="flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition-colors"
+                      className="flex items-start gap-4 p-4 rounded-xl hover:bg-muted/20 transition-colors"
                       initial={{ opacity: 0, x: -20 }}
                       animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                       transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
@@ -282,8 +282,8 @@ export function Contact() {
                         <Icon className={`h-6 w-6 text-${item.color}-600`} />
                       </motion.div>
                       <div>
-                        <p className="font-semibold text-gray-900 mb-1">{item.label}</p>
-                        <p className="text-gray-600" style={{ whiteSpace: 'pre-line' }}>{item.value}</p>
+                        <p className="font-semibold text-foreground mb-1">{item.label}</p>
+                        <p className="text-muted-foreground" style={{ whiteSpace: 'pre-line' }}>{item.value}</p>
                       </div>
                     </motion.div>
                   );
@@ -292,7 +292,7 @@ export function Contact() {
             </motion.div>
 
             <motion.div 
-              className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl p-8 text-white shadow-lg"
+              className="bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl p-8 text-white shadow-lg"
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ duration: 0.6, delay: 0.9 }}
@@ -320,14 +320,14 @@ export function Contact() {
           </div>
 
           <motion.div 
-            className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200"
+            className="bg-card rounded-2xl p-8 shadow-lg border border-border"
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm text-gray-700 mb-2">
+                <label htmlFor="name" className="block text-sm text-foreground/80 mb-2">
                   Full Name *
                 </label>
                 <Input
@@ -342,7 +342,7 @@ export function Contact() {
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm text-gray-700 mb-2">
+                <label htmlFor="email" className="block text-sm text-foreground/80 mb-2">
                   Email Address *
                 </label>
                 <div className="flex gap-2">
@@ -370,7 +370,7 @@ export function Contact() {
                   )}
                   {emailVerification.verified && (
                     <Button type="button" variant="outline" size="sm" disabled>
-                      <Check className="h-4 w-4 mr-1 text-green-600" />
+                      <Check className="h-4 w-4 mr-1 text-green-400" />
                       Verified
                     </Button>
                   )}
@@ -395,7 +395,7 @@ export function Contact() {
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-sm text-gray-700 mb-2">
+                <label htmlFor="phone" className="block text-sm text-foreground/80 mb-2">
                   Phone Number
                 </label>
                 <div className="flex gap-2">
@@ -422,7 +422,7 @@ export function Contact() {
                   )}
                   {phoneVerification.verified && (
                     <Button type="button" variant="outline" size="sm" disabled>
-                      <Check className="h-4 w-4 mr-1 text-green-600" />
+                      <Check className="h-4 w-4 mr-1 text-green-400" />
                       Verified
                     </Button>
                   )}
@@ -447,7 +447,7 @@ export function Contact() {
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm text-gray-700 mb-2">
+                <label htmlFor="message" className="block text-sm text-foreground/80 mb-2">
                   Message *
                 </label>
                 <Textarea

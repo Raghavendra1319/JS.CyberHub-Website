@@ -78,7 +78,7 @@ export function BookingTrackingPage() {
       case "confirmed":
         return "bg-green-500/20 text-green-400 border-green-500/30";
       case "in-progress":
-        return "bg-neon-blue/20 text-neon-blue border-neon-blue/30";
+        return "bg-cyan-500/10 text-cyan-400 border-border";
       case "completed":
         return "bg-purple-500/20 text-purple-400 border-purple-500/30";
       case "cancelled":
@@ -92,7 +92,7 @@ export function BookingTrackingPage() {
     <div className="max-w-6xl mx-auto">
       <Link
         to="/dashboard"
-        className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+        className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Bookings
@@ -105,14 +105,14 @@ export function BookingTrackingPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-2xl p-6 shadow-lg"
+            className="bg-card rounded-2xl p-6 shadow-lg"
           >
             <div className="flex items-start justify-between mb-4">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                <h1 className="text-2xl font-bold text-foreground mb-2">
                   {booking.serviceName}
                 </h1>
-                <p className="text-gray-600">Booking ID: {booking.id}</p>
+                <p className="text-muted-foreground">Booking ID: {booking.id}</p>
               </div>
               <span className={`px-4 py-2 rounded-lg text-sm font-bold border capitalize ${getStatusColor(booking.status)}`}>
                 {booking.status.replace('-', ' ')}
@@ -120,37 +120,37 @@ export function BookingTrackingPage() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-4 mt-6">
-              <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
-                <Calendar className="h-5 w-5 text-blue-600" />
+              <div className="flex items-center gap-3 p-4 bg-muted/20 rounded-lg">
+                <Calendar className="h-5 w-5 text-cyan-500" />
                 <div>
-                  <div className="text-xs text-gray-600">Date</div>
-                  <div className="font-semibold text-gray-900">
+                  <div className="text-xs text-muted-foreground">Date</div>
+                  <div className="font-semibold text-foreground">
                     {format(booking.date, "EEEE, MMMM d, yyyy")}
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
-                <Clock className="h-5 w-5 text-blue-600" />
+              <div className="flex items-center gap-3 p-4 bg-muted/20 rounded-lg">
+                <Clock className="h-5 w-5 text-cyan-500" />
                 <div>
-                  <div className="text-xs text-gray-600">Time</div>
-                  <div className="font-semibold text-gray-900">{booking.time}</div>
+                  <div className="text-xs text-muted-foreground">Time</div>
+                  <div className="font-semibold text-foreground">{booking.time}</div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
-                <MapPin className="h-5 w-5 text-blue-600" />
+              <div className="flex items-center gap-3 p-4 bg-muted/20 rounded-lg">
+                <MapPin className="h-5 w-5 text-cyan-500" />
                 <div>
-                  <div className="text-xs text-gray-600">Location</div>
-                  <div className="font-semibold text-gray-900">{booking.location}</div>
+                  <div className="text-xs text-muted-foreground">Location</div>
+                  <div className="font-semibold text-foreground">{booking.location}</div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
-                <IndianRupee className="h-5 w-5 text-blue-600" />
+              <div className="flex items-center gap-3 p-4 bg-muted/20 rounded-lg">
+                <IndianRupee className="h-5 w-5 text-cyan-500" />
                 <div>
-                  <div className="text-xs text-gray-600">Amount Paid</div>
-                  <div className="font-semibold text-gray-900">
+                  <div className="text-xs text-muted-foreground">Amount Paid</div>
+                  <div className="font-semibold text-foreground">
                     ₹{booking.price.toLocaleString('en-IN')}
                   </div>
                 </div>
@@ -163,9 +163,9 @@ export function BookingTrackingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white rounded-2xl p-6 shadow-lg"
+            className="bg-card rounded-2xl p-6 shadow-lg"
           >
-            <h2 className="text-xl font-bold text-gray-900 mb-6">Booking Timeline</h2>
+            <h2 className="text-xl font-bold text-foreground mb-6">Booking Timeline</h2>
 
             <div className="space-y-6">
               {timeline.map((item, index) => (
@@ -173,22 +173,22 @@ export function BookingTrackingPage() {
                   {/* Timeline Line */}
                   {index < timeline.length - 1 && (
                     <div className={`absolute left-[15px] top-8 bottom-0 w-0.5 ${
-                      item.completed ? "bg-blue-200" : "bg-gray-200"
+                      item.completed ? "bg-blue-200" : "bg-muted"
                     }`} />
                   )}
 
                   {/* Icon */}
                   <div className={`relative z-10 flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
                     item.active
-                      ? "bg-blue-600 ring-4 ring-blue-100"
+                      ? "bg-primary ring-4 ring-blue-100"
                       : item.completed
-                      ? "bg-blue-600"
-                      : "bg-gray-200"
+                      ? "bg-primary"
+                      : "bg-muted"
                   }`}>
                     {item.completed ? (
                       <CheckCircle2 className="h-4 w-4 text-white" />
                     ) : (
-                      <Circle className="h-4 w-4 text-gray-400" />
+                      <Circle className="h-4 w-4 text-muted-foreground/70" />
                     )}
                   </div>
 
@@ -196,18 +196,18 @@ export function BookingTrackingPage() {
                   <div className="flex-1 pb-6">
                     <div className="flex items-start justify-between mb-1">
                       <h3 className={`font-semibold ${
-                        item.completed ? "text-gray-900" : "text-gray-400"
+                        item.completed ? "text-foreground" : "text-muted-foreground/70"
                       }`}>
                         {item.label}
                       </h3>
                       {item.timestamp && (
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-muted-foreground">
                           {format(item.timestamp, "MMM d, h:mm a")}
                         </span>
                       )}
                     </div>
                     <p className={`text-sm ${
-                      item.completed ? "text-gray-600" : "text-gray-400"
+                      item.completed ? "text-muted-foreground" : "text-muted-foreground/70"
                     }`}>
                       {item.description}
                     </p>
@@ -225,32 +225,32 @@ export function BookingTrackingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-white rounded-2xl p-6 shadow-lg"
+            className="bg-card rounded-2xl p-6 shadow-lg"
           >
-            <h2 className="text-lg font-bold text-gray-900 mb-4">Service Provider</h2>
+            <h2 className="text-lg font-bold text-foreground mb-4">Service Provider</h2>
 
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold">
+              <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
                 {booking.provider.avatar}
               </div>
               <div>
-                <div className="font-semibold text-gray-900">{booking.provider.name}</div>
-                <div className="text-sm text-gray-600">⭐ {booking.provider.rating} Rating</div>
+                <div className="font-semibold text-foreground">{booking.provider.name}</div>
+                <div className="text-sm text-muted-foreground">⭐ {booking.provider.rating} Rating</div>
               </div>
             </div>
 
             <div className="space-y-3">
-              <div className="flex items-center gap-3 text-sm text-gray-600">
+              <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4" />
                 {booking.provider.email}
               </div>
-              <div className="flex items-center gap-3 text-sm text-gray-600">
+              <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4" />
                 {booking.provider.phone}
               </div>
             </div>
 
-            <button className="w-full mt-4 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+            <button className="w-full mt-4 px-4 py-2 bg-primary text-white font-medium rounded-lg hover:bg-cyan-600 transition-colors flex items-center justify-center gap-2">
               <MessageSquare className="h-4 w-4" />
               Message Provider
             </button>
@@ -261,35 +261,35 @@ export function BookingTrackingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-white rounded-2xl p-6 shadow-lg"
+            className="bg-card rounded-2xl p-6 shadow-lg"
           >
-            <h2 className="text-lg font-bold text-gray-900 mb-4">Payment Details</h2>
+            <h2 className="text-lg font-bold text-foreground mb-4">Payment Details</h2>
 
             <div className="space-y-3 mb-4">
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600">Status</span>
-                <span className="font-semibold text-green-600 capitalize">{booking.paymentStatus}</span>
+                <span className="text-muted-foreground">Status</span>
+                <span className="font-semibold text-green-400 capitalize">{booking.paymentStatus}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600">Method</span>
-                <span className="font-semibold text-gray-900">{booking.paymentMethod}</span>
+                <span className="text-muted-foreground">Method</span>
+                <span className="font-semibold text-foreground">{booking.paymentMethod}</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600">Transaction ID</span>
-                <span className="font-semibold text-gray-900">{booking.transactionId}</span>
+                <span className="text-muted-foreground">Transaction ID</span>
+                <span className="font-semibold text-foreground">{booking.transactionId}</span>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-gray-200">
+            <div className="pt-4 border-t border-border">
               <div className="flex justify-between mb-2">
-                <span className="font-semibold text-gray-900">Total Amount</span>
-                <span className="font-bold text-xl text-gray-900">
+                <span className="font-semibold text-foreground">Total Amount</span>
+                <span className="font-bold text-xl text-foreground">
                   ₹{booking.price.toLocaleString('en-IN')}
                 </span>
               </div>
             </div>
 
-            <button className="w-full mt-4 px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors flex items-center justify-center gap-2">
+            <button className="w-full mt-4 px-4 py-2 bg-muted/40 text-foreground/80 font-medium rounded-lg hover:bg-muted transition-colors flex items-center justify-center gap-2">
               <Download className="h-4 w-4" />
               Download Invoice
             </button>
@@ -300,18 +300,18 @@ export function BookingTrackingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="bg-white rounded-2xl p-6 shadow-lg"
+            className="bg-card rounded-2xl p-6 shadow-lg"
           >
-            <h2 className="text-lg font-bold text-gray-900 mb-4">Actions</h2>
+            <h2 className="text-lg font-bold text-foreground mb-4">Actions</h2>
 
             <div className="space-y-2">
-              <button className="w-full px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors">
+              <button className="w-full px-4 py-2 bg-muted/40 text-foreground/80 font-medium rounded-lg hover:bg-muted transition-colors">
                 Reschedule Booking
               </button>
-              <button className="w-full px-4 py-2 bg-red-50 text-red-600 font-medium rounded-lg hover:bg-red-100 transition-colors">
+              <button className="w-full px-4 py-2 bg-red-50 text-red-600 font-medium rounded-lg hover:bg-red-500/15 transition-colors">
                 Cancel Booking
               </button>
-              <button className="w-full px-4 py-2 bg-yellow-50 text-yellow-700 font-medium rounded-lg hover:bg-yellow-100 transition-colors flex items-center justify-center gap-2">
+              <button className="w-full px-4 py-2 bg-yellow-50 text-cyan-400 font-medium rounded-lg hover:bg-cyan-500/15 transition-colors flex items-center justify-center gap-2">
                 <AlertCircle className="h-4 w-4" />
                 Report Issue
               </button>

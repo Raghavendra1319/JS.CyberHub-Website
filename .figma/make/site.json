@@ -1,0 +1,12 @@
+{
+  "title": "JS.CyberHub",
+  "description": "Connects service providers with clients seeking various services, streamlining bookings and enhancing user experience for both parties.",
+  "language": "Eng",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

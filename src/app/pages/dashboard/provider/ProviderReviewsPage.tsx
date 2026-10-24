@@ -90,8 +90,8 @@ export function ProviderReviewsPage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Reviews & Ratings</h1>
-        <p className="text-gray-600 mt-1">See what your clients are saying about your services</p>
+        <h1 className="text-3xl font-bold text-foreground">Reviews & Ratings</h1>
+        <p className="text-muted-foreground mt-1">See what your clients are saying about your services</p>
       </div>
 
       {/* Overall Rating Summary */}
@@ -100,15 +100,15 @@ export function ProviderReviewsPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl p-6 shadow-sm"
+          className="bg-card rounded-2xl p-6 shadow-sm"
         >
           <div className="text-center">
-            <div className="text-6xl font-bold text-gray-900 mb-2">{overallStats.avgRating}</div>
+            <div className="text-6xl font-bold text-foreground mb-2">{overallStats.avgRating}</div>
             <div className="flex justify-center mb-2">
               {renderStars(5)}
             </div>
-            <div className="text-sm text-gray-600">{overallStats.totalReviews} total reviews</div>
-            <div className="mt-4 flex items-center justify-center gap-1 text-green-600 text-sm font-medium">
+            <div className="text-sm text-muted-foreground">{overallStats.totalReviews} total reviews</div>
+            <div className="mt-4 flex items-center justify-center gap-1 text-green-400 text-sm font-medium">
               <TrendingUp className="h-4 w-4" />
               +0.2 from last month
             </div>
@@ -120,18 +120,18 @@ export function ProviderReviewsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm"
+          className="lg:col-span-2 bg-card rounded-2xl p-6 shadow-sm"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Rating Breakdown</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-4">Rating Breakdown</h3>
           <div className="space-y-3">
             {overallStats.breakdown.map((item) => (
               <div key={item.stars} className="flex items-center gap-3">
                 <div className="flex items-center gap-1 w-16">
-                  <span className="text-sm font-medium text-gray-700">{item.stars}</span>
+                  <span className="text-sm font-medium text-foreground/80">{item.stars}</span>
                   <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                 </div>
                 <div className="flex-1">
-                  <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="h-2 bg-muted rounded-full overflow-hidden">
                     <div
                       className="h-full bg-yellow-400"
                       style={{ width: `${item.percentage}%` }}
@@ -139,8 +139,8 @@ export function ProviderReviewsPage() {
                   </div>
                 </div>
                 <div className="w-20 text-right">
-                  <span className="text-sm font-medium text-gray-700">{item.count}</span>
-                  <span className="text-sm text-gray-500 ml-1">({item.percentage}%)</span>
+                  <span className="text-sm font-medium text-foreground/80">{item.count}</span>
+                  <span className="text-sm text-muted-foreground ml-1">({item.percentage}%)</span>
                 </div>
               </div>
             ))}
@@ -149,35 +149,35 @@ export function ProviderReviewsPage() {
       </div>
 
       {/* Reviews List */}
-      <div className="bg-white rounded-2xl shadow-sm overflow-hidden mb-6">
-        <div className="p-6 border-b border-gray-200 flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-900">Client Reviews</h3>
-          <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+      <div className="bg-card rounded-2xl shadow-sm overflow-hidden mb-6">
+        <div className="p-6 border-b border-border flex items-center justify-between">
+          <h3 className="text-lg font-semibold text-foreground">Client Reviews</h3>
+          <button className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg hover:bg-muted/20 transition-colors">
             <Filter className="h-4 w-4" />
             Filter
           </button>
         </div>
 
-        <div className="divide-y divide-gray-200">
+        <div className="divide-y divide-border">
           {reviews.map((review, index) => (
             <motion.div
               key={review.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
-              className="p-6 hover:bg-gray-50 transition-colors"
+              className="p-6 hover:bg-muted/20 transition-colors"
             >
               {/* Review Header */}
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white font-medium text-lg flex-shrink-0">
+                  <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-white font-medium text-lg flex-shrink-0">
                     {review.clientInitial}
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900">{review.client}</h4>
+                    <h4 className="font-semibold text-foreground">{review.client}</h4>
                     <div className="flex items-center gap-2 mt-1">
                       {renderStars(review.rating)}
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm text-muted-foreground">
                         {new Date(review.date).toLocaleDateString('en-US', { 
                           month: 'short', 
                           day: 'numeric', 
@@ -185,23 +185,23 @@ export function ProviderReviewsPage() {
                         })}
                       </span>
                     </div>
-                    <div className="text-sm text-gray-600 mt-1">{review.service}</div>
+                    <div className="text-sm text-muted-foreground mt-1">{review.service}</div>
                   </div>
                 </div>
               </div>
 
               {/* Review Content */}
               <div className="ml-16">
-                <p className="text-gray-700 mb-4">{review.comment}</p>
+                <p className="text-foreground/80 mb-4">{review.comment}</p>
 
                 {/* Review Actions */}
                 <div className="flex items-center gap-4 mb-4">
-                  <button className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900">
+                  <button className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
                     <ThumbsUp className="h-4 w-4" />
                     Helpful ({review.helpful})
                   </button>
                   {!review.response && (
-                    <button className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700">
+                    <button className="flex items-center gap-2 text-sm text-cyan-500 hover:text-cyan-400">
                       <MessageSquare className="h-4 w-4" />
                       Respond
                     </button>
@@ -210,14 +210,14 @@ export function ProviderReviewsPage() {
 
                 {/* Provider Response */}
                 {review.response && (
-                  <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                  <div className="bg-card border-l-4 border-blue-500 p-4 rounded-r-lg">
                     <div className="flex items-start gap-3">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
                         <span className="text-white text-xs font-medium">JS</span>
                       </div>
                       <div className="flex-1">
-                        <div className="text-sm font-medium text-gray-900 mb-1">Response from JS.CyberHub</div>
-                        <p className="text-sm text-gray-700">{review.response}</p>
+                        <div className="text-sm font-medium text-foreground mb-1">Response from JS.CyberHub</div>
+                        <p className="text-sm text-foreground/80">{review.response}</p>
                       </div>
                     </div>
                   </div>
@@ -230,7 +230,7 @@ export function ProviderReviewsPage() {
 
       {/* Load More */}
       <div className="text-center">
-        <button className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-medium">
+        <button className="px-6 py-3 border border-border rounded-lg hover:bg-muted/20 transition-colors font-medium">
           Load More Reviews
         </button>
       </div>

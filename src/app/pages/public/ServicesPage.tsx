@@ -23,9 +23,9 @@ export function ServicesPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-muted/20">
       {/* Header */}
-      <section className="bg-gradient-to-br from-blue-600 to-indigo-600 py-16">
+      <section className="bg-gradient-to-br from-cyan-400 to-blue-600 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -36,7 +36,7 @@ export function ServicesPage() {
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Our Services
             </h1>
-            <p className="text-lg text-blue-100 max-w-2xl mx-auto">
+            <p className="text-lg text-cyan-100/70 max-w-2xl mx-auto">
               Professional services tailored to your business needs. Book online and get started today.
             </p>
           </motion.div>
@@ -52,32 +52,32 @@ export function ServicesPage() {
             transition={{ duration: 0.6 }}
             className="lg:w-64 flex-shrink-0"
           >
-            <div className="bg-white rounded-2xl p-6 shadow-sm sticky top-24">
+            <div className="bg-card rounded-2xl p-6 shadow-sm sticky top-24">
               <div className="flex items-center gap-2 mb-6">
-                <Filter className="h-5 w-5 text-gray-700" />
-                <h2 className="font-semibold text-gray-900">Filters</h2>
+                <Filter className="h-5 w-5 text-foreground/80" />
+                <h2 className="font-semibold text-foreground">Filters</h2>
               </div>
 
               {/* Search */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-foreground/80 mb-2">
                   Search
                 </label>
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground/70" />
                   <input
                     type="text"
                     placeholder="Search services..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   />
                 </div>
               </div>
 
               {/* Category Filter */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-foreground/80 mb-2">
                   Category
                 </label>
                 <div className="space-y-2">
@@ -87,8 +87,8 @@ export function ServicesPage() {
                       onClick={() => setSelectedCategory(category.id)}
                       className={`w-full text-left px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                         selectedCategory === category.id
-                          ? "bg-blue-50 text-blue-600"
-                          : "text-gray-700 hover:bg-gray-50"
+                          ? "bg-card text-cyan-500"
+                          : "text-foreground/80 hover:bg-muted/20"
                       }`}
                     >
                       {category.name}
@@ -99,7 +99,7 @@ export function ServicesPage() {
 
               {/* Price Range */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-foreground/80 mb-2">
                   Price Range
                 </label>
                 <div className="space-y-2">
@@ -114,8 +114,8 @@ export function ServicesPage() {
                       onClick={() => setPriceRange(range.id as any)}
                       className={`w-full text-left px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                         priceRange === range.id
-                          ? "bg-blue-50 text-blue-600"
-                          : "text-gray-700 hover:bg-gray-50"
+                          ? "bg-card text-cyan-500"
+                          : "text-foreground/80 hover:bg-muted/20"
                       }`}
                     >
                       {range.label}
@@ -132,7 +132,7 @@ export function ServicesPage() {
                     setSearchQuery("");
                     setPriceRange("all");
                   }}
-                  className="w-full mt-6 px-4 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  className="w-full mt-6 px-4 py-2 text-sm font-medium text-cyan-500 hover:bg-card rounded-lg transition-colors"
                 >
                   Clear Filters
                 </button>
@@ -143,8 +143,8 @@ export function ServicesPage() {
           {/* Services Grid */}
           <div className="flex-1">
             <div className="mb-6 flex items-center justify-between">
-              <p className="text-gray-600">
-                <span className="font-semibold text-gray-900">{filteredServices.length}</span>{" "}
+              <p className="text-muted-foreground">
+                <span className="font-semibold text-foreground">{filteredServices.length}</span>{" "}
                 {filteredServices.length === 1 ? "service" : "services"} found
               </p>
             </div>
@@ -153,15 +153,15 @@ export function ServicesPage() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="bg-white rounded-2xl p-12 text-center"
+                className="bg-card rounded-2xl p-12 text-center"
               >
-                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Search className="h-8 w-8 text-gray-400" />
+                <div className="w-16 h-16 bg-muted/40 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Search className="h-8 w-8 text-muted-foreground/70" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-foreground mb-2">
                   No services found
                 </h3>
-                <p className="text-gray-600 mb-6">
+                <p className="text-muted-foreground mb-6">
                   Try adjusting your filters or search query
                 </p>
                 <button
@@ -170,7 +170,7 @@ export function ServicesPage() {
                     setSearchQuery("");
                     setPriceRange("all");
                   }}
-                  className="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                  className="px-6 py-2 bg-primary text-white font-medium rounded-lg hover:bg-cyan-600 transition-colors"
                 >
                   Clear Filters
                 </button>
@@ -186,7 +186,7 @@ export function ServicesPage() {
                   >
                     <Link
                       to={`/services/${service.id}`}
-                      className="block bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-shadow group h-full"
+                      className="block bg-card rounded-2xl overflow-hidden hover:shadow-xl transition-shadow group h-full"
                     >
                       <div className="relative h-48 overflow-hidden">
                         <img
@@ -196,11 +196,11 @@ export function ServicesPage() {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                         <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-                          <div className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-gray-900 capitalize">
+                          <div className="bg-card/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-foreground capitalize">
                             {service.category}
                           </div>
                           {service.popular && (
-                            <div className="bg-yellow-400 text-gray-900 px-3 py-1 rounded-full text-xs font-semibold">
+                            <div className="bg-yellow-400 text-foreground px-3 py-1 rounded-full text-xs font-semibold">
                               Popular
                             </div>
                           )}
@@ -208,21 +208,21 @@ export function ServicesPage() {
                       </div>
 
                       <div className="p-6">
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                        <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-cyan-500 transition-colors">
                           {service.name}
                         </h3>
-                        <p className="text-gray-600 mb-4 line-clamp-2">
+                        <p className="text-muted-foreground mb-4 line-clamp-2">
                           {service.shortDescription}
                         </p>
 
-                        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <div className="flex items-center justify-between pt-4 border-t border-border">
                           <div>
-                            <div className="text-2xl font-bold text-gray-900">
+                            <div className="text-2xl font-bold text-foreground">
                               ₹{service.price.toLocaleString('en-IN')}
                             </div>
-                            <div className="text-sm text-gray-500">{service.duration}</div>
+                            <div className="text-sm text-muted-foreground">{service.duration}</div>
                           </div>
-                          <div className="flex items-center gap-2 text-blue-600 font-medium group-hover:gap-3 transition-all">
+                          <div className="flex items-center gap-2 text-cyan-500 font-medium group-hover:gap-3 transition-all">
                             View Details
                             <ArrowRight className="h-4 w-4" />
                           </div>

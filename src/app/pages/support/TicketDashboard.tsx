@@ -134,16 +134,16 @@ export function TicketDashboard() {
       case "medium":
         return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
       case "low":
-        return "bg-blue-500/20 text-blue-400 border-blue-500/30";
+        return "bg-card0/20 text-muted-foreground/80 border-blue-500/30";
       default:
-        return "bg-gray-500/20 text-gray-400 border-gray-500/30";
+        return "bg-muted/200/20 text-muted-foreground/70 border-gray-500/30";
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case "open":
-        return "bg-blue-500/20 text-blue-400";
+        return "bg-card0/20 text-muted-foreground/80";
       case "in-progress":
         return "bg-yellow-500/20 text-yellow-400";
       case "pending":
@@ -153,14 +153,14 @@ export function TicketDashboard() {
       case "resolved":
         return "bg-green-500/20 text-green-400";
       case "closed":
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-muted/200/20 text-muted-foreground/70";
       default:
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-muted/200/20 text-muted-foreground/70";
     }
   };
 
   const getSLAColor = (minutes: number) => {
-    if (minutes <= 0) return "text-green-600";
+    if (minutes <= 0) return "text-green-400";
     if (minutes <= 60) return "text-orange-600";
     return "text-red-600";
   };
@@ -179,12 +179,12 @@ export function TicketDashboard() {
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Support Tickets</h1>
-            <p className="text-gray-600">Manage customer support requests and inquiries</p>
+            <h1 className="text-3xl font-bold text-foreground mb-2">Support Tickets</h1>
+            <p className="text-muted-foreground">Manage customer support requests and inquiries</p>
           </div>
           <Link
             to="/dashboard/support/create"
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-cyan-600 transition-colors flex items-center gap-2"
           >
             <Plus className="h-4 w-4" />
             Create Ticket
@@ -202,53 +202,53 @@ export function TicketDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-2xl p-6 shadow-sm"
+              className="bg-card rounded-2xl p-6 shadow-sm"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                  stat.color === "blue" ? "bg-blue-100" :
-                  stat.color === "purple" ? "bg-purple-100" :
-                  stat.color === "green" ? "bg-green-100" :
+                  stat.color === "blue" ? "bg-cyan-500/15" :
+                  stat.color === "purple" ? "bg-orange-500/15" :
+                  stat.color === "green" ? "bg-green-500/15" :
                   "bg-orange-100"
                 }`}>
                   <Icon className={`h-6 w-6 ${
-                    stat.color === "blue" ? "text-blue-600" :
-                    stat.color === "purple" ? "text-purple-600" :
-                    stat.color === "green" ? "text-green-600" :
+                    stat.color === "blue" ? "text-cyan-500" :
+                    stat.color === "purple" ? "text-orange-400" :
+                    stat.color === "green" ? "text-green-400" :
                     "text-orange-600"
                   }`} />
                 </div>
                 <div className={`flex items-center gap-1 text-sm font-medium ${
-                  stat.trend === "up" ? "text-green-600" : "text-red-600"
+                  stat.trend === "up" ? "text-green-400" : "text-red-600"
                 }`}>
                   <TrendingUp className={`h-4 w-4 ${stat.trend === "down" ? "rotate-180" : ""}`} />
                   {stat.change}
                 </div>
               </div>
-              <div className="text-sm text-gray-600 mb-1">{stat.label}</div>
-              <div className="text-3xl font-bold text-gray-900">{stat.value}</div>
+              <div className="text-sm text-muted-foreground mb-1">{stat.label}</div>
+              <div className="text-3xl font-bold text-foreground">{stat.value}</div>
             </motion.div>
           );
         })}
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm mb-6">
+      <div className="bg-card rounded-2xl p-6 shadow-sm mb-6">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
             <input
               type="text"
               placeholder="Search tickets by ID, subject, customer..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
             />
           </div>
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white"
+            className="px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none bg-card"
           >
             <option value="all">All Statuses</option>
             <option value="open">Open</option>
@@ -261,7 +261,7 @@ export function TicketDashboard() {
           <select
             value={filterPriority}
             onChange={(e) => setFilterPriority(e.target.value)}
-            className="px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white"
+            className="px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none bg-card"
           >
             <option value="all">All Priorities</option>
             <option value="critical">Critical</option>
@@ -277,57 +277,57 @@ export function TicketDashboard() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="bg-white rounded-2xl shadow-sm overflow-hidden"
+        className="bg-card rounded-2xl shadow-sm overflow-hidden"
       >
-        <div className="p-6 border-b border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900">
+        <div className="p-6 border-b border-border">
+          <h3 className="text-lg font-semibold text-foreground">
             Tickets ({filteredTickets.length})
           </h3>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-muted/20">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Ticket ID
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Subject
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Priority
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Customer
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Assigned To
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Responses
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   SLA
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-card divide-y divide-border">
               {filteredTickets.map((ticket, index) => (
-                <tr key={index} className="hover:bg-gray-50 transition-colors">
+                <tr key={index} className="hover:bg-muted/20 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-blue-600">{ticket.id}</div>
-                    <div className="text-xs text-gray-500">{ticket.category}</div>
+                    <div className="text-sm font-medium text-cyan-500">{ticket.id}</div>
+                    <div className="text-xs text-muted-foreground">{ticket.category}</div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-sm text-gray-900 max-w-md">{ticket.subject}</div>
-                    <div className="text-xs text-gray-500">
+                    <div className="text-sm text-foreground max-w-md">{ticket.subject}</div>
+                    <div className="text-xs text-muted-foreground">
                       Updated {format(ticket.lastUpdate, "MMM d, HH:mm")}
                     </div>
                   </td>
@@ -343,17 +343,17 @@ export function TicketDashboard() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white text-xs font-medium">
+                      <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-white text-xs font-medium">
                         {ticket.customer.split(' ').map(n => n[0]).join('')}
                       </div>
-                      <div className="text-sm text-gray-900">{ticket.customer}</div>
+                      <div className="text-sm text-foreground">{ticket.customer}</div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-900">{ticket.assignedTo}</div>
+                    <div className="text-sm text-foreground">{ticket.assignedTo}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center gap-1 text-sm text-gray-600">
+                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
                       <MessageSquare className="h-4 w-4" />
                       {ticket.responses}
                     </div>
@@ -366,7 +366,7 @@ export function TicketDashboard() {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <Link
                       to={`/dashboard/support/${ticket.id}`}
-                      className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center gap-1"
+                      className="text-cyan-500 hover:text-cyan-400 font-medium text-sm flex items-center gap-1"
                     >
                       <Eye className="h-4 w-4" />
                       View

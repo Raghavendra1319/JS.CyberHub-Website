@@ -29,13 +29,13 @@ export function UserBookingsPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "confirmed":
-        return "bg-green-100 text-green-700";
+        return "bg-green-500/15 text-green-400";
       case "pending":
-        return "bg-yellow-100 text-yellow-700";
+        return "bg-cyan-500/15 text-cyan-400";
       case "cancelled":
-        return "bg-red-100 text-red-700";
+        return "bg-red-500/15 text-red-400";
       default:
-        return "bg-gray-100 text-gray-700";
+        return "bg-muted/40 text-foreground/80";
     }
   };
 
@@ -43,12 +43,12 @@ export function UserBookingsPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">My Bookings</h1>
-          <p className="text-gray-600 mt-1">Manage your upcoming appointments</p>
+          <h1 className="text-3xl font-bold text-foreground">My Bookings</h1>
+          <p className="text-muted-foreground mt-1">Manage your upcoming appointments</p>
         </div>
         <Link
           to="/services"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow"
         >
           <Plus className="h-5 w-5" />
           Book Service
@@ -59,20 +59,20 @@ export function UserBookingsPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl p-12 text-center"
+          className="bg-card rounded-2xl p-12 text-center"
         >
-          <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Calendar className="h-8 w-8 text-gray-400" />
+          <div className="w-16 h-16 bg-muted/40 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Calendar className="h-8 w-8 text-muted-foreground/70" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+          <h3 className="text-lg font-semibold text-foreground mb-2">
             No Upcoming Bookings
           </h3>
-          <p className="text-gray-600 mb-6">
+          <p className="text-muted-foreground mb-6">
             You don't have any bookings scheduled. Browse our services to get started.
           </p>
           <Link
             to="/services"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-cyan-600 transition-colors"
           >
             Browse Services
             <ExternalLink className="h-4 w-4" />
@@ -86,16 +86,16 @@ export function UserBookingsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-white rounded-2xl p-6 hover:shadow-lg transition-shadow"
+              className="bg-card rounded-2xl p-6 hover:shadow-lg transition-shadow"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
                   <div className="flex items-start justify-between">
                     <div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                      <h3 className="text-xl font-semibold text-foreground mb-2">
                         {booking.serviceName}
                       </h3>
-                      <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                         <div className="flex items-center gap-2">
                           <Calendar className="h-4 w-4" />
                           {format(booking.date, "EEEE, MMMM d, yyyy")}
@@ -111,7 +111,7 @@ export function UserBookingsPage() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-2xl font-bold text-gray-900 mb-1">
+                      <div className="text-2xl font-bold text-foreground mb-1">
                         ₹{booking.price.toLocaleString('en-IN')}
                       </div>
                       <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium capitalize ${getStatusColor(booking.status)}`}>
@@ -125,20 +125,20 @@ export function UserBookingsPage() {
               {booking.status === "pending" && (
                 <div className="flex items-start gap-3 p-4 bg-yellow-50 rounded-lg mb-4">
                   <AlertCircle className="h-5 w-5 text-yellow-600 flex-shrink-0 mt-0.5" />
-                  <div className="text-sm text-yellow-800">
+                  <div className="text-sm text-cyan-300">
                     <strong>Payment Pending:</strong> Please complete payment to confirm your booking.
                   </div>
                 </div>
               )}
 
-              <div className="flex gap-3 pt-4 border-t border-gray-100">
-                <button className="flex-1 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
+              <div className="flex gap-3 pt-4 border-t border-border">
+                <button className="flex-1 px-4 py-2 bg-primary text-white font-medium rounded-lg hover:bg-cyan-600 transition-colors">
                   View Details
                 </button>
-                <button className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors">
+                <button className="flex-1 px-4 py-2 bg-muted/40 text-foreground/80 font-medium rounded-lg hover:bg-muted transition-colors">
                   Reschedule
                 </button>
-                <button className="px-4 py-2 bg-red-50 text-red-600 font-medium rounded-lg hover:bg-red-100 transition-colors">
+                <button className="px-4 py-2 bg-red-50 text-red-600 font-medium rounded-lg hover:bg-red-500/15 transition-colors">
                   Cancel
                 </button>
               </div>

@@ -60,7 +60,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
           onClick={onClose}
         >
           <motion.div
-            className="bg-white rounded-2xl max-w-md w-full shadow-2xl overflow-hidden"
+            className="bg-card rounded-2xl max-w-md w-full shadow-2xl overflow-hidden"
             initial={{ scale: 0.9, y: 50, opacity: 0 }}
             animate={{ scale: 1, y: 0, opacity: 1 }}
             exit={{ scale: 0.9, y: 50, opacity: 0 }}
@@ -68,7 +68,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-white relative overflow-hidden">
+            <div className="bg-gradient-to-r from-cyan-400 to-blue-600 p-8 text-white relative overflow-hidden">
               <motion.div
                 className="absolute inset-0 opacity-20"
                 animate={{
@@ -88,7 +88,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
                     <motion.div
-                      className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center"
+                      className="w-12 h-12 bg-card/20 backdrop-blur-sm rounded-xl flex items-center justify-center"
                       initial={{ rotate: -180, scale: 0 }}
                       animate={{ rotate: 0, scale: 1 }}
                       transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
@@ -104,7 +104,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   </div>
                   <motion.button
                     onClick={onClose}
-                    className="w-10 h-10 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-lg flex items-center justify-center transition-colors"
+                    className="w-10 h-10 bg-card/20 backdrop-blur-sm hover:bg-card/30 rounded-lg flex items-center justify-center transition-colors"
                     whileHover={{ scale: 1.1, rotate: 90 }}
                     whileTap={{ scale: 0.9 }}
                   >
@@ -130,17 +130,17 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-foreground/80 mb-2">
                         Full Name
                       </label>
                       <div className="relative">
-                        <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                        <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
                         <input
                           type="text"
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                          className="w-full pl-11 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all outline-none"
                           placeholder="Enter your full name"
                           required={!isLogin}
                         />
@@ -150,17 +150,17 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 </AnimatePresence>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-foreground/80 mb-2">
                     Email Address
                   </label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                      className="w-full pl-11 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all outline-none"
                       placeholder="Enter your email"
                       required
                     />
@@ -175,17 +175,17 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-foreground/80 mb-2">
                         Phone Number
                       </label>
                       <div className="relative">
-                        <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                        <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
                         <input
                           type="tel"
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                          className="w-full pl-11 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all outline-none"
                           placeholder="+91 1234567890"
                           required={!isLogin}
                         />
@@ -195,24 +195,24 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 </AnimatePresence>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-foreground/80 mb-2">
                     Password
                   </label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
                     <input
                       type={showPassword ? "text" : "password"}
                       name="password"
                       value={formData.password}
                       onChange={handleChange}
-                      className="w-full pl-11 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                      className="w-full pl-11 pr-12 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all outline-none"
                       placeholder="Enter your password"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground/70 hover:text-muted-foreground transition-colors"
                     >
                       {showPassword ? (
                         <EyeOff className="h-5 w-5" />
@@ -231,17 +231,17 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-foreground/80 mb-2">
                         Confirm Password
                       </label>
                       <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
                         <input
                           type={showPassword ? "text" : "password"}
                           name="confirmPassword"
                           value={formData.confirmPassword}
                           onChange={handleChange}
-                          className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none"
+                          className="w-full pl-11 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all outline-none"
                           placeholder="Confirm your password"
                           required={!isLogin}
                         />
@@ -255,11 +255,11 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                     <label className="flex items-center gap-2 cursor-pointer">
                       <input
                         type="checkbox"
-                        className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        className="w-4 h-4 rounded border-border text-cyan-500 focus:ring-cyan-500"
                       />
-                      <span className="text-gray-600">Remember me</span>
+                      <span className="text-muted-foreground">Remember me</span>
                     </label>
-                    <a href="#" className="text-blue-600 hover:text-blue-700 font-medium">
+                    <a href="#" className="text-cyan-500 hover:text-cyan-400 font-medium">
                       Forgot password?
                     </a>
                   </div>
@@ -267,7 +267,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
                 <motion.button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+                  className="w-full bg-gradient-to-r from-cyan-400 to-blue-600 text-white py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -279,17 +279,17 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
               <div className="mt-6">
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-300"></div>
+                    <div className="w-full border-t border-border"></div>
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white text-gray-500">Or continue with</span>
+                    <span className="px-2 bg-card text-muted-foreground">Or continue with</span>
                   </div>
                 </div>
 
                 <div className="mt-6 grid grid-cols-2 gap-3">
                   <motion.button
                     type="button"
-                    className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-lg hover:bg-muted/20 transition-colors"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -311,31 +311,31 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                         d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                       />
                     </svg>
-                    <span className="text-sm font-medium text-gray-700">Google</span>
+                    <span className="text-sm font-medium text-foreground/80">Google</span>
                   </motion.button>
 
                   <motion.button
                     type="button"
-                    className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="flex items-center justify-center gap-2 px-4 py-3 border border-border rounded-lg hover:bg-muted/20 transition-colors"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <svg className="h-5 w-5" fill="#1877F2" viewBox="0 0 24 24">
                       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                     </svg>
-                    <span className="text-sm font-medium text-gray-700">Facebook</span>
+                    <span className="text-sm font-medium text-foreground/80">Facebook</span>
                   </motion.button>
                 </div>
               </div>
 
               {/* Toggle between Login/Signup */}
               <div className="mt-6 text-center">
-                <p className="text-gray-600">
+                <p className="text-muted-foreground">
                   {isLogin ? "Don't have an account? " : "Already have an account? "}
                   <button
                     type="button"
                     onClick={toggleMode}
-                    className="text-blue-600 hover:text-blue-700 font-semibold"
+                    className="text-cyan-500 hover:text-cyan-400 font-semibold"
                   >
                     {isLogin ? "Sign Up" : "Sign In"}
                   </button>

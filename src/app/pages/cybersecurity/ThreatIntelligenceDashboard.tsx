@@ -282,7 +282,7 @@ function getSeverityConfig(severity: string) {
     case "critical": return { bg: "bg-red-500/15", text: "text-red-400", border: "border-red-500/30", dot: "bg-red-500" };
     case "high": return { bg: "bg-orange-500/15", text: "text-orange-400", border: "border-orange-500/30", dot: "bg-orange-500" };
     case "medium": return { bg: "bg-yellow-500/15", text: "text-yellow-400", border: "border-yellow-500/30", dot: "bg-yellow-500" };
-    default: return { bg: "bg-blue-500/15", text: "text-blue-400", border: "border-blue-500/30", dot: "bg-blue-500" };
+    default: return { bg: "bg-card0/15", text: "text-muted-foreground/80", border: "border-blue-500/30", dot: "bg-card0" };
   }
 }
 
@@ -307,7 +307,7 @@ function getIOCIcon(type: IOCType) {
 
 function getIOCColor(type: IOCType) {
   switch (type) {
-    case "ip": return "text-blue-400 bg-blue-500/10 border-blue-500/20";
+    case "ip": return "text-muted-foreground/80 bg-card0/10 border-blue-500/20";
     case "domain": return "text-orange-400 bg-orange-500/10 border-orange-500/20";
     case "hash": return "text-purple-400 bg-purple-500/10 border-purple-500/20";
     case "url": return "text-yellow-400 bg-yellow-500/10 border-yellow-500/20";
@@ -411,14 +411,14 @@ export function ThreatIntelligenceDashboard() {
     red: "text-red-400",
     orange: "text-orange-400",
     purple: "text-purple-400",
-    blue: "text-blue-400",
+    blue: "text-muted-foreground/80",
     green: "text-green-400",
   };
   const bgMap: Record<string, string> = {
     red: "bg-red-500/10 border-red-500/20",
     orange: "bg-orange-500/10 border-orange-500/20",
     purple: "bg-purple-500/10 border-purple-500/20",
-    blue: "bg-blue-500/10 border-blue-500/20",
+    blue: "bg-card0/10 border-blue-500/20",
     green: "bg-green-500/10 border-green-500/20",
   };
 
@@ -930,7 +930,7 @@ export function ThreatIntelligenceDashboard() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
                       <span className="text-sm font-medium text-foreground">{feed.name}</span>
-                      <span className={`px-1.5 py-0.5 rounded text-[10px] ${feed.type === "Commercial" ? "bg-purple-500/10 text-purple-400 border border-purple-500/20" : "bg-blue-500/10 text-blue-400 border border-blue-500/20"}`}>
+                      <span className={`px-1.5 py-0.5 rounded text-[10px] ${feed.type === "Commercial" ? "bg-purple-500/10 text-purple-400 border border-purple-500/20" : "bg-card0/10 text-muted-foreground/80 border border-blue-500/20"}`}>
                         {feed.type}
                       </span>
                     </div>

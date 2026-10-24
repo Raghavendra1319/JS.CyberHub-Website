@@ -85,8 +85,8 @@ export function UserReviewsPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">My Reviews</h1>
-        <p className="text-gray-600 mt-1">Share your experience and help others make informed decisions</p>
+        <h1 className="text-3xl font-bold text-foreground">My Reviews</h1>
+        <p className="text-muted-foreground mt-1">Share your experience and help others make informed decisions</p>
       </div>
 
       {/* Stats Cards */}
@@ -94,39 +94,39 @@ export function UserReviewsPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl p-6 shadow-lg"
+          className="bg-card rounded-2xl p-6 shadow-lg"
         >
           <div className="flex items-center justify-between mb-2">
-            <MessageSquare className="h-8 w-8 text-blue-600" />
+            <MessageSquare className="h-8 w-8 text-cyan-500" />
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-1">{stats.totalReviews}</div>
-          <div className="text-gray-600">Total Reviews</div>
+          <div className="text-3xl font-bold text-foreground mb-1">{stats.totalReviews}</div>
+          <div className="text-muted-foreground">Total Reviews</div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl p-6 shadow-lg"
+          className="bg-card rounded-2xl p-6 shadow-lg"
         >
           <div className="flex items-center justify-between mb-2">
             <Star className="h-8 w-8 text-yellow-400 fill-current" />
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-1">{stats.averageRating}</div>
-          <div className="text-gray-600">Average Rating</div>
+          <div className="text-3xl font-bold text-foreground mb-1">{stats.averageRating}</div>
+          <div className="text-muted-foreground">Average Rating</div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white rounded-2xl p-6 shadow-lg"
+          className="bg-card rounded-2xl p-6 shadow-lg"
         >
           <div className="flex items-center justify-between mb-2">
-            <ThumbsUp className="h-8 w-8 text-green-600" />
+            <ThumbsUp className="h-8 w-8 text-green-400" />
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-1">{stats.helpful}</div>
-          <div className="text-gray-600">Helpful Votes</div>
+          <div className="text-3xl font-bold text-foreground mb-1">{stats.helpful}</div>
+          <div className="text-muted-foreground">Helpful Votes</div>
         </motion.div>
       </div>
 
@@ -138,7 +138,7 @@ export function UserReviewsPage() {
           transition={{ delay: 0.3 }}
           className="bg-yellow-50 border border-yellow-200 rounded-2xl p-6 mb-6"
         >
-          <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
             <MessageSquare className="h-5 w-5 text-yellow-600" />
             Pending Reviews
           </h3>
@@ -146,17 +146,17 @@ export function UserReviewsPage() {
             {pendingReviews.map((booking) => (
               <div
                 key={booking.bookingId}
-                className="bg-white rounded-xl p-4 flex items-center justify-between"
+                className="bg-card rounded-xl p-4 flex items-center justify-between"
               >
                 <div>
-                  <div className="font-semibold text-gray-900">{booking.serviceName}</div>
-                  <div className="text-sm text-gray-600">
+                  <div className="font-semibold text-foreground">{booking.serviceName}</div>
+                  <div className="text-sm text-muted-foreground">
                     Completed on {format(booking.completedDate, "MMM d, yyyy")}
                   </div>
                 </div>
                 <button
                   onClick={() => setIsWritingReview(true)}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                  className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-cyan-600 transition-colors font-medium"
                 >
                   Write Review
                 </button>
@@ -171,12 +171,12 @@ export function UserReviewsPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl p-6 shadow-lg mb-6"
+          className="bg-card rounded-2xl p-6 shadow-lg mb-6"
         >
-          <h3 className="text-xl font-bold text-gray-900 mb-4">Write Your Review</h3>
+          <h3 className="text-xl font-bold text-foreground mb-4">Write Your Review</h3>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-foreground/80 mb-2">
               Rating
             </label>
             <div className="flex gap-2">
@@ -199,7 +199,7 @@ export function UserReviewsPage() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-foreground/80 mb-2">
               Your Review
             </label>
             <textarea
@@ -207,7 +207,7 @@ export function UserReviewsPage() {
               onChange={(e) => setNewReview((prev) => ({ ...prev, comment: e.target.value }))}
               rows={5}
               placeholder="Share your experience with this service..."
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
             />
           </div>
 
@@ -217,13 +217,13 @@ export function UserReviewsPage() {
                 setIsWritingReview(false);
                 setNewReview({ rating: 5, comment: "" });
               }}
-              className="flex-1 px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+              className="flex-1 px-6 py-3 bg-muted/40 text-foreground/80 rounded-lg hover:bg-muted transition-colors font-medium"
             >
               Cancel
             </button>
             <button
               onClick={handleSubmitReview}
-              className="flex-1 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:shadow-lg transition-shadow font-medium"
+              className="flex-1 px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-600 text-white rounded-lg hover:shadow-lg transition-shadow font-medium"
             >
               Submit Review
             </button>
@@ -233,7 +233,7 @@ export function UserReviewsPage() {
 
       {/* My Reviews */}
       <div className="space-y-4">
-        <h3 className="text-xl font-bold text-gray-900">My Reviews</h3>
+        <h3 className="text-xl font-bold text-foreground">My Reviews</h3>
 
         {myReviews.map((review, index) => (
           <motion.div
@@ -241,15 +241,15 @@ export function UserReviewsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 + index * 0.1 }}
-            className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+            className="bg-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <h4 className="font-semibold text-lg text-gray-900">
+                  <h4 className="font-semibold text-lg text-foreground">
                     {review.serviceName}
                   </h4>
-                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                  <span className="text-xs text-muted-foreground bg-muted/40 px-2 py-1 rounded">
                     {review.bookingId}
                   </span>
                 </div>
@@ -267,19 +267,19 @@ export function UserReviewsPage() {
                       />
                     ))}
                   </div>
-                  <span className="text-sm text-gray-600">
+                  <span className="text-sm text-muted-foreground">
                     {review.rating}/5
                   </span>
                 </div>
 
-                <p className="text-gray-700 leading-relaxed mb-3">{review.comment}</p>
+                <p className="text-foreground/80 leading-relaxed mb-3">{review.comment}</p>
 
                 <div className="flex items-center gap-4 text-sm">
-                  <div className="flex items-center gap-2 text-gray-600">
+                  <div className="flex items-center gap-2 text-muted-foreground">
                     <Calendar className="h-4 w-4" />
                     {format(review.date, "MMM d, yyyy")}
                   </div>
-                  <div className="flex items-center gap-2 text-green-600">
+                  <div className="flex items-center gap-2 text-green-400">
                     <ThumbsUp className="h-4 w-4" />
                     {review.helpful} people found this helpful
                   </div>
@@ -288,7 +288,7 @@ export function UserReviewsPage() {
 
               <div className="flex gap-2">
                 <button
-                  className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="p-2 text-muted-foreground hover:bg-muted/40 rounded-lg transition-colors"
                   title="Edit review"
                 >
                   <Edit2 className="h-5 w-5" />
@@ -311,24 +311,24 @@ export function UserReviewsPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
-        className="mt-8 bg-blue-50 border border-blue-200 rounded-2xl p-6"
+        className="mt-8 bg-card border border-blue-200 rounded-2xl p-6"
       >
-        <h4 className="font-bold text-gray-900 mb-3">Review Guidelines</h4>
-        <ul className="space-y-2 text-sm text-gray-700">
+        <h4 className="font-bold text-foreground mb-3">Review Guidelines</h4>
+        <ul className="space-y-2 text-sm text-foreground/80">
           <li className="flex items-start gap-2">
-            <span className="text-blue-600">•</span>
+            <span className="text-cyan-500">•</span>
             <span>Be honest and detailed about your experience</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-blue-600">•</span>
+            <span className="text-cyan-500">•</span>
             <span>Focus on the service quality and professionalism</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-blue-600">•</span>
+            <span className="text-cyan-500">•</span>
             <span>Avoid personal information or offensive language</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-blue-600">•</span>
+            <span className="text-cyan-500">•</span>
             <span>Your review helps others make informed decisions</span>
           </li>
         </ul>

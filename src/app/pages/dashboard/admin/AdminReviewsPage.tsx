@@ -131,8 +131,8 @@ export function AdminReviewsPage() {
     <div>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Reviews Management</h1>
-        <p className="text-gray-600 mt-1">Monitor and moderate customer reviews</p>
+        <h1 className="text-3xl font-bold text-foreground">Reviews Management</h1>
+        <p className="text-muted-foreground mt-1">Monitor and moderate customer reviews</p>
       </div>
 
       {/* Stats Cards */}
@@ -140,83 +140,83 @@ export function AdminReviewsPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl p-6 shadow-lg"
+          className="bg-card rounded-2xl p-6 shadow-lg"
         >
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-              <MessageSquare className="h-6 w-6 text-blue-600" />
+            <div className="w-12 h-12 bg-cyan-500/15 rounded-xl flex items-center justify-center">
+              <MessageSquare className="h-6 w-6 text-cyan-500" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-1">{stats.total}</div>
-          <div className="text-gray-600">Total Reviews</div>
+          <div className="text-3xl font-bold text-foreground mb-1">{stats.total}</div>
+          <div className="text-muted-foreground">Total Reviews</div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl p-6 shadow-lg"
+          className="bg-card rounded-2xl p-6 shadow-lg"
         >
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-              <Eye className="h-6 w-6 text-green-600" />
+            <div className="w-12 h-12 bg-green-500/15 rounded-xl flex items-center justify-center">
+              <Eye className="h-6 w-6 text-green-400" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-1">{stats.published}</div>
-          <div className="text-gray-600">Published</div>
+          <div className="text-3xl font-bold text-foreground mb-1">{stats.published}</div>
+          <div className="text-muted-foreground">Published</div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white rounded-2xl p-6 shadow-lg"
+          className="bg-card rounded-2xl p-6 shadow-lg"
         >
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center">
+            <div className="w-12 h-12 bg-cyan-500/15 rounded-xl flex items-center justify-center">
               <MessageSquare className="h-6 w-6 text-yellow-600" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-1">{stats.pending}</div>
-          <div className="text-gray-600">Pending Approval</div>
+          <div className="text-3xl font-bold text-foreground mb-1">{stats.pending}</div>
+          <div className="text-muted-foreground">Pending Approval</div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white rounded-2xl p-6 shadow-lg"
+          className="bg-card rounded-2xl p-6 shadow-lg"
         >
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+            <div className="w-12 h-12 bg-orange-500/15 rounded-xl flex items-center justify-center">
               <Star className="h-6 w-6 text-yellow-500 fill-yellow-500" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-1">{stats.averageRating}</div>
-          <div className="text-gray-600">Average Rating</div>
+          <div className="text-3xl font-bold text-foreground mb-1">{stats.averageRating}</div>
+          <div className="text-muted-foreground">Average Rating</div>
         </motion.div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl p-4 shadow-md mb-6">
+      <div className="bg-card rounded-xl p-4 shadow-md mb-6">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
             <input
               type="text"
               placeholder="Search reviews by customer, service, or content..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="w-full pl-11 pr-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
             />
           </div>
 
           <div className="flex items-center gap-2">
-            <Filter className="h-5 w-5 text-gray-600" />
+            <Filter className="h-5 w-5 text-muted-foreground" />
             <select
               value={filterRating}
               onChange={(e) => setFilterRating(e.target.value)}
-              className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="px-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
             >
               <option value="all">All Ratings</option>
               <option value="5">5 Stars</option>
@@ -228,7 +228,7 @@ export function AdminReviewsPage() {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="px-4 py-2.5 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
             >
               <option value="all">All Status</option>
               <option value="published">Published</option>
@@ -247,32 +247,32 @@ export function AdminReviewsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
-            className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+            className="bg-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-start gap-4 flex-1">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
                   {review.userName.charAt(0)}
                 </div>
 
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <h4 className="font-semibold text-gray-900">{review.userName}</h4>
-                    <span className="text-sm text-gray-500">{review.userEmail}</span>
+                    <h4 className="font-semibold text-foreground">{review.userName}</h4>
+                    <span className="text-sm text-muted-foreground">{review.userEmail}</span>
                     <span
                       className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                         review.status === "published"
-                          ? "bg-green-100 text-green-700"
+                          ? "bg-green-500/15 text-green-400"
                           : review.status === "pending"
-                          ? "bg-yellow-100 text-yellow-700"
-                          : "bg-gray-100 text-gray-700"
+                          ? "bg-cyan-500/15 text-cyan-400"
+                          : "bg-muted/40 text-foreground/80"
                       }`}
                     >
                       {review.status.charAt(0).toUpperCase() + review.status.slice(1)}
                     </span>
                   </div>
 
-                  <div className="text-sm text-gray-600 mb-3">
+                  <div className="text-sm text-muted-foreground mb-3">
                     <span className="font-medium">{review.serviceName}</span>
                     <span className="mx-2">•</span>
                     <span>Booking {review.bookingId}</span>
@@ -291,19 +291,19 @@ export function AdminReviewsPage() {
                         />
                       ))}
                     </div>
-                    <span className="text-sm text-gray-600">
+                    <span className="text-sm text-muted-foreground">
                       {review.rating}/5
                     </span>
                   </div>
 
-                  <p className="text-gray-700 leading-relaxed mb-3">{review.comment}</p>
+                  <p className="text-foreground/80 leading-relaxed mb-3">{review.comment}</p>
 
                   <div className="flex items-center gap-4 text-sm">
-                    <div className="flex items-center gap-2 text-gray-600">
+                    <div className="flex items-center gap-2 text-muted-foreground">
                       <ThumbsUp className="h-4 w-4" />
                       {review.helpful} helpful
                     </div>
-                    <div className="text-gray-500">
+                    <div className="text-muted-foreground">
                       {format(review.date, "MMM d, yyyy")}
                     </div>
                   </div>
@@ -321,7 +321,7 @@ export function AdminReviewsPage() {
                 )}
                 <button
                   onClick={() => handleToggleVisibility(review.id, review.status)}
-                  className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="p-2 text-muted-foreground hover:bg-muted/40 rounded-lg transition-colors"
                   title={review.status === "published" ? "Hide review" : "Show review"}
                 >
                   {review.status === "published" ? (

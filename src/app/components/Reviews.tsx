@@ -79,7 +79,7 @@ export function Reviews() {
     <section id="reviews" className="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden" ref={ref}>
       {/* Background decorative elements */}
       <motion.div 
-        className="absolute top-1/4 left-0 w-96 h-96 bg-indigo-100 rounded-full blur-3xl opacity-40"
+        className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl opacity-40"
         animate={{
           scale: [1, 1.3, 1],
           x: [0, 50, 0],
@@ -92,7 +92,7 @@ export function Reviews() {
         }}
       ></motion.div>
       <motion.div 
-        className="absolute bottom-1/4 right-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-40"
+        className="absolute bottom-1/4 right-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl opacity-40"
         animate={{
           scale: [1, 1.2, 1],
           x: [0, -50, 0],
@@ -108,19 +108,19 @@ export function Reviews() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Live Reviews Ticker */}
         <motion.div 
-          className="mb-12 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-1 overflow-hidden shadow-lg"
+          className="mb-12 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-2xl p-1 overflow-hidden shadow-lg"
           initial={{ opacity: 0, y: -20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="bg-white rounded-xl p-4 flex items-center gap-4">
+          <div className="bg-card rounded-xl p-4 flex items-center gap-4">
             <div className="flex items-center gap-2 flex-shrink-0">
               <motion.div 
                 className="w-3 h-3 bg-green-500 rounded-full"
                 animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
-              <span className="font-semibold text-gray-900">Live Reviews</span>
+              <span className="font-semibold text-foreground">Live Reviews</span>
             </div>
             <div className="overflow-hidden flex-1">
               <motion.div
@@ -131,7 +131,7 @@ export function Reviews() {
                 {[...reviews, ...reviews].map((review, idx) => (
                   <div key={idx} className="flex items-center gap-2 flex-shrink-0">
                     <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                    <span className="text-gray-700 text-sm">
+                    <span className="text-foreground/80 text-sm">
                       <strong>{review.name}</strong> from {review.company}
                     </span>
                   </div>
@@ -152,7 +152,7 @@ export function Reviews() {
           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8 md:p-12 relative overflow-hidden border border-blue-100">
+          <div className="bg-gradient-to-br from-card to-muted rounded-3xl p-8 md:p-12 relative overflow-hidden border border-border">
             <motion.div 
               className="absolute top-0 right-0 w-64 h-64 bg-blue-200 rounded-full blur-3xl opacity-30"
               animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
@@ -184,7 +184,7 @@ export function Reviews() {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <p className="text-xl md:text-2xl text-gray-800 leading-relaxed mb-8 italic">
+                  <p className="text-xl md:text-2xl text-foreground leading-relaxed mb-8 italic">
                     "{reviews[currentReviewIndex].text}"
                   </p>
 
@@ -197,8 +197,8 @@ export function Reviews() {
                       />
                     </div>
                     <div>
-                      <h4 className="font-bold text-gray-900 text-lg">{reviews[currentReviewIndex].name}</h4>
-                      <p className="text-gray-600">{reviews[currentReviewIndex].role}, {reviews[currentReviewIndex].company}</p>
+                      <h4 className="font-bold text-foreground text-lg">{reviews[currentReviewIndex].name}</h4>
+                      <p className="text-muted-foreground">{reviews[currentReviewIndex].role}, {reviews[currentReviewIndex].company}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -215,7 +215,7 @@ export function Reviews() {
                     <motion.div
                       className={`h-2 rounded-full transition-all ${
                         index === currentReviewIndex 
-                          ? 'bg-blue-600 w-8' 
+                          ? 'bg-primary w-8' 
                           : 'bg-blue-300 w-2 hover:bg-blue-400'
                       }`}
                       whileHover={{ scale: 1.2 }}
@@ -230,7 +230,7 @@ export function Reviews() {
         {/* Header */}
         <div className="text-center mb-16">
           <motion.div
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-4"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-400/10 to-blue-600/10 text-cyan-400 px-4 py-2 rounded-full text-sm font-medium mb-4"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.5 }}
@@ -240,16 +240,16 @@ export function Reviews() {
           </motion.div>
           
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
+            className="text-4xl md:text-5xl font-bold text-foreground mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            What Our <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Clients Say</span>
+            What Our <span className="bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">Clients Say</span>
           </motion.h2>
           
           <motion.p 
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
+            className="text-lg text-muted-foreground max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -263,7 +263,7 @@ export function Reviews() {
           {reviews.map((review, index) => (
             <motion.div
               key={index}
-              className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow relative group"
+              className="bg-card rounded-2xl p-8 shadow-lg border border-border hover:shadow-2xl transition-shadow relative group"
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.6, delay: 0.1 * index }}
@@ -271,7 +271,7 @@ export function Reviews() {
             >
               {/* Quote icon */}
               <motion.div 
-                className="absolute top-6 right-6 text-blue-100 group-hover:text-blue-200 transition-colors"
+                className="absolute top-6 right-6 text-cyan-100/70 group-hover:text-foreground/70 transition-colors"
                 whileHover={{ rotate: 180, scale: 1.2 }}
                 transition={{ duration: 0.3 }}
               >
@@ -293,12 +293,12 @@ export function Reviews() {
               </div>
 
               {/* Review text */}
-              <p className="text-gray-700 leading-relaxed mb-6 relative z-10">
+              <p className="text-foreground/80 leading-relaxed mb-6 relative z-10">
                 "{review.text}"
               </p>
 
               {/* Client info */}
-              <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
+              <div className="flex items-center gap-4 pt-6 border-t border-border">
                 <motion.div 
                   className="relative"
                   whileHover={{ scale: 1.1 }}
@@ -318,8 +318,8 @@ export function Reviews() {
                   ></motion.div>
                 </motion.div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">{review.name}</h4>
-                  <p className="text-sm text-gray-600">{review.role}, {review.company}</p>
+                  <h4 className="font-semibold text-foreground">{review.name}</h4>
+                  <p className="text-sm text-muted-foreground">{review.role}, {review.company}</p>
                 </div>
               </div>
             </motion.div>
@@ -341,7 +341,7 @@ export function Reviews() {
           ].map((stat, index) => (
             <motion.div 
               key={index}
-              className="text-center p-6 bg-white rounded-xl shadow-md border border-gray-100"
+              className="text-center p-6 bg-card rounded-xl shadow-md border border-border"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.4, delay: 0.9 + index * 0.1 }}
@@ -355,7 +355,7 @@ export function Reviews() {
               >
                 {stat.value}
               </motion.div>
-              <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
+              <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>

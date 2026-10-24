@@ -73,31 +73,31 @@ export function BookingPaymentPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-muted/20">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-card border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <Link
             to={`/booking/summary/${serviceId}`}
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-4"
           >
             <ArrowLeft className="h-4 w-4" />
             Back
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900">Secure Payment</h1>
-          <p className="text-gray-600 mt-1">Complete your booking by making a secure payment</p>
+          <h1 className="text-2xl font-bold text-foreground">Secure Payment</h1>
+          <p className="text-muted-foreground mt-1">Complete your booking by making a secure payment</p>
         </div>
       </div>
 
       {/* Progress */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-card border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-2">
             {["Select Service", "Date & Time", "Your Details", "Payment"].map((step, index) => (
               <div key={index} className="flex items-center gap-2">
-                <div className={`flex items-center gap-2 ${index <= 3 ? "text-blue-600" : "text-gray-400"}`}>
+                <div className={`flex items-center gap-2 ${index <= 3 ? "text-cyan-500" : "text-muted-foreground/70"}`}>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                    index < 3 ? "bg-green-600 text-white" : index === 3 ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-600"
+                    index < 3 ? "bg-green-600 text-white" : index === 3 ? "bg-primary text-white" : "bg-muted text-muted-foreground"
                   }`}>
                     {index < 3 ? <CheckCircle className="h-5 w-5" /> : index + 1}
                   </div>
@@ -121,10 +121,10 @@ export function BookingPaymentPage() {
               className="bg-green-50 border border-green-200 rounded-xl p-4"
             >
               <div className="flex items-center gap-3">
-                <Shield className="h-6 w-6 text-green-600" />
+                <Shield className="h-6 w-6 text-green-400" />
                 <div>
                   <div className="font-semibold text-green-900">Secure Payment</div>
-                  <div className="text-sm text-green-700">
+                  <div className="text-sm text-green-400">
                     Your payment information is encrypted and secure
                   </div>
                 </div>
@@ -136,9 +136,9 @@ export function BookingPaymentPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-white rounded-2xl p-6 shadow-lg"
+              className="bg-card rounded-2xl p-6 shadow-lg"
             >
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Select Payment Method</h2>
+              <h2 className="text-xl font-bold text-foreground mb-4">Select Payment Method</h2>
               
               <div className="grid grid-cols-2 gap-3">
                 {paymentMethods.map((method) => (
@@ -147,15 +147,15 @@ export function BookingPaymentPage() {
                     onClick={() => setSelectedMethod(method.id)}
                     className={`p-4 rounded-xl border-2 transition-all text-left ${
                       selectedMethod === method.id
-                        ? "border-blue-600 bg-blue-50"
-                        : "border-gray-200 hover:border-gray-300"
+                        ? "border-blue-600 bg-card"
+                        : "border-border hover:border-border"
                     }`}
                   >
                     <method.icon className={`h-6 w-6 mb-2 ${
-                      selectedMethod === method.id ? "text-blue-600" : "text-gray-600"
+                      selectedMethod === method.id ? "text-cyan-500" : "text-muted-foreground"
                     }`} />
-                    <div className="font-semibold text-gray-900 text-sm mb-1">{method.name}</div>
-                    <div className="text-xs text-gray-500">{method.description}</div>
+                    <div className="font-semibold text-foreground text-sm mb-1">{method.name}</div>
+                    <div className="text-xs text-muted-foreground">{method.description}</div>
                   </button>
                 ))}
               </div>
@@ -166,31 +166,31 @@ export function BookingPaymentPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-white rounded-2xl p-6 shadow-lg"
+              className="bg-card rounded-2xl p-6 shadow-lg"
             >
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Payment Details</h2>
+              <h2 className="text-xl font-bold text-foreground mb-4">Payment Details</h2>
 
               {selectedMethod === "card" && (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-foreground/80 mb-2">
                       Card Number
                     </label>
                     <div className="relative">
-                      <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                      <CreditCard className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
                       <input
                         type="text"
                         name="number"
                         value={cardData.number}
                         onChange={handleCardChange}
                         placeholder="1234 5678 9012 3456"
-                        className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                        className="w-full pl-11 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-foreground/80 mb-2">
                       Cardholder Name
                     </label>
                     <input
@@ -199,13 +199,13 @@ export function BookingPaymentPage() {
                       value={cardData.name}
                       onChange={handleCardChange}
                       placeholder="JOHN DOE"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none uppercase"
+                      className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none uppercase"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-foreground/80 mb-2">
                         Expiry Date
                       </label>
                       <input
@@ -214,22 +214,22 @@ export function BookingPaymentPage() {
                         value={cardData.expiry}
                         onChange={handleCardChange}
                         placeholder="MM/YY"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                        className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-foreground/80 mb-2">
                         CVV
                       </label>
                       <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
                         <input
                           type="password"
                           name="cvv"
                           value={cardData.cvv}
                           onChange={handleCardChange}
                           placeholder="123"
-                          className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                          className="w-full pl-11 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                         />
                       </div>
                     </div>
@@ -239,18 +239,18 @@ export function BookingPaymentPage() {
 
               {selectedMethod === "upi" && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-foreground/80 mb-2">
                     UPI ID
                   </label>
                   <div className="relative">
-                    <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
                     <input
                       type="text"
                       placeholder="yourname@upi"
-                      className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                      className="w-full pl-11 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none"
                     />
                   </div>
-                  <p className="text-sm text-gray-500 mt-2">
+                  <p className="text-sm text-muted-foreground mt-2">
                     Enter your UPI ID to receive a payment request
                   </p>
                 </div>
@@ -258,10 +258,10 @@ export function BookingPaymentPage() {
 
               {selectedMethod === "netbanking" && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-foreground/80 mb-2">
                     Select Your Bank
                   </label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none">
+                  <select className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent outline-none">
                     <option value="">Choose your bank</option>
                     <option value="sbi">State Bank of India</option>
                     <option value="hdfc">HDFC Bank</option>
@@ -275,14 +275,14 @@ export function BookingPaymentPage() {
 
               {selectedMethod === "wallet" && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-foreground/80 mb-2">
                     Select Wallet
                   </label>
                   <div className="space-y-2">
                     {["Paytm", "Amazon Pay", "PhonePe Wallet", "Google Pay"].map((wallet) => (
                       <button
                         key={wallet}
-                        className="w-full p-3 border border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left"
+                        className="w-full p-3 border border-border rounded-lg hover:border-blue-500 hover:bg-card transition-all text-left"
                       >
                         {wallet}
                       </button>
@@ -298,33 +298,33 @@ export function BookingPaymentPage() {
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="bg-white rounded-2xl p-6 shadow-lg sticky top-24"
+              className="bg-card rounded-2xl p-6 shadow-lg sticky top-24"
             >
-              <h3 className="font-semibold text-gray-900 mb-4">Order Summary</h3>
+              <h3 className="font-semibold text-foreground mb-4">Order Summary</h3>
               
               <div className="space-y-3 mb-6">
-                <div className="p-3 bg-gray-50 rounded-lg">
-                  <div className="font-medium text-gray-900 mb-1">{service.name}</div>
-                  <div className="text-sm text-gray-600">
+                <div className="p-3 bg-muted/20 rounded-lg">
+                  <div className="font-medium text-foreground mb-1">{service.name}</div>
+                  <div className="text-sm text-muted-foreground">
                     {format(bookingData.date!, "MMM d, yyyy")} at {bookingData.timeSlot}
                   </div>
                 </div>
 
-                <div className="space-y-2 py-3 border-t border-gray-200">
+                <div className="space-y-2 py-3 border-t border-border">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Service Price</span>
-                    <span className="text-gray-900">₹{service.price}</span>
+                    <span className="text-muted-foreground">Service Price</span>
+                    <span className="text-foreground">₹{service.price}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">GST (18%)</span>
-                    <span className="text-gray-900">₹{Math.round(service.price * 0.18)}</span>
+                    <span className="text-muted-foreground">GST (18%)</span>
+                    <span className="text-foreground">₹{Math.round(service.price * 0.18)}</span>
                   </div>
                 </div>
 
-                <div className="pt-3 border-t-2 border-gray-300">
+                <div className="pt-3 border-t-2 border-border">
                   <div className="flex justify-between items-center">
-                    <span className="text-lg font-semibold text-gray-900">Total</span>
-                    <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    <span className="text-lg font-semibold text-foreground">Total</span>
+                    <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
                       ₹{totalAmount}
                     </span>
                   </div>
@@ -334,7 +334,7 @@ export function BookingPaymentPage() {
               <button
                 onClick={handlePayment}
                 disabled={isProcessing}
-                className="w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full px-6 py-4 bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-medium rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isProcessing ? (
                   <>
@@ -349,7 +349,7 @@ export function BookingPaymentPage() {
                 )}
               </button>
 
-              <div className="mt-4 flex items-center justify-center gap-2 text-xs text-gray-500">
+              <div className="mt-4 flex items-center justify-center gap-2 text-xs text-muted-foreground">
                 <Lock className="h-3 w-3" />
                 <span>Secured by 256-bit SSL encryption</span>
               </div>

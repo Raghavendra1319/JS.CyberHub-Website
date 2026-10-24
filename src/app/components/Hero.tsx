@@ -12,10 +12,10 @@ export function Hero() {
   };
 
   return (
-    <section id="hero" className="pt-20 min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-hidden">
+    <section id="hero" className="pt-20 min-h-screen flex items-center bg-gradient-to-br from-background via-card to-muted relative overflow-hidden">
       {/* Background decorative elements */}
       <motion.div 
-        className="absolute top-20 right-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-30"
+        className="absolute top-20 right-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl opacity-30"
         animate={{
           scale: [1, 1.2, 1],
           x: [0, 50, 0],
@@ -28,7 +28,7 @@ export function Hero() {
         }}
       ></motion.div>
       <motion.div 
-        className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-100 rounded-full blur-3xl opacity-30"
+        className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl opacity-30"
         animate={{
           scale: [1, 1.3, 1],
           x: [0, -50, 0],
@@ -45,7 +45,7 @@ export function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <motion.div 
-              className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium"
+              className="inline-flex items-center gap-2 bg-cyan-500/15 text-cyan-400 px-4 py-2 rounded-full text-sm font-medium border border-cyan-500/25"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -55,17 +55,17 @@ export function Hero() {
             </motion.div>
             
             <motion.h1 
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               Secure Your Business & 
-              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"> Drive Growth</span>
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent"> Drive Growth</span>
             </motion.h1>
             
             <motion.p 
-              className="text-xl md:text-2xl text-gray-600 leading-relaxed"
+              className="text-xl md:text-2xl text-muted-foreground leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -74,7 +74,7 @@ export function Hero() {
             </motion.p>
 
             <motion.div 
-              className="flex flex-wrap gap-6 text-gray-700"
+              className="flex flex-wrap gap-6 text-foreground/80"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
@@ -91,7 +91,7 @@ export function Hero() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
                 >
-                  <CheckCircle className="h-5 w-5 text-green-600" />
+                  <CheckCircle className="h-5 w-5 text-green-400" />
                   <span className="font-medium">{item}</span>
                 </motion.div>
               ))}
@@ -114,7 +114,7 @@ export function Hero() {
 
             {/* Trust indicators */}
             <motion.div 
-              className="flex flex-wrap gap-8 pt-4 border-t border-gray-200"
+              className="flex flex-wrap gap-8 pt-4 border-t border-border"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.1 }}
@@ -124,12 +124,12 @@ export function Hero() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <Shield className="h-6 w-6 text-blue-600" />
+                <div className="w-12 h-12 bg-cyan-500/15 rounded-full flex items-center justify-center">
+                  <Shield className="h-6 w-6 text-cyan-500" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-gray-900">100%</div>
-                  <div className="text-sm text-gray-600">Secure Solutions</div>
+                  <div className="text-2xl font-bold text-foreground">100%</div>
+                  <div className="text-sm text-muted-foreground">Secure Solutions</div>
                 </div>
               </motion.div>
               <motion.div 
@@ -137,12 +137,12 @@ export function Hero() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                  <Award className="h-6 w-6 text-green-600" />
+                <div className="w-12 h-12 bg-green-500/15 rounded-full flex items-center justify-center border border-green-500/20">
+                  <Award className="h-6 w-6 text-green-400" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-gray-900">Expert</div>
-                  <div className="text-sm text-gray-600">Certified Team</div>
+                  <div className="text-2xl font-bold text-foreground">Expert</div>
+                  <div className="text-sm text-muted-foreground">Certified Team</div>
                 </div>
               </motion.div>
             </motion.div>
@@ -154,15 +154,15 @@ export function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl opacity-10 blur-2xl"></div>
+            <div className="absolute -inset-4 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-2xl opacity-10 blur-2xl"></div>
             <ImageWithFallback
               src="https://images.unsplash.com/photo-1581093805071-a04e696db334?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMHRlYW18ZW58MXx8fHwxNzY3NzY0NDQ2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
               alt="Professional business team"
-              className="rounded-2xl shadow-2xl w-full h-auto relative z-10 border border-gray-200"
+              className="rounded-2xl shadow-2xl w-full h-auto relative z-10 border border-border"
             />
             {/* Floating card */}
             <motion.div 
-              className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-xl p-6 border border-gray-100 hidden lg:block"
+              className="absolute -bottom-6 -left-6 cyber-card rounded-xl p-6 hidden lg:block"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1.3 }}
@@ -174,14 +174,14 @@ export function Hero() {
                 </div>
                 <div>
                   <motion.div 
-                    className="text-2xl font-bold text-gray-900"
+                    className="text-2xl font-bold text-foreground"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1, delay: 1.5 }}
                   >
                     99.9%
                   </motion.div>
-                  <div className="text-sm text-gray-600">Uptime Guarantee</div>
+                  <div className="text-sm text-muted-foreground">Uptime Guarantee</div>
                 </div>
               </div>
             </motion.div>

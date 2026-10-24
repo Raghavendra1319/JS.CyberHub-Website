@@ -95,7 +95,7 @@ export function SecurityScoreDashboard() {
   ];
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return "text-green-600";
+    if (score >= 80) return "text-green-400";
     if (score >= 60) return "text-yellow-600";
     return "text-red-600";
   };
@@ -116,22 +116,22 @@ export function SecurityScoreDashboard() {
       case "medium":
         return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
       default:
-        return "bg-blue-500/20 text-blue-400 border-blue-500/30";
+        return "bg-card0/20 text-muted-foreground/80 border-blue-500/30";
     }
   };
 
   return (
     <div className="max-w-7xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Security Score Dashboard</h1>
-        <p className="text-gray-600">Monitor your organization's overall security posture</p>
+        <h1 className="text-3xl font-bold text-foreground mb-2">Security Score Dashboard</h1>
+        <p className="text-muted-foreground">Monitor your organization's overall security posture</p>
       </div>
 
       {/* Overall Score */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-8 text-white mb-8"
+        className="bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl p-8 text-white mb-8"
       >
         <div className="flex items-center justify-between">
           <div>
@@ -160,7 +160,7 @@ export function SecurityScoreDashboard() {
             </div>
             <Link
               to="/dashboard/security/report"
-              className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-white text-blue-600 rounded-lg hover:bg-blue-50 transition-colors text-sm font-medium"
+              className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-card text-cyan-500 rounded-lg hover:bg-card transition-colors text-sm font-medium"
             >
               View Full Report
               <ArrowRight className="h-4 w-4" />
@@ -179,19 +179,19 @@ export function SecurityScoreDashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 + index * 0.1 }}
-              className="bg-white rounded-2xl p-6 shadow-sm"
+              className="bg-card rounded-2xl p-6 shadow-sm"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                  metric.color === "green" ? "bg-green-100" :
+                  metric.color === "green" ? "bg-green-500/15" :
                   metric.color === "orange" ? "bg-orange-100" :
-                  metric.color === "blue" ? "bg-blue-100" :
-                  "bg-yellow-100"
+                  metric.color === "blue" ? "bg-cyan-500/15" :
+                  "bg-cyan-500/15"
                 }`}>
                   <Icon className={`h-6 w-6 ${
-                    metric.color === "green" ? "text-green-600" :
+                    metric.color === "green" ? "text-green-400" :
                     metric.color === "orange" ? "text-orange-600" :
-                    metric.color === "blue" ? "text-blue-600" :
+                    metric.color === "blue" ? "text-cyan-500" :
                     "text-yellow-600"
                   }`} />
                 </div>
@@ -199,8 +199,8 @@ export function SecurityScoreDashboard() {
                   {metric.score}
                 </div>
               </div>
-              <div className="text-sm text-gray-600 mb-1">{metric.label}</div>
-              <div className="text-lg font-semibold text-gray-900">{metric.value}</div>
+              <div className="text-sm text-muted-foreground mb-1">{metric.label}</div>
+              <div className="text-lg font-semibold text-foreground">{metric.value}</div>
             </motion.div>
           );
         })}
@@ -212,9 +212,9 @@ export function SecurityScoreDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-white rounded-2xl p-6 shadow-sm"
+          className="bg-card rounded-2xl p-6 shadow-sm"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">Security Categories</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-6">Security Categories</h3>
           <ResponsiveContainer width="100%" height={300}>
             <RadarChart data={categoryScores}>
               <PolarGrid stroke="#e5e7eb" />
@@ -235,9 +235,9 @@ export function SecurityScoreDashboard() {
           <div className="mt-4 space-y-2">
             {categoryScores.map((cat, index) => (
               <div key={index} className="flex items-center justify-between">
-                <span className="text-sm text-gray-600">{cat.category}</span>
+                <span className="text-sm text-muted-foreground">{cat.category}</span>
                 <div className="flex items-center gap-2">
-                  <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="w-24 h-2 bg-muted rounded-full overflow-hidden">
                     <div
                       className={`h-full rounded-full ${
                         cat.score >= 80 ? "bg-green-500" :
@@ -261,9 +261,9 @@ export function SecurityScoreDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="bg-white rounded-2xl p-6 shadow-sm"
+          className="bg-card rounded-2xl p-6 shadow-sm"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">Score Trend</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-6">Score Trend</h3>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={trendData}>
               <defs>
@@ -287,12 +287,12 @@ export function SecurityScoreDashboard() {
             </AreaChart>
           </ResponsiveContainer>
 
-          <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-            <div className="flex items-center gap-2 text-blue-800 mb-2">
+          <div className="mt-4 p-4 bg-card rounded-lg">
+            <div className="flex items-center gap-2 text-cyan-400 mb-2">
               <TrendingUp className="h-5 w-5" />
               <span className="font-semibold">Positive Trend</span>
             </div>
-            <p className="text-sm text-blue-700">
+            <p className="text-sm text-cyan-400">
               Your security score has improved by {scoreChange} points over the last 30 days. Keep up the good work!
             </p>
           </div>
@@ -304,18 +304,18 @@ export function SecurityScoreDashboard() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
-        className="bg-white rounded-2xl p-6 shadow-sm"
+        className="bg-card rounded-2xl p-6 shadow-sm"
       >
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold text-gray-900">Top Recommendations to Improve Score</h3>
-          <div className="text-sm text-gray-600">Potential increase: +26 points</div>
+          <h3 className="text-lg font-semibold text-foreground">Top Recommendations to Improve Score</h3>
+          <div className="text-sm text-muted-foreground">Potential increase: +26 points</div>
         </div>
 
         <div className="space-y-4">
           {recommendations.map((rec, index) => (
             <div
               key={index}
-              className="p-4 border border-gray-200 rounded-lg hover:border-blue-300 transition-colors"
+              className="p-4 border border-border rounded-lg hover:border-blue-300 transition-colors"
             >
               <div className="flex items-start justify-between mb-2">
                 <div className="flex-1">
@@ -323,17 +323,17 @@ export function SecurityScoreDashboard() {
                     <span className={`px-3 py-1 rounded-full text-xs font-bold border uppercase ${getPriorityColor(rec.priority)}`}>
                       {rec.priority}
                     </span>
-                    <span className="text-xs text-gray-500">{rec.category}</span>
+                    <span className="text-xs text-muted-foreground">{rec.category}</span>
                   </div>
-                  <h4 className="font-semibold text-gray-900 mb-1">{rec.title}</h4>
-                  <p className="text-sm text-gray-600">{rec.description}</p>
+                  <h4 className="font-semibold text-foreground mb-1">{rec.title}</h4>
+                  <p className="text-sm text-muted-foreground">{rec.description}</p>
                 </div>
                 <div className="ml-4 text-right">
-                  <div className="text-sm text-gray-600 mb-1">Impact</div>
-                  <div className="text-lg font-bold text-green-600">{rec.impact}</div>
+                  <div className="text-sm text-muted-foreground mb-1">Impact</div>
+                  <div className="text-lg font-bold text-green-400">{rec.impact}</div>
                 </div>
               </div>
-              <button className="mt-3 text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1">
+              <button className="mt-3 text-sm text-cyan-500 hover:text-cyan-400 font-medium flex items-center gap-1">
                 Take Action
                 <ArrowRight className="h-4 w-4" />
               </button>

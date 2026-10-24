@@ -27,7 +27,7 @@ export function Header() {
 
   return (
     <motion.header
-      className="fixed top-0 left-0 right-0 backdrop-blur-md z-50 border-b border-gray-100"
+      className="fixed top-0 left-0 right-0 backdrop-blur-md z-50 border-b border-border"
       style={{
         backgroundColor: headerBackground,
         boxShadow: headerShadow
@@ -36,7 +36,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <motion.div
-            className="flex items-center gap-2 text-2xl font-semibold text-gray-900 cursor-pointer group"
+            className="flex items-center gap-2 text-2xl font-semibold text-foreground cursor-pointer group"
             onClick={() => scrollToSection("hero")}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -59,7 +59,7 @@ export function Header() {
               <motion.button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="px-4 py-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all font-medium capitalize"
+                className="px-4 py-2 text-foreground/80 hover:text-cyan-500 hover:bg-card rounded-lg transition-all font-medium capitalize"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
@@ -84,7 +84,7 @@ export function Header() {
           {/* Mobile Menu Button */}
           <motion.button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+            className="md:hidden p-2 text-foreground/80 hover:bg-muted/40 rounded-lg transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -99,7 +99,7 @@ export function Header() {
 
         {/* Mobile Navigation */}
         <motion.nav
-          className="md:hidden overflow-hidden border-t border-gray-100"
+          className="md:hidden overflow-hidden border-t border-border"
           initial={false}
           animate={{
             height: isMenuOpen ? "auto" : 0,
@@ -112,7 +112,7 @@ export function Header() {
               <motion.button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all font-medium capitalize"
+                className="block w-full text-left px-4 py-3 text-foreground/80 hover:bg-card hover:text-cyan-500 rounded-lg transition-all font-medium capitalize"
                 initial={{ opacity: 0, x: -20 }}
                 animate={isMenuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}

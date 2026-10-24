@@ -11,7 +11,7 @@ type FilterStatus = "all" | "active" | "suspended";
 const ROLE_COLORS: Record<string, string> = {
   admin:    "bg-red-500/15 text-red-400 border-red-500/25",
   provider: "bg-purple-500/15 text-purple-400 border-purple-500/25",
-  user:     "bg-blue-500/15 text-blue-400 border-blue-500/25",
+  user:     "bg-card0/15 text-muted-foreground/80 border-blue-500/25",
 };
 
 export function AdminUsersPage() {
@@ -71,7 +71,7 @@ export function AdminUsersPage() {
           { label: "Suspended", value: counts.suspended, color: "text-red-400"      },
           { label: "Admins",    value: counts.admins,    color: "text-red-400"      },
           { label: "Providers", value: counts.providers, color: "text-purple-400"   },
-          { label: "Clients",   value: counts.clients,   color: "text-blue-400"     },
+          { label: "Clients",   value: counts.clients,   color: "text-muted-foreground/80"     },
         ].map((c) => (
           <div key={c.label} className="cyber-card rounded-xl p-3 text-center">
             <p className={`text-xl font-bold ${c.color}`}>{c.value}</p>

@@ -42,7 +42,7 @@ export function LoginPage() {
       {/* Background Effects */}
       <div className="absolute inset-0 cyber-grid opacity-20" />
       <motion.div
-        className="absolute top-20 right-20 w-96 h-96 bg-neon-indigo rounded-full blur-[120px] opacity-20"
+        className="absolute top-20 right-20 w-96 h-96 bg-cyan-500 rounded-full blur-[120px] opacity-20"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.2, 0.3, 0.2],
@@ -50,7 +50,7 @@ export function LoginPage() {
         transition={{ duration: 8, repeat: Infinity }}
       />
       <motion.div
-        className="absolute bottom-20 left-20 w-96 h-96 bg-neon-purple rounded-full blur-[120px] opacity-15"
+        className="absolute bottom-20 left-20 w-96 h-96 bg-cyan-500 rounded-full blur-[120px] opacity-15"
         animate={{
           scale: [1, 1.3, 1],
           opacity: [0.15, 0.25, 0.15],
@@ -66,7 +66,7 @@ export function LoginPage() {
       >
         {/* Logo */}
         <Link to="/" className="flex items-center justify-center gap-3 mb-10">
-          <div className="w-14 h-14 bg-gradient-to-br from-neon-indigo to-neon-purple rounded-xl flex items-center justify-center neon-glow">
+          <div className="w-14 h-14 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-xl flex items-center justify-center neon-glow">
             <Shield className="h-8 w-8 text-white" />
           </div>
           <div className="flex items-baseline gap-0.5">
@@ -84,14 +84,14 @@ export function LoginPage() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg cyber-surface neon-border mb-4"
             >
-              <ShieldCheck className="h-4 w-4 text-neon-blue" />
-              <span className="text-xs font-bold text-blue-300 uppercase tracking-wider">Secure Access Portal</span>
+              <ShieldCheck className="h-4 w-4 text-cyan-400" />
+              <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Secure Access Portal</span>
             </motion.div>
 
             <h1 className="text-3xl font-bold text-white mb-2">
               Authentication Required
             </h1>
-            <p className="text-blue-300">
+            <p className="text-muted-foreground">
               Enter your credentials to access the system
             </p>
           </div>
@@ -109,11 +109,11 @@ export function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-bold text-blue-300 mb-2 uppercase tracking-wider">
+              <label htmlFor="email" className="block text-sm font-bold text-muted-foreground mb-2 uppercase tracking-wider">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-neon-blue" />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-cyan-400" />
                 <input
                   id="email"
                   type="email"
@@ -121,17 +121,17 @@ export function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="your.email@domain.com"
-                  className="w-full pl-12 pr-4 py-3.5 bg-cyber-surface border border-neon-blue/30 rounded-lg focus:ring-2 focus:ring-neon-blue focus:border-neon-blue text-white placeholder-blue-400/50 transition-all"
+                  className="w-full pl-12 pr-4 py-3.5 bg-cyber-surface border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500/30 text-white placeholder-muted-foreground/50 transition-all"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-bold text-blue-300 mb-2 uppercase tracking-wider">
+              <label htmlFor="password" className="block text-sm font-bold text-muted-foreground mb-2 uppercase tracking-wider">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-neon-blue" />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-cyan-400" />
                 <input
                   id="password"
                   type="password"
@@ -139,7 +139,7 @@ export function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="••••••••••••"
-                  className="w-full pl-12 pr-4 py-3.5 bg-cyber-surface border border-neon-blue/30 rounded-lg focus:ring-2 focus:ring-neon-blue focus:border-neon-blue text-white placeholder-blue-400/50 transition-all"
+                  className="w-full pl-12 pr-4 py-3.5 bg-cyber-surface border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500/30 text-white placeholder-muted-foreground/50 transition-all"
                 />
               </div>
             </div>
@@ -148,13 +148,13 @@ export function LoginPage() {
               <label className="flex items-center gap-2 cursor-pointer group">
                 <input
                   type="checkbox"
-                  className="rounded border-neon-blue/30 bg-cyber-surface text-neon-blue focus:ring-neon-blue focus:ring-offset-0"
+                  className="rounded border-border bg-cyber-surface text-cyan-400 focus:ring-cyan-500 focus:ring-offset-0"
                 />
-                <span className="text-blue-300 group-hover:text-neon-blue transition-colors">Remember me</span>
+                <span className="text-muted-foreground group-hover:text-cyan-400 transition-colors">Remember me</span>
               </label>
               <Link
                 to="/auth/forgot-password"
-                className="text-neon-blue hover:text-neon-purple font-semibold transition-colors"
+                className="text-cyan-400 hover:text-cyan-400 font-semibold transition-colors"
               >
                 Forgot password?
               </Link>
@@ -163,7 +163,7 @@ export function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full px-6 py-4 bg-gradient-to-r from-neon-indigo to-neon-purple text-white font-bold rounded-lg neon-glow hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+              className="w-full px-6 py-4 bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-bold rounded-lg neon-glow hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
@@ -182,10 +182,10 @@ export function LoginPage() {
           <div className="mt-8">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-neon-blue/20"></div>
+                <div className="w-full border-t border-border"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-cyber-surface text-blue-400 font-semibold">Alternative Access</span>
+                <span className="px-4 bg-cyber-surface text-muted-foreground/80 font-semibold">Alternative Access</span>
               </div>
             </div>
 
@@ -193,7 +193,7 @@ export function LoginPage() {
               onClick={() => {
                 toast.info("Google OAuth integration available - configure in Supabase settings");
               }}
-              className="mt-6 w-full flex items-center justify-center gap-3 px-6 py-3.5 border border-neon-blue/30 rounded-lg hover:bg-neon-blue/5 hover:border-neon-blue/50 transition-all cyber-surface"
+              className="mt-6 w-full flex items-center justify-center gap-3 px-6 py-3.5 border border-border rounded-lg hover:bg-cyan-500/5 hover:border-border transition-all cyber-surface"
             >
               <svg className="h-5 w-5" viewBox="0 0 24 24">
                 <path
@@ -213,35 +213,35 @@ export function LoginPage() {
                   d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                 />
               </svg>
-              <span className="text-blue-300 font-semibold">Continue with Google</span>
+              <span className="text-muted-foreground font-semibold">Continue with Google</span>
             </button>
           </div>
 
           <div className="mt-8 text-center text-sm">
-            <span className="text-blue-400">New to the system? </span>
-            <Link to="/auth/signup" className="text-neon-blue hover:text-neon-purple font-bold transition-colors">
+            <span className="text-muted-foreground/80">New to the system? </span>
+            <Link to="/auth/signup" className="text-cyan-400 hover:text-cyan-400 font-bold transition-colors">
               Register Access
             </Link>
           </div>
 
           {/* Demo Credentials */}
-          <div className="mt-8 p-4 cyber-surface rounded-lg border border-neon-blue/30">
+          <div className="mt-8 p-4 cyber-surface rounded-lg border border-border">
             <div className="flex items-center gap-2 mb-3">
-              <Fingerprint className="h-4 w-4 text-neon-blue" />
-              <div className="text-xs font-bold text-blue-300 uppercase tracking-wider">Test Credentials</div>
+              <Fingerprint className="h-4 w-4 text-cyan-400" />
+              <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Test Credentials</div>
             </div>
-            <div className="text-xs text-blue-400 space-y-1.5 font-mono">
-              <div><span className="text-neon-blue font-bold">Admin:</span> admin@jscyberhub.com</div>
-              <div><span className="text-neon-purple font-bold">Provider:</span> provider@jscyberhub.com</div>
-              <div><span className="text-blue-400 font-bold">User:</span> user@example.com</div>
-              <div className="pt-1 border-t border-neon-blue/20 mt-2"><span className="text-green-400 font-bold">Pass:</span> any password</div>
+            <div className="text-xs text-muted-foreground/80 space-y-1.5 font-mono">
+              <div><span className="text-cyan-400 font-bold">Admin:</span> admin@jscyberhub.com</div>
+              <div><span className="text-orange-400 font-bold">Provider:</span> provider@jscyberhub.com</div>
+              <div><span className="text-muted-foreground/80 font-bold">User:</span> user@example.com</div>
+              <div className="pt-1 border-t border-border mt-2"><span className="text-green-400 font-bold">Pass:</span> any password</div>
             </div>
           </div>
         </div>
 
         <div className="text-center mt-8 flex items-center justify-center gap-2">
-          <Shield className="h-4 w-4 text-neon-blue" />
-          <p className="text-sm text-blue-400 font-semibold">
+          <Shield className="h-4 w-4 text-cyan-400" />
+          <p className="text-sm text-muted-foreground/80 font-semibold">
             Military-grade AES-256 encryption
           </p>
         </div>

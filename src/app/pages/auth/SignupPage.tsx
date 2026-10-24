@@ -53,7 +53,7 @@ export function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-white flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-background via-card to-muted flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -62,19 +62,19 @@ export function SignupPage() {
       >
         {/* Logo */}
         <Link to="/" className="flex items-center justify-center gap-2 mb-8">
-          <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
+          <div className="w-12 h-12 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center">
             <Shield className="h-7 w-7 text-white" />
           </div>
-          <span className="text-2xl font-bold text-gray-900">JS.CyberHub</span>
+          <span className="text-2xl font-bold text-foreground">JS.CyberHub</span>
         </Link>
 
         {/* Signup Form */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-card rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            <h1 className="text-2xl font-bold text-foreground mb-2">
               Create Account
             </h1>
-            <p className="text-gray-600">
+            <p className="text-muted-foreground">
               Get started with your free account today
             </p>
           </div>
@@ -82,17 +82,17 @@ export function SignupPage() {
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
               <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-red-800">{error}</div>
+              <div className="text-sm text-red-300">{error}</div>
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="name" className="block text-sm font-medium text-foreground/80 mb-2">
                 Full Name
               </label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
                 <input
                   id="name"
                   type="text"
@@ -100,17 +100,17 @@ export function SignupPage() {
                   onChange={(e) => setName(e.target.value)}
                   required
                   placeholder="John Doe"
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-11 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-foreground/80 mb-2">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
                 <input
                   id="email"
                   type="email"
@@ -118,17 +118,17 @@ export function SignupPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder="you@example.com"
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-11 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-foreground/80 mb-2">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
                 <input
                   id="password"
                   type="password"
@@ -136,13 +136,13 @@ export function SignupPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="••••••••"
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-11 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                 />
               </div>
               {password && (
                 <div className="mt-2">
                   <div className="flex items-center gap-2 mb-1">
-                    <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
                       <div
                         className={`h-full bg-${pwdStrength.color}-500 transition-all`}
                         style={{ width: `${((pwdStrength.strength + 1) / 3) * 100}%` }}
@@ -157,11 +157,11 @@ export function SignupPage() {
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-foreground/80 mb-2">
                 Confirm Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/70" />
                 <input
                   id="confirmPassword"
                   type="password"
@@ -169,7 +169,7 @@ export function SignupPage() {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                   placeholder="••••••••"
-                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-11 pr-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                 />
                 {confirmPassword && (
                   <div className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -187,15 +187,15 @@ export function SignupPage() {
               <input
                 type="checkbox"
                 required
-                className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                className="mt-1 rounded border-border text-cyan-500 focus:ring-cyan-500"
               />
-              <span className="text-sm text-gray-700">
+              <span className="text-sm text-foreground/80">
                 I agree to the{" "}
-                <Link to="#" className="text-blue-600 hover:text-blue-700 font-medium">
+                <Link to="#" className="text-cyan-500 hover:text-cyan-400 font-medium">
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link to="#" className="text-blue-600 hover:text-blue-700 font-medium">
+                <Link to="#" className="text-cyan-500 hover:text-cyan-400 font-medium">
                   Privacy Policy
                 </Link>
               </span>
@@ -204,7 +204,7 @@ export function SignupPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full px-6 py-3 bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
@@ -220,10 +220,10 @@ export function SignupPage() {
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
+                <div className="w-full border-t border-border"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Or continue with</span>
+                <span className="px-2 bg-card text-muted-foreground">Or continue with</span>
               </div>
             </div>
 
@@ -232,7 +232,7 @@ export function SignupPage() {
                 // Simulate Google OAuth - In production, integrate with Supabase OAuth
                 toast.info("Google OAuth integration available - configure in Supabase settings");
               }}
-              className="mt-4 w-full flex items-center justify-center gap-3 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              className="mt-4 w-full flex items-center justify-center gap-3 px-6 py-3 border border-border rounded-lg hover:bg-muted/20 transition-colors"
             >
               <svg className="h-5 w-5" viewBox="0 0 24 24">
                 <path
@@ -252,19 +252,19 @@ export function SignupPage() {
                   d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
                 />
               </svg>
-              <span className="text-gray-700 font-medium">Continue with Google</span>
+              <span className="text-foreground/80 font-medium">Continue with Google</span>
             </button>
           </div>
 
-          <div className="mt-8 text-center text-sm text-gray-600">
+          <div className="mt-8 text-center text-sm text-muted-foreground">
             Already have an account?{" "}
-            <Link to="/auth/login" className="text-blue-600 hover:text-blue-700 font-medium">
+            <Link to="/auth/login" className="text-cyan-500 hover:text-cyan-400 font-medium">
               Sign in
             </Link>
           </div>
         </div>
 
-        <p className="text-center text-sm text-gray-500 mt-8">
+        <p className="text-center text-sm text-muted-foreground mt-8">
           Protected by industry-standard encryption
         </p>
       </motion.div>

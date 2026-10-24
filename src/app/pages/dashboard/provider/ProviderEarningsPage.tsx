@@ -75,10 +75,10 @@ export function ProviderEarningsPage() {
       <div className="mb-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Earnings</h1>
-            <p className="text-gray-600 mt-1">Track your revenue and payment history</p>
+            <h1 className="text-3xl font-bold text-foreground">Earnings</h1>
+            <p className="text-muted-foreground mt-1">Track your revenue and payment history</p>
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow">
+          <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-400 to-blue-600 text-white font-medium rounded-lg hover:shadow-lg transition-shadow">
             <Download className="h-5 w-5" />
             Export Report
           </button>
@@ -95,23 +95,23 @@ export function ProviderEarningsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow"
+              className="bg-card rounded-2xl p-6 shadow-sm hover:shadow-lg transition-shadow"
             >
               <div className="flex items-start justify-between mb-2">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <Icon className="h-6 w-6 text-blue-600" />
+                <div className="w-12 h-12 bg-cyan-500/15 rounded-lg flex items-center justify-center">
+                  <Icon className="h-6 w-6 text-cyan-500" />
                 </div>
                 {stat.change && (
                   <div className={`flex items-center gap-1 text-sm font-medium ${
-                    stat.trend === "up" ? "text-green-600" : stat.trend === "down" ? "text-red-600" : "text-gray-600"
+                    stat.trend === "up" ? "text-green-400" : stat.trend === "down" ? "text-red-600" : "text-muted-foreground"
                   }`}>
                     {stat.trend === "up" ? <TrendingUp className="h-4 w-4" /> : stat.trend === "down" ? <TrendingDown className="h-4 w-4" /> : null}
                     {stat.change}
                   </div>
                 )}
               </div>
-              <div className="text-sm text-gray-600 mb-1">{stat.label}</div>
-              <div className="text-3xl font-bold text-gray-900">
+              <div className="text-sm text-muted-foreground mb-1">{stat.label}</div>
+              <div className="text-3xl font-bold text-foreground">
                 ₹{stat.value.toLocaleString('en-IN')}
               </div>
             </motion.div>
@@ -126,9 +126,9 @@ export function ProviderEarningsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm"
+          className="lg:col-span-2 bg-card rounded-2xl p-6 shadow-sm"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">Earnings Trend</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-6">Earnings Trend</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={earningsData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -152,9 +152,9 @@ export function ProviderEarningsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="bg-white rounded-2xl p-6 shadow-sm"
+          className="bg-card rounded-2xl p-6 shadow-sm"
         >
-          <h3 className="text-lg font-semibold text-gray-900 mb-6">Service Breakdown</h3>
+          <h3 className="text-lg font-semibold text-foreground mb-6">Service Breakdown</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -179,9 +179,9 @@ export function ProviderEarningsPage() {
               <div key={index} className="flex items-center justify-between text-sm">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[index] }} />
-                  <span className="text-gray-600">{service.name}</span>
+                  <span className="text-muted-foreground">{service.name}</span>
                 </div>
-                <span className="font-semibold text-gray-900">₹{service.value.toLocaleString('en-IN')}</span>
+                <span className="font-semibold text-foreground">₹{service.value.toLocaleString('en-IN')}</span>
               </div>
             ))}
           </div>
@@ -193,9 +193,9 @@ export function ProviderEarningsPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.6 }}
-        className="bg-white rounded-2xl p-6 shadow-sm mb-8"
+        className="bg-card rounded-2xl p-6 shadow-sm mb-8"
       >
-        <h3 className="text-lg font-semibold text-gray-900 mb-6">Monthly Bookings Overview</h3>
+        <h3 className="text-lg font-semibold text-foreground mb-6">Monthly Bookings Overview</h3>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={earningsData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -212,55 +212,55 @@ export function ProviderEarningsPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.7 }}
-        className="bg-white rounded-2xl shadow-sm overflow-hidden"
+        className="bg-card rounded-2xl shadow-sm overflow-hidden"
       >
-        <div className="p-6 border-b border-gray-200">
-          <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
+        <div className="p-6 border-b border-border">
+          <h3 className="text-lg font-semibold text-foreground">Recent Transactions</h3>
         </div>
         
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50">
+            <thead className="bg-muted/20">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Transaction ID
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Client
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Service
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Date
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Amount
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                   Status
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-card divide-y divide-border">
               {recentTransactions.map((transaction, index) => (
-                <tr key={index} className="hover:bg-gray-50 transition-colors">
+                <tr key={index} className="hover:bg-muted/20 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">{transaction.id}</div>
+                    <div className="text-sm font-medium text-foreground">{transaction.id}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center text-white text-xs font-medium">
+                      <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-white text-xs font-medium">
                         {transaction.client.charAt(0)}
                       </div>
-                      <div className="text-sm text-gray-900">{transaction.client}</div>
+                      <div className="text-sm text-foreground">{transaction.client}</div>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-sm text-gray-900 max-w-xs truncate">{transaction.service}</div>
+                    <div className="text-sm text-foreground max-w-xs truncate">{transaction.service}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center gap-1 text-sm text-gray-600">
+                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
                       <Calendar className="h-4 w-4" />
                       {new Date(transaction.date).toLocaleDateString('en-US', { 
                         month: 'short', 
@@ -270,13 +270,13 @@ export function ProviderEarningsPage() {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-semibold text-gray-900">₹{transaction.amount.toLocaleString('en-IN')}</div>
+                    <div className="text-sm font-semibold text-foreground">₹{transaction.amount.toLocaleString('en-IN')}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                       transaction.status === "completed"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-yellow-100 text-yellow-700"
+                        ? "bg-green-500/15 text-green-400"
+                        : "bg-cyan-500/15 text-cyan-400"
                     }`}>
                       {transaction.status.charAt(0).toUpperCase() + transaction.status.slice(1)}
                     </span>
