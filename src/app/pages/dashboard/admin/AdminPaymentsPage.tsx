@@ -118,15 +118,15 @@ export function AdminPaymentsPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "completed":
-        return "bg-green-100 text-green-700";
+        return "bg-green-500/15 text-green-400 border border-green-500/25";
       case "pending":
-        return "bg-yellow-100 text-yellow-700";
+        return "bg-yellow-500/15 text-yellow-400 border border-yellow-500/25";
       case "refunded":
-        return "bg-red-100 text-red-700";
+        return "bg-red-500/15 text-red-400 border border-red-500/25";
       case "failed":
-        return "bg-red-100 text-red-700";
+        return "bg-red-500/15 text-red-400 border border-red-500/25";
       default:
-        return "bg-gray-100 text-gray-700";
+        return "bg-muted text-muted-foreground border border-border";
     }
   };
 
@@ -146,10 +146,10 @@ export function AdminPaymentsPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Payments & Revenue</h1>
-          <p className="text-gray-600 mt-1">Track all transactions and revenue analytics</p>
+          <h1 className="text-3xl font-bold text-foreground">Payments & Revenue</h1>
+          <p className="text-muted-foreground mt-1">Track all transactions and revenue analytics</p>
         </div>
-        <button className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
+        <button className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors">
           <Download className="h-5 w-5" />
           Export Report
         </button>
@@ -160,7 +160,7 @@ export function AdminPaymentsPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg"
+          className="bg-gradient-to-br from-primary to-secondary rounded-2xl p-6 text-white shadow-lg neon-glow"
         >
           <div className="flex items-center justify-between mb-4">
             <DollarSign className="h-8 w-8 opacity-80" />
@@ -176,42 +176,42 @@ export function AdminPaymentsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl p-6 shadow-lg"
+          className="cyber-card rounded-2xl p-6"
         >
           <div className="flex items-center justify-between mb-4">
-            <Calendar className="h-8 w-8 text-green-600" />
-            <div className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">This Month</div>
+            <Calendar className="h-8 w-8 text-green-400" />
+            <div className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">This Month</div>
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-1">
+          <div className="text-3xl font-bold text-foreground mb-1">
             ₹{stats.thisMonth.toLocaleString("en-IN")}
           </div>
-          <div className="text-gray-600">Monthly Revenue</div>
+          <div className="text-muted-foreground">Monthly Revenue</div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-white rounded-2xl p-6 shadow-lg"
+          className="cyber-card rounded-2xl p-6"
         >
           <div className="flex items-center justify-between mb-4">
-            <CreditCard className="h-8 w-8 text-purple-600" />
+            <CreditCard className="h-8 w-8 text-secondary" />
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-1">{stats.totalTransactions}</div>
-          <div className="text-gray-600">Total Transactions</div>
+          <div className="text-3xl font-bold text-foreground mb-1">{stats.totalTransactions}</div>
+          <div className="text-muted-foreground">Total Transactions</div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-white rounded-2xl p-6 shadow-lg"
+          className="cyber-card rounded-2xl p-6"
         >
           <div className="flex items-center justify-between mb-4">
-            <AlertCircle className="h-8 w-8 text-yellow-600" />
+            <AlertCircle className="h-8 w-8 text-yellow-400" />
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-1">{stats.pending}</div>
-          <div className="text-gray-600">Pending Payments</div>
+          <div className="text-3xl font-bold text-foreground mb-1">{stats.pending}</div>
+          <div className="text-muted-foreground">Pending Payments</div>
         </motion.div>
       </div>
 
@@ -220,34 +220,33 @@ export function AdminPaymentsPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="bg-white rounded-2xl p-6 shadow-lg mb-8"
+        className="cyber-card rounded-2xl p-6 mb-8"
       >
-        <h3 className="text-xl font-bold text-gray-900 mb-6">Revenue Trend</h3>
+        <h3 className="text-xl font-bold text-foreground mb-6">Revenue Trend</h3>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={revenueData}>
               <defs>
                 <linearGradient id={`${uid}-revenue`} x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <CartesianGrid key="grid" strokeDasharray="3 3" stroke="#E5E7EB" />
-              <XAxis key="xaxis" dataKey="month" stroke="#6B7280" />
-              <YAxis key="yaxis" stroke="#6B7280" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(99,102,241,0.15)" />
+              <XAxis dataKey="month" stroke="#94a3b8" tick={{ fill: "#94a3b8" }} />
+              <YAxis stroke="#94a3b8" tick={{ fill: "#94a3b8" }} />
               <Tooltip
-                key="tooltip"
                 contentStyle={{
-                  backgroundColor: "#fff",
-                  border: "1px solid #E5E7EB",
+                  backgroundColor: "#13131a",
+                  border: "1px solid rgba(99,102,241,0.25)",
                   borderRadius: "8px",
+                  color: "#e0e7ff",
                 }}
               />
               <Area
-                key="area-revenue"
                 type="monotone"
                 dataKey="revenue"
-                stroke="#3B82F6"
+                stroke="#6366f1"
                 strokeWidth={2}
                 fillOpacity={1}
                 fill={`url(#${uid}-revenue)`}
@@ -258,25 +257,25 @@ export function AdminPaymentsPage() {
       </motion.div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl p-4 shadow-md mb-6">
+      <div className="cyber-card rounded-xl p-4 mb-6">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <input
               type="text"
               placeholder="Search by customer, payment ID, or booking ID..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="w-full pl-11 pr-4 py-2.5 bg-muted/40 border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50"
             />
           </div>
 
           <div className="flex items-center gap-2">
-            <Filter className="h-5 w-5 text-gray-600" />
+            <Filter className="h-5 w-5 text-muted-foreground" />
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="px-4 py-2.5 bg-muted/40 border border-border rounded-lg text-foreground focus:outline-none focus:border-primary/50"
             >
               <option value="all">All Status</option>
               <option value="completed">Completed</option>
@@ -287,7 +286,7 @@ export function AdminPaymentsPage() {
             <select
               value={filterPeriod}
               onChange={(e) => setFilterPeriod(e.target.value)}
-              className="px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+              className="px-4 py-2.5 bg-muted/40 border border-border rounded-lg text-foreground focus:outline-none focus:border-primary/50"
             >
               <option value="all">All Time</option>
               <option value="today">Today</option>
@@ -299,70 +298,51 @@ export function AdminPaymentsPage() {
       </div>
 
       {/* Payments Table */}
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+      <div className="cyber-card rounded-2xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="border-b border-border bg-muted/20">
               <tr>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Payment ID
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Customer
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Service
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Amount
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Method
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Date
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
-                  Status
-                </th>
-                <th className="px-6 py-4 text-right text-sm font-semibold text-gray-900">
-                  Actions
-                </th>
+                {["Payment ID", "Customer", "Service", "Amount", "Method", "Date", "Status", "Actions"].map((h) => (
+                  <th key={h} className={`px-6 py-4 text-left text-sm font-semibold text-muted-foreground ${h === "Actions" ? "text-right" : ""}`}>
+                    {h}
+                  </th>
+                ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-border/40">
               {filteredPayments.map((payment, index) => (
                 <motion.tr
                   key={payment.id}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: index * 0.05 }}
-                  className="hover:bg-gray-50 transition-colors"
+                  className="hover:bg-muted/20 transition-colors"
                 >
                   <td className="px-6 py-4">
                     <div>
-                      <div className="font-mono text-sm text-gray-900">{payment.id}</div>
-                      <div className="text-xs text-gray-500">Booking: {payment.bookingId}</div>
+                      <div className="font-mono text-sm text-foreground">{payment.id}</div>
+                      <div className="text-xs text-muted-foreground">Booking: {payment.bookingId}</div>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="font-medium text-gray-900">{payment.customerName}</div>
+                    <div className="font-medium text-foreground">{payment.customerName}</div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="text-gray-900">{payment.serviceName}</span>
+                    <span className="text-foreground">{payment.serviceName}</span>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="text-lg font-bold text-gray-900">₹{payment.amount}</span>
+                    <span className="text-lg font-bold text-foreground">₹{payment.amount}</span>
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-2">
-                      <CreditCard className="h-4 w-4 text-gray-600" />
-                      <span className="text-gray-900">{payment.method}</span>
+                      <CreditCard className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-foreground">{payment.method}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <div className="text-gray-900">{format(payment.date, "MMM d, yyyy")}</div>
-                    <div className="text-xs text-gray-500">{format(payment.date, "h:mm a")}</div>
+                    <div className="text-foreground">{format(payment.date, "MMM d, yyyy")}</div>
+                    <div className="text-xs text-muted-foreground">{format(payment.date, "h:mm a")}</div>
                   </td>
                   <td className="px-6 py-4">
                     <span
@@ -376,7 +356,7 @@ export function AdminPaymentsPage() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center justify-end">
-                      <button className="px-3 py-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors text-sm font-medium">
+                      <button className="px-3 py-1.5 text-primary hover:bg-primary/10 rounded-lg transition-colors text-sm font-medium">
                         View Receipt
                       </button>
                     </div>

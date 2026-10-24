@@ -125,8 +125,7 @@ export function AdminUsersPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-border/40">
-              <AnimatePresence>
-                {filtered.map((u, i) => (
+              {filtered.map((u, i) => (
                   <Fragment key={u.id}>
                     <motion.tr
                       initial={{ opacity: 0 }}
@@ -272,7 +271,6 @@ export function AdminUsersPage() {
                     </AnimatePresence>
                   </Fragment>
                 ))}
-              </AnimatePresence>
             </tbody>
           </table>
 
